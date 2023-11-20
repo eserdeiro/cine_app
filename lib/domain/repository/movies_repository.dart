@@ -1,6 +1,6 @@
-import 'package:cine_app/domain/entities/movie.dart';
+import 'package:cine_app/domain/entities/movie_entity.dart';
 
-abstract class MovieRepository {
+abstract class MoviesRepository {
 
   Future<List<Movie>> getNowPlaying({int page = 1});
 
