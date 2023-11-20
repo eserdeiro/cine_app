@@ -11,8 +11,19 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return  const Scaffold(
       body: Center(
-        child: Placeholder(),
+        child: _HomeView(),
       ),
     );
+  }
+}
+
+class _HomeView extends StatelessWidget {
+  const _HomeView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Placeholder();
   }
 }
