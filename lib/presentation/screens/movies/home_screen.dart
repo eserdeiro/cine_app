@@ -16,14 +16,13 @@ class HomeScreen extends StatelessWidget {
       body: Center(
         child: _HomeView(),
       ),
+      bottomNavigationBar: CustomBottomNavigationBar(),
     );
   }
 }
 
 class _HomeView extends ConsumerStatefulWidget {
-  const _HomeView({
-    super.key,
-  });
+  const _HomeView();
 
   @override
   _HomeViewState createState() => _HomeViewState();
@@ -46,7 +45,7 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     final slideshowProvider = ref.watch(moviesSlideshowProvider);
     return Column(
       children: [
-        CustomAppbar(),
+        const CustomAppbar(),
         MoviesSlideshow(movies: slideshowProvider)
       ],
     );
