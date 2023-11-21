@@ -3,7 +3,7 @@ import 'package:cine_app/infrastructure/models/moviedb/movie_moviedb.dart';
 
 class MovieMapper {
 
-  static Movie movieDbToEntity(MovieFromMovieDb movieDb) => Movie(
+  static Movie movieDbToEntity(MovieFromMovieDbResponse movieDb) => Movie(
 
       adult       : movieDb.adult,
       backdropPath: (movieDb.backdropPath != '') 

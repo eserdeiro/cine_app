@@ -3,13 +3,12 @@
 
  //Here it shows the page data
 
- 
  import 'package:cine_app/infrastructure/models/moviedb/movie_moviedb.dart';
 
 class MovieDbResponse {
     final Dates? dates;
     final int page;
-    final List<MovieFromMovieDb> results;
+    final List<MovieFromMovieDbResponse> results;
     final int totalPages;
     final int totalResults;
 
@@ -24,7 +23,7 @@ class MovieDbResponse {
     factory MovieDbResponse.fromJson(Map<String, dynamic> json) => MovieDbResponse(
         dates: json["dates"] != null ? Dates.fromJson(json["dates"]) : null,
         page: json["page"],
-        results: List<MovieFromMovieDb>.from(json["results"].map((x) => MovieFromMovieDb.fromJson(x))),
+        results: List<MovieFromMovieDbResponse>.from(json["results"].map((x) => MovieFromMovieDbResponse.fromJson(x))),
         totalPages: json["total_pages"],
         totalResults: json["total_results"],
     );
