@@ -1,5 +1,5 @@
 
-import 'package:cine_app/presentation/providers/movies/movies_providers.dart';
+import 'package:cine_app/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cine_app/presentation/widgets/widgets.dart';
@@ -41,13 +41,13 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
   @override
   Widget build(BuildContext context) {
-
-    final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
-
+    //If changed to nowPlayingMovies, a list of 20 movies will be displayed
+    //final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
+    final slideshowProvider = ref.watch(moviesSlideshowProvider);
     return Column(
       children: [
         CustomAppbar(),
-        MoviesSlideshow(movies: nowPlayingMovies)
+        MoviesSlideshow(movies: slideshowProvider)
       ],
     );
   }
