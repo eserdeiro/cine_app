@@ -43,11 +43,12 @@ class _Slide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final decorationBackground = BoxDecoration(
+
+    var decorationBackground = BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         boxShadow: const [
           BoxShadow(
-            color: Colors.black45,
+            color: Colors.black26,
             blurRadius: 10,
             offset: Offset(0, 10),
           )
@@ -79,18 +80,11 @@ class _SlideLoadingProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        const DecoratedBox(
-        decoration: BoxDecoration(
-          color: Colors.black12,)),
-          SpinPerfect(
-            infinite: true,
-            child: const Center(
-              child: Icon(Icons.refresh, size: 40),
-              ),
-          )
-      ],
+    return SpinPerfect(
+      infinite: true,
+      child: const Center(
+        child: Icon(Icons.refresh, size: 40),
+      ),
     );
   }
 }
