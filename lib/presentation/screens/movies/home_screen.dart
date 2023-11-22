@@ -52,8 +52,11 @@ class _HomeViewState extends ConsumerState<_HomeView> {
           title: 'Now Playing',
           //TODO SET DATE
           subtitle: 'Date',
+          loadNextPage: (){
+            ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
+          },
           )
-          
+
       ],
     );
   }
