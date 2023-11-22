@@ -32,12 +32,15 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     super.initState();
 
     ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
+    ref.read(popularMoviesProvider.notifier).loadNextPage();
   }
 
   @override
   Widget build(BuildContext context) {
     //If changed to nowPlayingMovies, a list of 20 movies will be displayed
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
+    final popularMovies    = ref.watch(popularMoviesProvider);
+
     final slideshowProvider = ref.watch(moviesSlideshowProvider);
     //CustomScrollView + Slivers
     return CustomScrollView(
@@ -56,6 +59,7 @@ class _HomeViewState extends ConsumerState<_HomeView> {
           return Column(
             children: [
               MoviesSlideshow(movies: slideshowProvider),
+              //NowPlaying
               MovieHorizontalListview(
                 movies: nowPlayingMovies,
                 title: 'Now Playing',
@@ -65,33 +69,18 @@ class _HomeViewState extends ConsumerState<_HomeView> {
                   ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
                 },
               ),
+
+              //Popular
               MovieHorizontalListview(
-                movies: nowPlayingMovies,
-                title: 'Populares',
-                //TODO SET DATE
-                subtitle: 'Proximamente',
-                loadNextPage: () {
-                  ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
-                },
-              ),
-              MovieHorizontalListview(
-                movies: nowPlayingMovies,
-                title: 'Populares',
+                movies: popularMovies,
+                title: 'Popular',
                 //TODO SET DATE
                 subtitle: 'Today',
                 loadNextPage: () {
-                  ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
+                  ref.read(popularMoviesProvider.notifier).loadNextPage();
                 },
               ),
-              MovieHorizontalListview(
-                movies: nowPlayingMovies,
-                title: 'Mejores',
-                //TODO SET DATE
-                subtitle: 'Today',
-                loadNextPage: () {
-                  ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
-                },
-              ),
+
             ],
           );
         }, childCount: 1))
