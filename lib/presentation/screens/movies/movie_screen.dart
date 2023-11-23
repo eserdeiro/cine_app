@@ -42,27 +42,51 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
           //'official': 'true', 
           //'key': 'oRTC5aFjXQw'(https://www.youtube.com/watch?v=oRTC5aFjXQw)
       //]
-      
+
+     if(movie == null )  return const Scaffold(body: Center(child: CircularProgressIndicator(strokeWidth: 3)));
+
     return  Scaffold(
-      appBar: AppBar(
-        title: Text('MovieID ${widget.movieId}'),
+      body: CustomScrollView(
+        physics: const ClampingScrollPhysics(),
+        slivers: [
+          _CustomSliverAppBar(movie: movie),
+
+        ],
       ),
-      body: _MovieScreenView(movie: movie),
-      bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }
 }
 
-class _MovieScreenView extends StatelessWidget {
-  final Movie? movie;
-
-  const _MovieScreenView({
-    required this.movie,
+class _CustomSliverAppBar extends StatelessWidget {
+  final Movie movie;
+  const _CustomSliverAppBar({
+    required this.movie
   });
 
   @override
   Widget build(BuildContext context) {
-     if(movie != null )  return const Center(child: CircularProgressIndicator(strokeWidth: 3));
-    return Placeholder();
+
+    final size = MediaQuery.of(context).size;
+    return SliverAppBar(
+      expandedHeight: size.height * 0.2 ,
+      backgroundColor: Colors.black,
+      foregroundColor: Colors.white,
+      flexibleSpace: FlexibleSpaceBar(
+        title: Text(
+          movie.title,
+          style: const TextStyle(fontSize: 20),
+          textAlign: TextAlign.start,
+          ),
+          titlePadding: const EdgeInsets.symmetric(vertical: 20,horizontal: 10),
+          background: Stack(
+            children: [
+              SizedBox.expand(
+                child: Image.network(
+                  movie.backdropPath, 
+                  fit: BoxFit.cover),
+              )
+            ]),
+      ),
+    ) ;
   }
 }
