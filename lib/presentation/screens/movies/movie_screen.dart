@@ -1,4 +1,6 @@
+import 'package:cine_app/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MovieScreen extends StatelessWidget {
 
@@ -27,6 +29,22 @@ class MovieScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('MovieID $movieId'),
       ),
+      body: _HomeView(),
+      bottomNavigationBar: CustomBottomNavigationBar(),
     );
+  }
+}
+
+class _HomeView extends ConsumerStatefulWidget {
+  const _HomeView();
+
+  @override
+  _HomeViewState createState() => _HomeViewState();
+}
+
+class _HomeViewState extends ConsumerState<_HomeView> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
