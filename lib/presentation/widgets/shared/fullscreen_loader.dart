@@ -6,7 +6,7 @@ class FullScreenLoader extends StatelessWidget {
 
   Stream<String> getLoadingMessages () {
     final messages = <String>[
-      'Welcome to APP_NAME :)',
+      'Receiving info...',
       'Please wait...',
       'Loading data...',
     ];
@@ -24,7 +24,7 @@ class FullScreenLoader extends StatelessWidget {
         children: [
           StreamBuilder(stream: getLoadingMessages(), 
           builder: (context, snapshot) {
-            if(!snapshot.hasData) return Text('Loading...', style: titleStyle.titleMedium,);
+            if(!snapshot.hasData) return Text('Welcome to APP_NAME :)', style: titleStyle.titleMedium,);
             return Text(snapshot.data!, style: titleStyle.titleMedium);
           }),
           const SizedBox(height: 10),
