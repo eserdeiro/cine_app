@@ -3,7 +3,7 @@
 
  //Here it shows the page data
 
- import 'package:cine_app/infrastructure/models/moviedb/movie_moviedb.dart';
+import 'package:cine_app/infrastructure/models/models.dart';
 
 class MovieDbResponse {
     final Dates? dates;
