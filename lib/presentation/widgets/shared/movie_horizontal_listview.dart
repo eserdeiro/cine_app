@@ -117,16 +117,7 @@ class _Slide extends StatelessWidget {
             width: 150,
             child: Row(
               children: [
-                RatingBarIndicator(
-                  rating: movie.voteAverage / 2 ,
-                  itemBuilder: (context, index) => Icon(
-                    Icons.star,
-                    color: Colors.yellow.shade800,
-                  ),
-                  itemCount: 5,
-                  itemSize: 16.0,
-                  direction: Axis.horizontal,
-                ),
+                _RatingBar(movie: movie),
 
                 // Icon(Icons.star_half_outlined, color: Colors.yellow.shade800),
                 const SizedBox(width: 2),
@@ -145,6 +136,28 @@ class _Slide extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+}
+
+class _RatingBar extends StatelessWidget {
+  const _RatingBar({
+    required this.movie,
+  });
+
+  final Movie movie;
+
+  @override
+  Widget build(BuildContext context) {
+    return RatingBarIndicator(
+      rating: movie.voteAverage / 2 ,
+      itemBuilder: (context, index) => Icon(
+        Icons.star,
+        color: Colors.yellow.shade800,
+      ),
+      itemCount: 5,
+      itemSize: 16.0,
+      direction: Axis.horizontal,
     );
   }
 }
