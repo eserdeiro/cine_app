@@ -2,19 +2,19 @@ import 'package:cine_app/domain/entities/movie_entity.dart';
 import 'package:cine_app/presentation/providers/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final movieDetailProvider = StateNotifierProvider((ref) {
+final movieDetailProvider = StateNotifierProvider<MovieMapNotifier,Map<String, Movie>>((ref) {
   final movieRepository = ref.watch(movieRepositoryProvider).getMovieById;
 
-  return MovieDetailsMapNotifier(getMovieDetail: movieRepository);
+  return MovieMapNotifier(getMovieDetail: movieRepository);
 });
 
 typedef GetMovieCallback = Future<Movie>Function(String movieId);
 
-class MovieDetailsMapNotifier extends StateNotifier<Map<String, Movie>>{
+class MovieMapNotifier extends StateNotifier<Map<String, Movie>>{
 
   final GetMovieCallback getMovieDetail;
-
-  MovieDetailsMapNotifier({
+//  Maps each movie and maintains the cache in memory 
+  MovieMapNotifier({
       required this.getMovieDetail
       }) : super({});
 
