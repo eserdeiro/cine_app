@@ -3,6 +3,7 @@ import 'package:cine_app/config/helpers/formats.dart';
 import 'package:cine_app/domain/entities/movie_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:go_router/go_router.dart';
 
 class MovieHorizontalListview extends StatefulWidget {
   final List<Movie> movies;
@@ -28,9 +29,8 @@ class _MovieHorizontalListviewState extends State<MovieHorizontalListview> {
   @override
   void initState() {
     super.initState();
-    
+    //When you reach the end, load more movies 
     scrollController.addListener(() {
-      //TODO
       if(widget.loadNextPage == null) return;
 
       if((scrollController.position.pixels + 200) >= scrollController.position.maxScrollExtent) {
@@ -50,7 +50,7 @@ class _MovieHorizontalListviewState extends State<MovieHorizontalListview> {
     return SizedBox(
       height: 360,
       child: Column(
-        //Title & Date
+        //Title list & Date(subtitle)
         children: [
           if (widget.title != null || widget.subtitle != null)
             _Title(title: widget.title, subtitle: widget.subtitle),
@@ -60,11 +60,11 @@ class _MovieHorizontalListviewState extends State<MovieHorizontalListview> {
           //ListView Movies
           Expanded(
               child: ListView.builder(
-                  controller: scrollController,
+                  controller     : scrollController,
                   scrollDirection: Axis.horizontal,
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: widget.movies.length,
-                  itemBuilder: (context, index) {
+                  physics        : const BouncingScrollPhysics(),
+                  itemCount      : widget.movies.length,
+                  itemBuilder    : (context, index) {
                     return _Slide(movie: widget.movies[index]);
                   })),
         ],
@@ -98,7 +98,9 @@ class _Slide extends StatelessWidget {
                     if (loadingProgress != null) {
                       return const _SlideLoadingProgress();
                     } else {
-                      return FadeIn(child: child);
+                      return GestureDetector(
+                        onTap: () => context.push('/movie/${movie.id}'),
+                        child: FadeIn(child: child));
                     }
                   },
                 )),
@@ -175,7 +177,7 @@ class _SlideLoadingProgress extends StatelessWidget {
   }
 }
 
-//_Title
+//_Title & date screen
 class _Title extends StatelessWidget {
   final String? title;
   final String? subtitle;
