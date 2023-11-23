@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cine_app/config/helpers/formats.dart';
 import 'package:cine_app/domain/entities/movie_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class MovieHorizontalListview extends StatefulWidget {
   final List<Movie> movies;
@@ -103,23 +104,39 @@ class _Slide extends StatelessWidget {
                 )),
           ),
           const SizedBox(height: 5),
+
           //Movie title
           SizedBox(
               width: 150,
               child:
                   Text(movie.title, maxLines: 2, style: textStyle.titleSmall)),
+          const Spacer(),
+
           //Rating
           SizedBox(
             width: 150,
             child: Row(
               children: [
-                Icon(Icons.star_half_outlined, color: Colors.yellow.shade800),
+                RatingBarIndicator(
+                  rating: movie.voteAverage / 2 ,
+                  itemBuilder: (context, index) => Icon(
+                    Icons.star,
+                    color: Colors.yellow.shade800,
+                  ),
+                  itemCount: 5,
+                  itemSize: 16.0,
+                  direction: Axis.horizontal,
+                ),
+
+                // Icon(Icons.star_half_outlined, color: Colors.yellow.shade800),
                 const SizedBox(width: 2),
+
                 //VoteAverage
-                Text(Formats.number(movie.voteAverage, 1),
+                Text(Formats.number(movie.voteAverage / 2 , 1),
                     style: textStyle.bodyMedium
                         ?.copyWith(color: Colors.yellow.shade800)),
                 const Spacer(),
+
                 //Popularity
                 Text(Formats.number(movie.popularity, 0),
                     style: textStyle.bodySmall)
