@@ -1,6 +1,17 @@
+  //TODO SET VIDEOS, select first option[0]
+      //https://api.themoviedb.org/3/movie/{IDMOVIE}/videos?api_key={API_KEY}&language=es-ARG
+
+      //And this response 
+      //"id": 670292,
+      //"results": [
+          //'type': 'Trailer'
+          //'site': 'Youtube', 
+          //'official': 'true', 
+          //'key': 'oRTC5aFjXQw'(https://www.youtube.com/watch?v=oRTC5aFjXQw)
+      //]
+
 import 'package:cine_app/domain/entities/movie_entity.dart';
 import 'package:cine_app/presentation/providers/movies/movie_details_provider.dart';
-import 'package:cine_app/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -31,18 +42,6 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
 
      final Movie? movie = ref.watch(movieDetailProvider)[widget.movieId];
 
-      //TODO SET VIDEOS, select first option[0]
-      //https://api.themoviedb.org/3/movie/{IDMOVIE}/videos?api_key={API_KEY}&language=es-ARG
-
-      //And this response 
-      //"id": 670292,
-      //"results": [
-          //'type': 'Trailer'
-          //'site': 'Youtube', 
-          //'official': 'true', 
-          //'key': 'oRTC5aFjXQw'(https://www.youtube.com/watch?v=oRTC5aFjXQw)
-      //]
-
      if(movie == null )  return const Scaffold(body: Center(child: CircularProgressIndicator(strokeWidth: 3)));
 
     return  Scaffold(
@@ -50,9 +49,57 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
         physics: const ClampingScrollPhysics(),
         slivers: [
           _CustomSliverAppBar(movie: movie),
-
+          SliverList(delegate: SliverChildBuilderDelegate(
+            (context, index) => _MovieDetails(movie: movie),
+            childCount: 5
+          ))
         ],
       ),
+    );
+  }
+}
+
+class _MovieDetails extends StatelessWidget {
+  final Movie movie;
+  const _MovieDetails({
+    required this.movie});
+
+  @override
+  Widget build(BuildContext context) {
+
+    final size = MediaQuery.of(context).size;
+    final titleStyle = Theme.of(context).textTheme;
+
+    return  Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(padding: const EdgeInsets.all(8),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.network(
+                movie.posterPath,
+              width: size.width * 0.3),
+            ),
+
+            const SizedBox(width: 10),
+
+            SizedBox(
+              width: (size.width -40) * 0.7 ,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(movie.title, style: titleStyle.titleLarge),
+                  Text(movie.overview)
+                ],
+              )),
+                //Show actors
+
+          ],
+        )),
+      ],
     );
   }
 }
@@ -67,15 +114,15 @@ class _CustomSliverAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final size = MediaQuery.of(context).size;
-    return SliverAppBar(
+    return SliverAppBar.medium(
       expandedHeight: size.height * 0.2 ,
       backgroundColor: Colors.black,
       foregroundColor: Colors.white,
       flexibleSpace: FlexibleSpaceBar(
+        centerTitle: true,
         title: Text(
           movie.title,
           style: const TextStyle(fontSize: 20),
-          textAlign: TextAlign.start,
           ),
           titlePadding: const EdgeInsets.symmetric(vertical: 20,horizontal: 10),
           background: Stack(
@@ -84,9 +131,39 @@ class _CustomSliverAppBar extends StatelessWidget {
                 child: Image.network(
                   movie.backdropPath, 
                   fit: BoxFit.cover),
+              ),
+
+              const SizedBox.expand(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end:  Alignment.bottomCenter,
+                      stops: [0.50, 1.0],
+                      colors: [
+                      Colors.transparent,
+                      Colors.black54
+                    ])
+                  )
+                  ),
+              ),
+
+              const SizedBox.expand(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      stops: [0.0, 0.2],
+                      colors: [
+                      Colors.black54,
+                      Colors.transparent
+                    ])
+                  )
+                  ),
               )
             ]),
       ),
     ) ;
   }
 }
+
