@@ -121,7 +121,6 @@ class _Slide extends StatelessWidget {
               children: [
                 _RatingBar(movie: movie),
 
-                // Icon(Icons.star_half_outlined, color: Colors.yellow.shade800),
                 const SizedBox(width: 2),
 
                 //VoteAverage
@@ -141,7 +140,7 @@ class _Slide extends StatelessWidget {
     );
   }
 }
-
+//Rating bar
 class _RatingBar extends StatelessWidget {
   const _RatingBar({
     required this.movie,
@@ -158,11 +157,12 @@ class _RatingBar extends StatelessWidget {
         color: Colors.yellow.shade800,
       ),
       itemCount: 5,
-      itemSize: 16.0,
+      itemSize : 16.0,
       direction: Axis.horizontal,
     );
   }
 }
+
 //_SlideLoadingProgress
 class _SlideLoadingProgress extends StatelessWidget {
   const _SlideLoadingProgress();
@@ -170,8 +170,8 @@ class _SlideLoadingProgress extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         height: 222,
-        color: Colors.black12,
-        child: SpinPerfect(
+        color : Colors.black12,
+        child : SpinPerfect(
             infinite: true,
             child: const Icon(Icons.refresh_outlined, size: 40)));
   }
@@ -196,10 +196,9 @@ class _Title extends StatelessWidget {
         const Spacer(),
         if (subtitle != null)
           FilledButton.tonal(
-              style:
-                  const ButtonStyle(visualDensity: VisualDensity.comfortable),
+              style    :const ButtonStyle(visualDensity: VisualDensity.comfortable),
               onPressed: () {},
-              child: Text(subtitle!))
+              child    : Text(subtitle!))
       ]),
     );
   }
