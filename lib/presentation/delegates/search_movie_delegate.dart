@@ -43,28 +43,66 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-   return FutureBuilder(future: searchMovies(query), 
-                      builder: (context, snapshot) {
-                      final movies = snapshot.data ?? [];
-                      return GridView.count(
-                        mainAxisSpacing: 3,
-                        crossAxisSpacing: 3,
-                        crossAxisCount: 3,
-                        childAspectRatio: 0.7,
-                      children: [
-                        ...movies.map((e) => SizedBox(
-                          child: FadeIn(
-                            delay: const Duration(milliseconds: 500),
-                            duration: const Duration(milliseconds: 1500),
-                            child: Image.network(
-                              e.posterPath, 
-                              fit: BoxFit.cover),
-                          )))
-                      ],
-                      );
-                      //TODO add similar movies
-                      },);
+    return FutureBuilder(
+      future: searchMovies(query),
+      builder: (context, snapshot) {
+        final movies = snapshot.data ?? [];
+        return _MovieItem(
+          movies: movies, 
+          query: query, 
+          onMovieSelected: close);
+        //TODO add similar movies
+      },
+    );
   }
+}
 
+class _MovieItem extends StatelessWidget {
+  final List<Movie> movies;
+  final String query;
+  final Function onMovieSelected;
+  const _MovieItem({
+    required this.movies,
+    required this.query,
+    required this.onMovieSelected,
+  });
 
+  @override
+  Widget build(BuildContext context) {
+    final titleStyle = Theme.of(context).textTheme;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (movies.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Text(
+              'Main results for $query',
+              style: titleStyle.titleLarge,
+            ),
+          ),
+        Expanded(
+          child: GridView.count(
+            mainAxisSpacing: 3,
+            crossAxisSpacing: 3,
+            crossAxisCount: 3,
+            childAspectRatio: 0.7,
+            children: [
+              ...movies.map((movie) => SizedBox(
+                      child: FadeIn(
+                    delay: const Duration(milliseconds: 500),
+                    duration: const Duration(milliseconds: 1500),
+                    child: GestureDetector(
+                      onTap: () {
+                        onMovieSelected(context, movie);
+                      },
+                      child: Image.network(movie.posterPath, fit: BoxFit.cover),
+                    ),
+                  )))
+            ],
+          ),
+        ),
+      ],
+    );
+  }
 }
