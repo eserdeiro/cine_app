@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:animate_do/animate_do.dart';
@@ -11,10 +12,31 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
 
   final SearchMovieCallback searchMovies;
 
+  StreamController<List<Movie>> debouncedMovies  = StreamController.broadcast();
+  Timer? _debounceTimer;
+
   SearchMovieDelegate({required this.searchMovies});
+
+  void clearStreams(){
+    debouncedMovies.close();
+  }
 
   // @override
   // String get searchFieldLabel => 'Search';
+
+  void _onQueryChanged(String query) {
+    if(_debounceTimer?.isActive ?? false) _debounceTimer!.cancel();
+    _debounceTimer = Timer(const Duration(milliseconds: 500), () async{
+      //This is executed when the user stops typing for 500 ms
+      if(query.isEmpty){
+        debouncedMovies.add([]);
+        return;
+      }
+
+      final movies = await searchMovies(query);
+      debouncedMovies.add(movies);
+    });
+  }
 
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -32,6 +54,7 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
   @override
   Widget? buildLeading(BuildContext context) {
     return IconButton(onPressed: () {
+      clearStreams();
       close(context, null);
     }, icon: Icon(Platform.isAndroid? Icons.arrow_back_outlined : Icons.arrow_back_ios));
   }
@@ -43,14 +66,19 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return FutureBuilder(
-      future: searchMovies(query),
+    _onQueryChanged(query);
+    return StreamBuilder(
+      stream: debouncedMovies.stream,
+      //future: searchMovies(query),
       builder: (context, snapshot) {
         final movies = snapshot.data ?? [];
         return _MovieItem(
           movies: movies, 
           query: query, 
-          onMovieSelected: close);
+          onMovieSelected: (context, movie){
+            clearStreams();
+            close;
+          });
         //TODO add similar movies
       },
     );
