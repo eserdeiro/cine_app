@@ -3,7 +3,7 @@ import 'package:cine_app/infrastructure/models/moviedb/movie_details.dart';
 import 'package:cine_app/infrastructure/models/moviedb/movie_moviedb.dart';
 
 class MovieMapper {
-
+  //This is used to get the list of movies, for nowplaying, popular, etc.
   static Movie movieDbToEntity(MovieFromMovieDbResponse movieDb) => Movie(
 
       adult       : movieDb.adult,
@@ -26,7 +26,7 @@ class MovieMapper {
       voteCount   : movieDb.voteCount
       );
 
-
+      //This is used to get movies by id
       static Movie movieDetailstoEntity(MovieDetails movieDetails) => Movie(
         adult: movieDetails.adult, 
         backdropPath: (movieDetails.backdropPath != '') 
