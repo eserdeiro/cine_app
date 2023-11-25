@@ -5,6 +5,5 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //Read only
 final actorsRepositoryProvider = Provider((ref) {
-//If you want to change the source, change TheMovieDbDataSource to something else, example ImdbDataSource
   return ActorsRepositoryImpl(datasource: ActorFromMovieDbDatasource());
 });

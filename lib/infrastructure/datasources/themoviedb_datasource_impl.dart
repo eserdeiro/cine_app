@@ -35,7 +35,7 @@ class TheMovieDbDataSource extends MoviesDataSource {
     return _jsonToMovies(response.data);
   }
 
-  //GetPopular optimized(_jsonToMovies), TODO do the same in getNowPlaying
+  //GetPopular
   @override
   Future<List<Movie>> getPopular({int page = 1}) async{
     final response = await dio.get('/movie/popular',

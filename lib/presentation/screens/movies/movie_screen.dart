@@ -12,6 +12,7 @@
 
 import 'package:cine_app/domain/entities/movie_entity.dart';
 import 'package:cine_app/presentation/providers/movies/movie_details_provider.dart';
+import 'package:cine_app/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -30,14 +31,16 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
   void initState() {
     super.initState();
     ref.read(movieDetailProvider.notifier).loadMovie(widget.movieId);
+    ref.read(actorsByMovieProvider.notifier).loadActors(widget.movieId);
   }
 
   @override
   Widget build(BuildContext context) {
     final Movie? movie = ref.watch(movieDetailProvider)[widget.movieId];
-    if (movie == null)
+    if (movie == null) {
       return const Scaffold(
           body: Center(child: CircularProgressIndicator(strokeWidth: 3)));
+    }
 
     return Scaffold(
       body: CustomScrollView(
@@ -61,7 +64,6 @@ class _MovieDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final titleStyle = Theme.of(context).textTheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,7 +104,25 @@ class _MovieDetails extends StatelessWidget {
                             ))
                       ],
                     )),
+
+                    _ActorsByMovie(movieId: movie.id.toString())
       ]);
+  }
+}
+
+class _ActorsByMovie extends ConsumerWidget {
+  final String movieId;
+  const _ActorsByMovie({required this.movieId});
+
+  @override
+  Widget build(BuildContext context, ref) {
+
+    final actorsByMovie = ref.watch(actorsByMovieProvider);
+    if (actorsByMovie[movieId] == null){
+      return const CircularProgressIndicator(strokeWidth: 2);
+    }
+
+    return const Placeholder();
   }
 }
 
