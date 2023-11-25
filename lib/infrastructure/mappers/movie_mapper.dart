@@ -1,6 +1,6 @@
 import 'package:cine_app/domain/entities/movie_entity.dart';
 import 'package:cine_app/infrastructure/models/moviedb/movie_details.dart';
-import 'package:cine_app/infrastructure/models/moviedb/movie_moviedb.dart';
+import 'package:cine_app/infrastructure/models/moviedb/movie_from_moviedb.dart';
 
 class MovieMapper {
   //This is used to get the list of movies, for nowplaying, popular, etc.
@@ -19,7 +19,7 @@ class MovieMapper {
       posterPath  : (movieDb.posterPath != '')
           ? 'https://image.tmdb.org/t/p/w500/${movieDb.posterPath}' 
           : 'no-poster',
-      releaseDate : movieDb.releaseDate,
+      releaseDate : movieDb.releaseDate != null ? movieDb.releaseDate! : null,
       title       : movieDb.title,
       video       : movieDb.video,
       voteAverage : movieDb.voteAverage,
