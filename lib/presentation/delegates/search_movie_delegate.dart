@@ -46,17 +46,23 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
    return FutureBuilder(future: searchMovies(query), 
                       builder: (context, snapshot) {
                       final movies = snapshot.data ?? [];
-                       return ListView.builder(
-                        itemCount: movies.length,
-                        itemBuilder: (context, index) {
-                          final movie = movies[index];
-                          return GestureDetector(
-                            onTap: () => query = movie.title,
-                            child: ListTile(
-                              title: Text(movie.title),
-                            ),
-                          );
-                        },);
+                      return GridView.count(
+                        mainAxisSpacing: 3,
+                        crossAxisSpacing: 3,
+                        crossAxisCount: 3,
+                        childAspectRatio: 0.7,
+                      children: [
+                        ...movies.map((e) => SizedBox(
+                          child: FadeIn(
+                            delay: const Duration(milliseconds: 500),
+                            duration: const Duration(milliseconds: 1500),
+                            child: Image.network(
+                              e.posterPath, 
+                              fit: BoxFit.cover),
+                          )))
+                      ],
+                      );
+                      //TODO add similar movies
                       },);
   }
 
