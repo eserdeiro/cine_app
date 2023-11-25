@@ -168,12 +168,14 @@ class _SlideLoadingProgress extends StatelessWidget {
   const _SlideLoadingProgress();
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: 222,
-        color : Colors.black12,
-        child : SpinPerfect(
-            infinite: true,
-            child: const Icon(Icons.refresh_outlined, size: 40)));
+    return FadeIn(
+      child: Container(
+          height: 222,
+          color : Colors.black12,
+          child : SpinPerfect(
+              infinite: true,
+              child: const Icon(Icons.refresh_outlined, size: 40))),
+    );
   }
 }
 
