@@ -174,6 +174,11 @@ class _CustomSliverAppBar extends StatelessWidget {
       expandedHeight: size.height * 0.26,
       backgroundColor: Colors.black,
       foregroundColor: Colors.white,
+      actions: [
+        IconButton(
+          onPressed: () {}, icon: const Icon(Icons.favorite_border_outlined))
+        //Icon(Icons.favorite_border_outlined, colors: Colors.red)
+      ],
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: true,
         title: Text(
@@ -190,25 +195,52 @@ class _CustomSliverAppBar extends StatelessWidget {
               return FadeIn(child: child);
             }),
           ),
-          const SizedBox.expand(
-            child: DecoratedBox(
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        stops: [0.50, 1.0],
-                        colors: [Colors.transparent, Colors.black54]))),
-          ),
-          const SizedBox.expand(
-            child: DecoratedBox(
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        stops: [0.0, 0.2],
-                        colors: [Colors.black54, Colors.transparent]))),
-          ),
+          //Gradients
+        const _CustomGradient(
+            begin: Alignment.topCenter, 
+            end: Alignment.bottomCenter, 
+            stops: [0.5, 1.0],
+            colors: [Colors.transparent, Colors.black54]),
+
+          const _CustomGradient(
+            begin: Alignment.topLeft, 
+            end: Alignment.bottomRight, 
+            stops: [0.0, 0.5],
+            colors: [Colors.black87, Colors.transparent]),
+
+          const _CustomGradient(
+            begin: Alignment.topRight, 
+            end: Alignment.bottomLeft, 
+            stops: [0.0, 0.5],
+            colors: [Colors.black87, Colors.transparent]),
         ]),
       ),
+    );
+  }
+}
+
+class _CustomGradient extends StatelessWidget {
+  final Alignment begin;
+  final Alignment end;
+  final List<double> stops;
+  final List<Color> colors;
+  const _CustomGradient({
+    required this.begin,
+    required this.end,
+    required this.stops,
+    required this.colors,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox.expand(
+      child: DecoratedBox(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: begin, 
+                  end: end, 
+                  stops: stops, 
+                  colors: colors))),
     );
   }
 }
