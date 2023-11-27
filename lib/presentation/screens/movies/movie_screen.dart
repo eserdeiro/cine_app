@@ -73,10 +73,7 @@ class _MovieDetails extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //PosterPath
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.network(movie.posterPath, width: size.width * 0.3),
-              ),
+              Image.network(movie.posterPath, width: size.width * 0.3),
               const SizedBox(width: 10),
               //Overview
               SizedBox(
@@ -87,20 +84,35 @@ class _MovieDetails extends StatelessWidget {
                   )),
             ],
           )),
+
+         SizedBox(
+          height: 55,
+           child: ListView.builder(
+                 scrollDirection: Axis.horizontal,
+                 itemCount: movie.genreIds.length,
+                 itemBuilder: (context, index) {
+            final genreId = movie.genreIds[index];
+            return Padding(
+              padding: const EdgeInsets.only(right: 8, top: 8, left: 8),
+              child: Chip(label: Text(genreId)),
+            );
+                 },
+               ),
+         ),
       //Genres
-      Padding(
-          padding: const EdgeInsets.all(8),
-          child: Wrap(
-            children: [
-              ...movie.genreIds.map((e) => Container(
-                    margin: const EdgeInsets.only(right: 8),
-                    //TODO GESTURE DETECTOR, to movies related
-                    child: Chip(
-                      label: Text(e),
-                    ),
-                  ))
-            ],
-          )),
+      // Padding(
+      //     padding: const EdgeInsets.all(8),
+      //     child: Wrap(
+      //       children: [
+      //         ...movie.genreIds.map((e) => Container(
+      //               margin: const EdgeInsets.only(right: 8),
+      //               //TODO GESTURE DETECTOR, to movies related
+      //               child: Chip(
+      //                 label: Text(e),
+      //               ),
+      //             ))
+      //       ],
+      //     )),
       //Actors view
       _ActorsByMovie(movieId: movie.id.toString()),
       const SizedBox(height: 50)
