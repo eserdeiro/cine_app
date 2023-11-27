@@ -6,7 +6,13 @@ final appRouter = GoRouter(
   // /home/0
   initialLocation: Strings.initialLocation,
   routes: [
-    
+    //redirect from '/' to '/home/0' because home is not recognized
+      GoRoute(
+        path: '/',
+        redirect: (_, __) {
+          // /home/0
+         return Strings.initialLocation;
+        },),
     GoRoute(
       path: '/home/:page',
       name: HomeScreen.name,
@@ -26,11 +32,4 @@ final appRouter = GoRouter(
       },
         ),
       ]),
-      //redirect from '/' to '/home/0' because home is not recognized
-      GoRoute(
-        path: '/',
-        redirect: (_, __) {
-          // /home/0
-         return Strings.initialLocation;
-        },)
 ]);
