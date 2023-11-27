@@ -1,5 +1,3 @@
-import 'package:cine_app/infrastructure/repository/local_database_repository_impl.dart';
-
 export 'package:cine_app/presentation/providers/movies/first_loading_provider.dart';
 export 'package:cine_app/presentation/providers/movies/movies_providers.dart';
 export 'package:cine_app/presentation/providers/movies/movies_repository_provider.dart';

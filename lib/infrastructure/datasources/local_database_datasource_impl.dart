@@ -56,7 +56,6 @@ class LocalDatabaseDataSourceImpl extends LocalDatabaseDatasource{
     if(favoriteMovie != null ){
       //Delete 
       //We use the id to use(favoriteMovie.id) because it has a unique id
-      print('se ejecuta');
       isar.writeTxnSync(() => isar.movies.deleteSync(favoriteMovie.isarId!));
       return;
     }
