@@ -8,7 +8,7 @@ class MovieMapper {
 
       adult       : movieDb.adult,
       backdropPath: (movieDb.backdropPath != '') 
-          ? 'https://image.tmdb.org/t/p/w500/${movieDb.backdropPath}' 
+          ? 'https://image.tmdb.org/t/p/w1280/${movieDb.backdropPath}' 
           : 'no-poster',
       genreIds    : movieDb.genreIds.map((e) => e.toString()).toList(),
       id          : movieDb.id,

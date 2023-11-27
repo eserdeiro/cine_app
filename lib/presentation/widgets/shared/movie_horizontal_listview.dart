@@ -90,22 +90,20 @@ class _Slide extends StatelessWidget {
           SizedBox(
             width: 150,
             height: 222,
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(30),
-                child: Image.network(
-                  movie.posterPath,
-                  fit: BoxFit.cover,
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress != null) {
-                      return const _SlideLoadingProgress();
-                    } else {
-                      //redirect from '/movie' to '/home/0/move/id' because movie is not recognized
-                      return GestureDetector(
-                        onTap: () => context.push('${Strings.movieRoute}${movie.id}'),
-                        child: FadeIn(child: child));
-                    }
-                  },
-                )),
+            child: Image.network(
+              movie.posterPath,
+              fit: BoxFit.cover,
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress != null) {
+                  return const _SlideLoadingProgress();
+                } else {
+                  //redirect from '/movie' to '/home/0/move/id' because movie is not recognized
+                  return GestureDetector(
+                    onTap: () => context.push('${Strings.movieRoute}${movie.id}'),
+                    child: FadeIn(child: child));
+                }
+              },
+            ),
           ),
           const SizedBox(height: 5),
 

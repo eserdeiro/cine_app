@@ -13,6 +13,7 @@ final appRouter = GoRouter(
       builder: (context, state) {
         final page = state.pathParameters['page'] ?? '0';
         return HomeScreen(page: int.parse(page));
+        //TODO if page > 2 || page < 0. redirect to home
       },
       routes: [
         //the initial slash /movie/:id is'nt needed by the parent
