@@ -1,10 +1,11 @@
+import 'package:cine_app/config/constants/strings.dart';
 import 'package:cine_app/presentation/providers/providers.dart';
 import 'package:cine_app/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomeView extends ConsumerStatefulWidget {
-  const HomeView();
+  const HomeView({super.key});
 
   @override
   HomeViewState createState() => HomeViewState();
@@ -52,7 +53,7 @@ class HomeViewState extends ConsumerState<HomeView> {
               //NowPlaying
               MovieHorizontalListview(
                 movies: nowPlayingMovies,
-                title: 'Now Playing',
+                title: Strings.movieHorizontalListviewOne,
                 //TODO SET DATE
                 subtitle: 'Today',
                 loadNextPage: () {
@@ -63,7 +64,7 @@ class HomeViewState extends ConsumerState<HomeView> {
               //Popular
               MovieHorizontalListview(
                 movies: popularMovies,
-                title: 'Popular',
+                title: Strings.movieHorizontalListviewTwo,
                 //TODO SET DATE
                 subtitle: 'Today',
                 loadNextPage: () {
@@ -74,7 +75,7 @@ class HomeViewState extends ConsumerState<HomeView> {
                //Upcoming
               MovieHorizontalListview(
                 movies: upcomingMovies,
-                title: 'Upcoming',
+                title: Strings.movieHorizontalListviewThree,
                 //TODO SET DATE
                 subtitle: 'Today',
                 loadNextPage: () {
@@ -85,7 +86,7 @@ class HomeViewState extends ConsumerState<HomeView> {
                //Toprated
               MovieHorizontalListview(
                 movies: topRatedMovies,
-                title: 'Toprated',
+                title: Strings.movieHorizontalListviewFour,
                 //TODO SET DATE
                 subtitle: 'Today',
                 loadNextPage: () {

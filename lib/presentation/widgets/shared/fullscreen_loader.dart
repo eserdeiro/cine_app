@@ -1,3 +1,4 @@
+import 'package:cine_app/config/constants/strings.dart';
 import 'package:flutter/material.dart';
 
 class FullScreenLoader extends StatelessWidget {
@@ -24,7 +25,7 @@ class FullScreenLoader extends StatelessWidget {
         children: [
           StreamBuilder(stream: getLoadingMessages(), 
           builder: (context, snapshot) {
-            if(!snapshot.hasData) return Text('Welcome to APP_NAME :)', style: titleStyle.titleMedium,);
+            if(!snapshot.hasData) return Text('Welcome to ${Strings.appName} :)', style: titleStyle.titleMedium,);
             return Text(snapshot.data!, style: titleStyle.titleMedium);
           }),
           const SizedBox(height: 10),

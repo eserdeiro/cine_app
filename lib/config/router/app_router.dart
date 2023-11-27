@@ -1,8 +1,10 @@
+import 'package:cine_app/config/constants/strings.dart';
 import 'package:cine_app/presentation/screens/screens.dart';
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(
-  initialLocation: '/home/0',
+  // /home/0
+  initialLocation: Strings.initialLocation,
   routes: [
     
     GoRoute(
@@ -27,6 +29,7 @@ final appRouter = GoRouter(
       GoRoute(
         path: '/',
         redirect: (_, __) {
-         return '/home/0';
+          // /home/0
+         return Strings.initialLocation;
         },)
 ]);
