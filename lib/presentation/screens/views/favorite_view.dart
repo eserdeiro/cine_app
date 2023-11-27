@@ -14,8 +14,7 @@ class FavoriteViewState extends ConsumerState<FavoriteView> {
     @override
     void initState() {
       super.initState();
-      ref.watch(favoriteMoviesProvider.notifier)
-    .loadNextPage();
+     ref.read(favoriteMoviesProvider.notifier).loadNextPage();
     }
 
   @override
@@ -23,14 +22,13 @@ class FavoriteViewState extends ConsumerState<FavoriteView> {
 
     final favoriteMovies = ref.watch(favoriteMoviesProvider).values.toList();
 
-    return Scaffold(
+    return Scaffold( 
       body: ListView.builder(
         itemCount: favoriteMovies.length,
         itemBuilder: (context, index) {
-          final movie = favoriteMovies[index];
-    
+         final movie = favoriteMovies[index];
           return  ListTile(
-            title: Text('${movie.title}'),
+            title: Text(movie.title),
           );
         },),
     );
