@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:cine_app/config/constants/strings.dart';
 import 'package:cine_app/config/helpers/formats.dart';
 import 'package:cine_app/domain/entities/movie_entity.dart';
 import 'package:flutter/material.dart';
@@ -98,8 +99,9 @@ class _Slide extends StatelessWidget {
                     if (loadingProgress != null) {
                       return const _SlideLoadingProgress();
                     } else {
+                      //redirect from '/movie' to '/home/0/move/id' because movie is not recognized
                       return GestureDetector(
-                        onTap: () => context.push('/movie/${movie.id}'),
+                        onTap: () => context.push('${Strings.movieRoute}${movie.id}'),
                         child: FadeIn(child: child));
                     }
                   },

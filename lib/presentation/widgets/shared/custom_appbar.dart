@@ -1,3 +1,4 @@
+import 'package:cine_app/config/constants/strings.dart';
 import 'package:cine_app/domain/entities/movie_entity.dart';
 import 'package:cine_app/presentation/delegates/search_movie_delegate.dart';
 import 'package:cine_app/presentation/providers/providers.dart';
@@ -39,7 +40,8 @@ class CustomAppbar extends ConsumerWidget {
                           searchMovies:  ref.read(searchedMoviesProvider.notifier).searchMoviesByQuery))
                           .then((movie){
                             if(movie != null){
-                              context.push('/movie/${movie.id}');
+                              //redirect from '/movie' to '/home/0/move/id' because movie is not recognized
+                              context.push('${Strings.movieRoute}${movie.id}');
                             }
                           });
               }, icon: const Icon(Icons.search))
