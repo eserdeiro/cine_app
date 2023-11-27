@@ -1,4 +1,3 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:cine_app/presentation/providers/providers.dart';
 import 'package:cine_app/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,7 @@ class FavoriteView extends ConsumerStatefulWidget {
   FavoriteViewState createState() => FavoriteViewState();
 }
 
-class FavoriteViewState extends ConsumerState<FavoriteView> {
+class FavoriteViewState extends ConsumerState<FavoriteView> with AutomaticKeepAliveClientMixin{
 
     bool isLastPage = false;
     bool isLoading = false;
@@ -37,16 +36,21 @@ class FavoriteViewState extends ConsumerState<FavoriteView> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
 
     final favoriteMovies = ref.watch(favoriteMoviesProvider).values.toList();
 
     return Scaffold( 
       appBar: AppBar(
-        title: Text('Favorites'),
+        title: const Text('Favorites'),
       ),
       body: MoviesGridView(
         movies: favoriteMovies,
         loadNextPage: loadNextPage)
     );
   }
+  
+
+  @override
+  bool get wantKeepAlive => true;
 }
