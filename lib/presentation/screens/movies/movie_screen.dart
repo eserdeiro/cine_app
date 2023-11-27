@@ -64,43 +64,33 @@ class _MovieDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    //final size = MediaQuery.of(context).size;
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Padding(
           padding: const EdgeInsets.only(left: 8, top: 16, right: 8, bottom: 0),
-          child: Row(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //PosterPath
-              Image.network(movie.posterPath, width: size.width * 0.3),
-              const SizedBox(width: 10),
+               const Text('Overview', style: TextStyle(
+                fontFamily: 'Montserrat', 
+                fontWeight: FontWeight.w600,
+                fontSize: 20)),
+                const SizedBox(width: 10),
               //Overview
-              SizedBox(
-                  width: (size.width - 40) * 0.7,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text(movie.overview)],
-                  )),
+              Text(movie.overview)
             ],
           )),
-         //Genres
-         SizedBox(
-          height: 55,
-           child: ListView.builder(
-                 scrollDirection: Axis.horizontal,
-                 itemCount: movie.genreIds.length,
-                 itemBuilder: (context, index) {
-            final genreId = movie.genreIds[index];
-            return Padding(
-              padding: const EdgeInsets.only(right: 8, top: 8, left: 8),
-              child: Chip(label: Text(genreId)),
-            );
-                 },
-               ),
-         ),
-
-      //Actors view
+        //Cast view
+        const Padding(
+          padding: EdgeInsets.all(10),
+          child: Text('Cast', style: TextStyle(
+                  fontFamily: 'Montserrat', 
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20)),
+        ),
+    
       _ActorsByMovie(movieId: movie.id.toString()),
       const SizedBox(height: 50)
     ]);
@@ -169,19 +159,18 @@ class _CustomSliverAppBar extends ConsumerWidget {
   Widget build(BuildContext context,ref) {
     final isFavoriteFutureProvider = ref.watch(isFavoriteProvider(movie.id));
     final size = MediaQuery.of(context).size;
-    return SliverAppBar.medium(
-      expandedHeight: size.height * 0.26,
+    return SliverAppBar(
+      centerTitle: true,
+      title: Text(movie.title),
+      expandedHeight: size.height * 0.6,
       backgroundColor: Colors.black,
       foregroundColor: Colors.white,
       actions: [
         IconButton(
           onPressed: () async{
-            // await ref.read(localDatabaseProvider)
-            // .toggleFavorite(movie);
             await ref.read(favoriteMoviesProvider.notifier)
             .toggleFavorite(movie);
-
-            // await Future.delayed(const Duration(milliseconds: 100));
+            
             ref.invalidate(isFavoriteProvider(movie.id));
           }, icon: isFavoriteFutureProvider.when(
             data:(isFavorite){
@@ -191,30 +180,26 @@ class _CustomSliverAppBar extends ConsumerWidget {
             } , 
             error: (_, __) => throw UnimplementedError(), 
             loading: () => SpinPerfect(child: const Icon(Icons.refresh_outlined))))
-        //Icon(Icons.favorite_border_outlined, colors: Colors.red)
       ],
       flexibleSpace: FlexibleSpaceBar(
-        centerTitle: true,
-        title: Text(
-          movie.title,
-          style: const TextStyle(fontSize: 20),
-        ),
         titlePadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-        background: Stack(children: [
+        background: Stack(
+          children: [
+            //Background posterpath
           SizedBox.expand(
-            child: Image.network(movie.backdropPath, 
+            child: Image.network(movie.posterPath, 
             fit: BoxFit.cover,
             loadingBuilder: (context, child, loadingProgress) {
               if(loadingProgress != null) return const SizedBox();
               return FadeIn(child: child);
             }),
           ),
-          //Gradients
+         // Gradients
         const _CustomGradient(
             begin: Alignment.topCenter, 
             end: Alignment.bottomCenter, 
-            stops: [0.5, 1.0],
-            colors: [Colors.transparent, Colors.black54]),
+            stops: [0.4, 1.0],
+            colors: [Colors.transparent, Color(0xff1f1d2b)]),
 
           const _CustomGradient(
             begin: Alignment.topLeft, 
@@ -227,7 +212,50 @@ class _CustomSliverAppBar extends ConsumerWidget {
             end: Alignment.bottomLeft, 
             stops: [0.0, 0.5],
             colors: [Colors.black87, Colors.transparent]),
+            
+            //Center posterpah
+            Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    child: SizedBox.fromSize(
+                      child: Image.network(movie.posterPath, height: 300,
+                          //fit: BoxFit.cover,
+                          loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress != null) return const SizedBox();
+                        return FadeIn(child: child);
+                      }),
+                    ),
+                  ),
+
+                  const SizedBox(height: 20),
+
+                 if (movie.releaseDate?.year != null)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.calendar_month),
+                      Text('${movie.releaseDate!.year}'),
+                    ],
+                  ),
+                 //Genres
+                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.local_movies_rounded),
+                  ...movie.genreIds.map((genreIds) {
+                    return Text("$genreIds ");
+                  }),
+                  ],
+                 ),
+                ],
+              ),
+            ),
         ]),
+          
       ),
     );
   }

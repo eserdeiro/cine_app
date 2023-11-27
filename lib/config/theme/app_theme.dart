@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AppTheme {
   
 
   ThemeData getTheme() => ThemeData(
     useMaterial3: true,
+    // appBarTheme: const AppBarTheme(
+    //   systemOverlayStyle: SystemUiOverlayStyle(
+    //     statusBarColor: Color(0xff1f1d2b),
+    //     statusBarIconBrightness: Brightness.light,
+    //   ),
+    // ),
+    
     colorScheme: const ColorScheme(
       brightness: Brightness.dark, 
       primary: Colors.cyan, // 
@@ -17,6 +25,6 @@ class AppTheme {
       onBackground: Colors.cyan, //
       surface: Color(0xff1f1d2b), //
       onSurface: Colors.white), //
-      primaryColorDark: Colors.red
+      primaryColorDark: const Color(0xff1f1d2b)
   );
 }

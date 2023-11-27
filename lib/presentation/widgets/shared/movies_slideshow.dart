@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:card_swiper/card_swiper.dart';
+import 'package:cine_app/config/constants/strings.dart';
 import 'package:cine_app/domain/entities/movie_entity.dart';
 import 'package:flutter/material.dart';
 
@@ -12,27 +13,39 @@ class MoviesSlideshow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-    return SizedBox(
-      height: 220,
-      width: double.infinity,
-      child: Swiper(
-        viewportFraction: 0.8,
-        //viewportFraction : 0.8
-        scale: 0.8,
-        autoplay: true,
-        pagination: SwiperPagination(
-          margin: const EdgeInsets.only(top: 0),
-          builder: DotSwiperPaginationBuilder(
-            activeColor: colors.primary,
-            color: colors.secondary
-          )
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+         Padding(
+           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+           child: Text(Strings.upComing, 
+                 style: const TextStyle(
+            fontFamily: 'Montserrat', 
+            fontWeight: FontWeight.w600, 
+            fontSize: 18)),
+         ),
+        SizedBox(
+          height: 220,
+          width: double.infinity,
+          child: Swiper(
+            viewportFraction: 0.8,
+            scale: 0.8,
+            autoplay: true,
+            pagination: SwiperPagination(
+              margin: const EdgeInsets.only(top: 0),
+              builder: DotSwiperPaginationBuilder(
+                activeColor: colors.primary,
+                color: colors.secondary
+              )
+            ),
+            itemCount: movies.length,
+            itemBuilder: (context, index) {
+              final movie = movies[index];
+              return _Slide(movie: movie);
+            },
+            ),
         ),
-        itemCount: movies.length,
-        itemBuilder: (context, index) {
-          final movie = movies[index];
-          return _Slide(movie: movie);
-        },
-        ),
+      ],
     );
   }
 }

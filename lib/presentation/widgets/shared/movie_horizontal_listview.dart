@@ -48,7 +48,7 @@ class _MovieHorizontalListviewState extends State<MovieHorizontalListview> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 360,
+      height: 350,
       child: Column(
         //Title listview & Date(subtitle)
         children: [
@@ -80,6 +80,7 @@ class _Slide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme;
+   
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ClipRRect(
@@ -117,17 +118,20 @@ class _Slide extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(5)),
                   child: Container(
-                    color: Colors.black45,
+                    color: const Color.fromRGBO(31, 29, 43, 50),
                     width: 50,
-                    child: Row(
-                      children: [
-                        const Icon(Icons.star, color: Color(0xfffd8701), size: 15),
-                        const SizedBox(width: 2),
-                        Text(Formats.number(movie.voteAverage , 1),
-                            style: textStyle.bodyMedium
-                                ?.copyWith(color: const Color(0xfffd8701))),
-                        const Spacer(),
-                      ],
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.star, color: Color(0xfffd8701), size: 15),
+                          const SizedBox(width: 2),
+                          Text(Formats.number(movie.voteAverage , 1),
+                              style: textStyle.bodyMedium
+                                  ?.copyWith(color: const Color(0xfffd8701))),
+                          const Spacer(),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -148,8 +152,15 @@ class _Slide extends StatelessWidget {
                           style: const TextStyle(fontFamily: 'Montserrat', fontWeight: FontWeight.w600),
                           overflow: TextOverflow.ellipsis,),
                       )),
-              const Spacer(),
-
+               
+              //GenreID
+              SizedBox(
+                width: 150,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 10, left: 5, right: 5, top: 5),
+                  child: Text(movie.genreIds.toString(), maxLines: 1),
+                ),
+              )
             ],
           ),
         ),
@@ -191,7 +202,7 @@ class _Title extends StatelessWidget {
         if (title != null) Text(title!, style: const TextStyle(fontFamily: 'Montserrat', fontSize: 18, fontWeight: FontWeight.w600)),
         const Spacer(),
         if (subtitle != null)
-          Text(subtitle!, style: const TextStyle(fontFamily: 'Montserrat', fontWeight: FontWeight.w400))
+          Text(subtitle!, style: const TextStyle(fontFamily: 'Montserrat', fontWeight: FontWeight.w400, color: Colors.cyan))
       ]),
     );
   }

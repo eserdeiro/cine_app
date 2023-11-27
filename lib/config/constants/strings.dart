@@ -6,4 +6,5 @@ class Strings {
   static String movieHorizontalListviewTwo   = 'Popular';
   static String movieHorizontalListviewThree = 'Upcoming';
   static String movieHorizontalListviewFour  = 'Top Rated';
+  static String upComing                     = 'Upcoming Movies';
 }

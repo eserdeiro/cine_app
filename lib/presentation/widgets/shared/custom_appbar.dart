@@ -17,38 +17,42 @@ class CustomAppbar extends ConsumerWidget {
     
     return SafeArea(
       bottom: false,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: SizedBox(
-          width: double.infinity,
-          height: 60,
-          child: Row(
-            children: [
-              Icon(Icons.movie_outlined, color: colors.primary),
-              const SizedBox(width: 5),
-              Text(Strings.appName, style: titleStyle),
-              const Spacer(),
-              IconButton(onPressed: (){
-
-                final searchedMovies= ref.read(searchedMoviesProvider);
-                final searchQuery = ref.read(searchMoviesQueryProvider);
-                 showSearch<Movie?>(
-                          query: searchQuery,
-                          context: context,
-                          delegate: SearchMovieDelegate(
-                          initialMovies: searchedMovies,
-                          searchMovies:  ref.read(searchedMoviesProvider.notifier).searchMoviesByQuery))
-                          .then((movie){
-                            if(movie != null){
-                              //redirect from '/movie' to '/home/0/move/id' because movie is not recognized
-                              context.push('${Strings.movieRoute}${movie.id}');
-                            }
-                          });
-              }, icon: const Icon(Icons.search))
-      
-            ],
+      child: Container(
+        color: const Color(0xff1f1d2b),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: SizedBox(
+            width: double.infinity,
+            height: 60,
+            child: Row(
+              children: [
+                Icon(Icons.movie_outlined, color: colors.primary),
+                const SizedBox(width: 5),
+                Text(Strings.appName, style: titleStyle),
+                const Spacer(),
+                IconButton(onPressed: (){
+              
+                  final searchedMovies= ref.read(searchedMoviesProvider);
+                  final searchQuery = ref.read(searchMoviesQueryProvider);
+                   showSearch<Movie?>(
+                            query: searchQuery,
+                            context: context,
+                            delegate: SearchMovieDelegate(
+                            initialMovies: searchedMovies,
+                            searchMovies:  ref.read(searchedMoviesProvider.notifier).searchMoviesByQuery))
+                            .then((movie){
+                              if(movie != null){
+                                //redirect from '/movie' to '/home/0/move/id' because movie is not recognized
+                                context.push('${Strings.movieRoute}${movie.id}');
+                              }
+                            });
+                }, icon: const Icon(Icons.search))
+              
+              ],
+            ),
           ),
-        )),
+        ),
+      ),
     );
   }
 }
