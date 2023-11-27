@@ -84,7 +84,7 @@ class _MovieDetails extends StatelessWidget {
                   )),
             ],
           )),
-
+         //Genres
          SizedBox(
           height: 55,
            child: ListView.builder(
@@ -99,20 +99,7 @@ class _MovieDetails extends StatelessWidget {
                  },
                ),
          ),
-      //Genres
-      // Padding(
-      //     padding: const EdgeInsets.all(8),
-      //     child: Wrap(
-      //       children: [
-      //         ...movie.genreIds.map((e) => Container(
-      //               margin: const EdgeInsets.only(right: 8),
-      //               //TODO GESTURE DETECTOR, to movies related
-      //               child: Chip(
-      //                 label: Text(e),
-      //               ),
-      //             ))
-      //       ],
-      //     )),
+
       //Actors view
       _ActorsByMovie(movieId: movie.id.toString()),
       const SizedBox(height: 50)
