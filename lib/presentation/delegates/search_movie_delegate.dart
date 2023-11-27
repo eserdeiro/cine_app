@@ -100,10 +100,10 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
         final movies = snapshot.data ?? [];
         return _MovieItem(
           movies: movies, 
-          query: query, 
+          query: query,
           onMovieSelected: (context, movie){
             clearStreams();
-            close;
+            close(context, movie);
           });
         //TODO add similar movies
       },
