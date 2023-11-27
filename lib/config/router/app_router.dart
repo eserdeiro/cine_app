@@ -2,13 +2,16 @@ import 'package:cine_app/presentation/screens/screens.dart';
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(
-  initialLocation: '/',
+  initialLocation: '/home/0',
   routes: [
     
     GoRoute(
-      path: '/',
+      path: '/home/:page',
       name: HomeScreen.name,
-      builder: (context, state) => const HomeScreen(),
+      builder: (context, state) {
+        final page = state.pathParameters['page'] ?? '0';
+        return HomeScreen(page: int.parse(page));
+      },
       routes: [
         //the initial slash /movie/:id is'nt needed by the parent
         GoRoute(
