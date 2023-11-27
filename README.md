@@ -20,7 +20,13 @@ THE_MOVIEDB_KEY=YOUR_API_KEY
 
 # UI
 
-UI components are designed according to the custom design system and built entirely
-using [Jetpack Compose](https://developer.android.com/jetpack/compose).
+The UI components are designed following the example of the following repository
+[Cinemax](https://github.com/AfigAliyev/Cinemax).
 
 The app has one dark theme that uses predefined colors.
+
+# Compatibility 
+
+Currently only available for Android and iOS
+
+I have incompatibilities with search delegate & isar database, which do not allow me to function on the web
