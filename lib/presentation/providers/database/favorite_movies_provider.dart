@@ -17,7 +17,7 @@ class DatabaseMoviesNotifier extends StateNotifier<Map<int, Movie>>{
 
   DatabaseMoviesNotifier({required this.localDatabaseRepository}) : super({});
 
-  Future<void> loadNextPage() async {
+  Future<List<Movie>> loadNextPage() async {
 
     final movies = await localDatabaseRepository.loadFavoriteMovies(offset: page * 10, limit: 12); // 
     page++;
@@ -30,6 +30,7 @@ class DatabaseMoviesNotifier extends StateNotifier<Map<int, Movie>>{
 
     state = {...state, ...tempMovieMap};
 
+    return movies;
     }
 
 
