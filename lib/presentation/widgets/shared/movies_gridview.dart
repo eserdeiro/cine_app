@@ -39,17 +39,11 @@ class _MoviesGridViewState extends State<MoviesGridView> {
 
   @override
   Widget build(BuildContext context) {
-   
+    final titleStyle = Theme.of(context).textTheme;
+   if (widget.movies.isNotEmpty) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (widget.movies.isNotEmpty)
-          const Padding(
-            padding: EdgeInsets.all(10),
-            child: Text(
-              'Main results for ',
-            ),
-          ),
         Expanded(
           child: GridView.count(
             controller: scrollController,
@@ -64,5 +58,7 @@ class _MoviesGridViewState extends State<MoviesGridView> {
         ),
       ],
     );
+   } 
+   return Center(child: Text('No movies :(', style: titleStyle.titleLarge));
   }
 }

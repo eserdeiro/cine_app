@@ -41,6 +41,9 @@ class FavoriteViewState extends ConsumerState<FavoriteView> {
     final favoriteMovies = ref.watch(favoriteMoviesProvider).values.toList();
 
     return Scaffold( 
+      appBar: AppBar(
+        title: Text('Favorites'),
+      ),
       body: MoviesGridView(
         movies: favoriteMovies,
         loadNextPage: loadNextPage)
