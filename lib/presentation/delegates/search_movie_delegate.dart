@@ -42,6 +42,21 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
   }
 
   @override
+  ThemeData appBarTheme(BuildContext context) {
+    return Theme.of(context).copyWith(
+      appBarTheme: const AppBarTheme(color: Color(0xff1f1d2b)),
+      inputDecorationTheme: const InputDecorationTheme(
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Color(0xff1f1d2b)),
+        ),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Color(0xff1f1d2b)),
+        ),
+      ),
+    );
+  }
+
+  @override
   List<Widget>? buildActions(BuildContext context) {
    return [
     StreamBuilder(
