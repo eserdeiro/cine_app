@@ -23,4 +23,10 @@ final appRouter = GoRouter(
       },
         ),
       ]),
+      //redirect from '/' to '/home/0' because home is not recognized
+      GoRoute(
+        path: '/',
+        redirect: (_, __) {
+         return '/home/0';
+        },)
 ]);
