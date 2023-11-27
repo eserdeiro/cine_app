@@ -67,34 +67,40 @@ class _MovieDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     //final size = MediaQuery.of(context).size;
 
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              //PosterPath
-               const Text('Overview', style: TextStyle(
-                fontFamily: 'Montserrat', 
-                fontWeight: FontWeight.w600,
-                fontSize: 20)),
-                const SizedBox(width: 10),
-              //Overview
-              Text(movie.overview)
-            ],
-          )),
-        //Cast view
-        const Padding(
-          padding: EdgeInsets.all(10),
-          child: Text('Cast', style: TextStyle(
-                  fontFamily: 'Montserrat', 
-                  fontWeight: FontWeight.w600,
-                  fontSize: 20)),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start, 
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            //PosterPath
+             const Text('Overview', style: TextStyle(
+              fontFamily: 'Montserrat', 
+              fontWeight: FontWeight.w600,
+              fontSize: 20)),
+              const SizedBox(width: 10),
+            //Overview
+            Text(movie.overview, style: const TextStyle(
+              fontFamily: 'Montserrat', 
+              fontWeight: FontWeight.w400,
+            ))
+          ],
         ),
+          //Cast view
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 10),
+            child: Text('Cast', style: TextStyle(
+                    fontFamily: 'Montserrat', 
+                    fontWeight: FontWeight.w600,
+                    fontSize: 20)),
+          ),
     
-      _ActorsByMovie(movieId: movie.id.toString()),
-      const SizedBox(height: 50)
-    ]);
+        _ActorsByMovie(movieId: movie.id.toString()),
+        const SizedBox(height: 50)
+      ]),
+    );
   }
 }
 
