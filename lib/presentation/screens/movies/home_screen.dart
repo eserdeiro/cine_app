@@ -13,9 +13,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMixin{
-  final viewRoutes = const<Widget>[
+  final viewRoutes = const[
     HomeView(),
-    CategorieView(),
     FavoriteView()
   ];
 
@@ -34,7 +33,6 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
    pageController.dispose();
     super.dispose();
   }
-
 
 
   @override
@@ -62,6 +60,7 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
             CustomBottomNavigationBar(currentIndex: widget.page),
       );
     }
+    //If is mobile 
         return Scaffold(
       body: PageView(
         controller: pageController,

@@ -5,7 +5,6 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cine_app/domain/entities/movie_entity.dart';
 import 'package:flutter/material.dart';
 
-
 typedef SearchMovieCallback = Future <List<Movie>> Function(String query);
 
 class SearchMovieDelegate extends SearchDelegate<Movie?> {
