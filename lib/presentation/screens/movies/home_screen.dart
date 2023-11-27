@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
 
   @override
   void dispose() {
-    pageController.dispose();
+   pageController.dispose();
     super.dispose();
   }
 
@@ -39,7 +39,10 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
 
   @override
   Widget build(BuildContext context) {
-     super.build(context);
+
+    const bool isWeb = bool.fromEnvironment('dart.library.js_util');
+
+    super.build(context);
 
       if ( pageController.hasClients ) {
       pageController.animateToPage(
@@ -48,11 +51,20 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
         duration: const Duration( milliseconds: 250)
       );
     }
-
-    return Scaffold(
+    
+    if(isWeb){
+          return Scaffold(
+        body: IndexedStack(
+          index: widget.page,
+          children: viewRoutes,
+        ),
+        bottomNavigationBar:
+            CustomBottomNavigationBar(currentIndex: widget.page),
+      );
+    }
+        return Scaffold(
       body: PageView(
         controller: pageController,
-       // index: widget.page,
         children: viewRoutes,
       ),
       bottomNavigationBar: CustomBottomNavigationBar(currentIndex : widget.page),

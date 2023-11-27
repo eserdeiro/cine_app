@@ -15,7 +15,8 @@ extension GetMovieCollection on Isar {
 
 const MovieSchema = CollectionSchema(
   name: r'Movie',
-  id: 693552702131689691,
+  //  id: 693552702131689691,
+  id: 6935527021,
   properties: {
     r'adult': PropertySchema(
       id: 0,

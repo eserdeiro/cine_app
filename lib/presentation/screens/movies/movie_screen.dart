@@ -200,7 +200,7 @@ class _CustomSliverAppBar extends ConsumerWidget {
             ? const Icon(Icons.favorite_border_outlined, color: Colors.red) 
             : const Icon(Icons.favorite_border_outlined);
             } , 
-            error: (_, __) => throw UnimplementedError(), 
+            error: (e, __) => throw UnimplementedError(e.toString()), 
             loading: () => SpinPerfect(child: const Icon(Icons.refresh_outlined))))
       ],
       flexibleSpace: FlexibleSpaceBar(
