@@ -3,7 +3,6 @@ import 'package:cine_app/config/constants/strings.dart';
 import 'package:cine_app/config/helpers/formats.dart';
 import 'package:cine_app/domain/entities/movie_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
 
 class MovieHorizontalListview extends StatefulWidget {
@@ -51,7 +50,7 @@ class _MovieHorizontalListviewState extends State<MovieHorizontalListview> {
     return SizedBox(
       height: 360,
       child: Column(
-        //Title list & Date(subtitle)
+        //Title listview & Date(subtitle)
         children: [
           if (widget.title != null || widget.subtitle != null)
             _Title(title: widget.title, subtitle: widget.subtitle),
@@ -81,84 +80,80 @@ class _Slide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme;
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          //Image
-          SizedBox(
-            width: 150,
-            height: 222,
-            child: Image.network(
-              movie.posterPath,
-              fit: BoxFit.cover,
-              loadingBuilder: (context, child, loadingProgress) {
-                if (loadingProgress != null) {
-                  return const _SlideLoadingProgress();
-                } else {
-                  //redirect from '/movie' to '/home/0/move/id' because movie is not recognized
-                  return GestureDetector(
-                    onTap: () => context.push('${Strings.movieRoute}${movie.id}'),
-                    child: FadeIn(child: child));
-                }
-              },
-            ),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ClipRRect(
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        child: Container(
+          color: const Color(0xff252836),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //Image
+              Stack(
+                children: [
+                   SizedBox(
+                  width: 150,
+                  height: 222,
+                  child: Image.network(
+                    movie.posterPath,
+                    fit: BoxFit.cover,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress != null) {
+                        return const _SlideLoadingProgress();
+                      } else {
+                        //redirect from '/movie' to '/home/0/move/id' because movie is not recognized
+                        return GestureDetector(
+                          onTap: () => context.push('${Strings.movieRoute}${movie.id}'),
+                          child: FadeIn(child: child));
+                      }
+                    },
+                  ),
+                ),
+              //Vote average
+              Positioned(
+                right: 10,
+                top: 10,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(5)),
+                  child: Container(
+                    color: Colors.black45,
+                    width: 50,
+                    child: Row(
+                      children: [
+                        const Icon(Icons.star, color: Color(0xfffd8701), size: 15),
+                        const SizedBox(width: 2),
+                        Text(Formats.number(movie.voteAverage , 1),
+                            style: textStyle.bodyMedium
+                                ?.copyWith(color: const Color(0xfffd8701))),
+                        const Spacer(),
+                      ],
+                    ),
+                  ),
+                ),
+              )
+                ]
+              ),
+              const SizedBox(height: 10),
+      
+              //Movie title
+              SizedBox(
+                  width: 150,
+                  child:
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
+                        child: Text(
+                          movie.title, 
+                          maxLines: 1, 
+                          style: const TextStyle(fontFamily: 'Montserrat', fontWeight: FontWeight.w600),
+                          overflow: TextOverflow.ellipsis,),
+                      )),
+              const Spacer(),
+
+            ],
           ),
-          const SizedBox(height: 5),
-
-          //Movie title
-          SizedBox(
-              width: 150,
-              child:
-                  Text(movie.title, maxLines: 2, style: textStyle.titleSmall)),
-          const Spacer(),
-
-          //Rating
-          SizedBox(
-            width: 150,
-            child: Row(
-              children: [
-                _RatingBar(movie: movie),
-
-                const SizedBox(width: 2),
-
-                //VoteAverage
-                Text(Formats.number(movie.voteAverage / 2 , 1),
-                    style: textStyle.bodyMedium
-                        ?.copyWith(color: Colors.yellow.shade800)),
-                const Spacer(),
-
-                //Popularity
-                Text(Formats.number(movie.popularity, 0),
-                    style: textStyle.bodySmall)
-              ],
-            ),
-          )
-        ],
+        ),
       ),
-    );
-  }
-}
-//Rating bar
-class _RatingBar extends StatelessWidget {
-  const _RatingBar({
-    required this.movie,
-  });
-
-  final Movie movie;
-
-  @override
-  Widget build(BuildContext context) {
-    return RatingBarIndicator(
-      rating: movie.voteAverage / 2 ,
-      itemBuilder: (context, index) => Icon(
-        Icons.star,
-        color: Colors.yellow.shade800,
-      ),
-      itemCount: 5,
-      itemSize : 16.0,
-      direction: Axis.horizontal,
     );
   }
 }
@@ -188,19 +183,15 @@ class _Title extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final titleStyle = Theme.of(context).textTheme.titleLarge;
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10),
       padding: const EdgeInsets.only(top: 10),
       child: Row(children: [
-        if (title != null) Text(title!, style: titleStyle),
+        if (title != null) Text(title!, style: const TextStyle(fontFamily: 'Montserrat', fontSize: 18, fontWeight: FontWeight.w600)),
         const Spacer(),
         if (subtitle != null)
-          FilledButton.tonal(
-              style    :const ButtonStyle(visualDensity: VisualDensity.comfortable),
-              onPressed: () {},
-              child    : Text(subtitle!))
+          Text(subtitle!, style: const TextStyle(fontFamily: 'Montserrat', fontWeight: FontWeight.w400))
       ]),
     );
   }
