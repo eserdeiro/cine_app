@@ -14,7 +14,7 @@ class LocalDatabaseRepositoryImpl extends LocalDatabaseRepository{
   }
 
   @override
-  Future<List<Movie>> loadFavoriteMovies({int limit = 10, int offset = 0}) {
+  Future<List<Movie>> loadFavoriteMovies({int limit = 9, int offset = 0}) {
     return datasource.loadFavoriteMovies(limit: limit, offset: offset);
   }
 

@@ -34,7 +34,7 @@ class LocalDatabaseDataSourceImpl extends LocalDatabaseDatasource{
   //Offset brings the movies after x, example 
   //If offset is 10, bring the movies after the next 10
   @override
-  Future<List<Movie>> loadFavoriteMovies({int limit = 10, int offset = 0}) async{
+  Future<List<Movie>> loadFavoriteMovies({int limit = 9, int offset = 0}) async{
     final isar = await database;
     return isar.movies.where()
     .offset(offset)

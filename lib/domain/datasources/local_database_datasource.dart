@@ -5,5 +5,5 @@ abstract class LocalDatabaseDatasource {
 
   Future<bool> isMoviefavorite(int movieId);
 
-  Future<List<Movie>> loadFavoriteMovies({int limit = 10, int offset = 0});
+  Future<List<Movie>> loadFavoriteMovies({int limit = 9, int offset = 0});
 }
