@@ -1,15 +1,3 @@
-//TODO SET VIDEOS, select first option[0]
-//https://api.themoviedb.org/3/movie/{IDMOVIE}/videos?api_key={API_KEY}&language=es-ARG
-
-//And this response
-//"id": 670292,
-//"results": [
-//'type': 'Trailer'
-//'site': 'Youtube',
-//'official': 'true',
-//'key': 'oRTC5aFjXQw'(https://www.youtube.com/watch?v=oRTC5aFjXQw)
-//]
-
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

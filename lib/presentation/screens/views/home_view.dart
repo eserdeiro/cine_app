@@ -56,7 +56,6 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
               MovieHorizontalListview(
                 movies: nowPlayingMovies,
                 title: Strings.movieHorizontalListviewOne,
-                //TODO SET DATE
                 subtitle: 'Today',
                 loadNextPage: () {
                   ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
@@ -67,7 +66,6 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
               MovieHorizontalListview(
                 movies: popularMovies,
                 title: Strings.movieHorizontalListviewTwo,
-                //TODO SET DATE
                 subtitle: 'Today',
                 loadNextPage: () {
                   ref.read(popularMoviesProvider.notifier).loadNextPage();
@@ -78,7 +76,6 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
               MovieHorizontalListview(
                 movies: upcomingMovies,
                 title: Strings.movieHorizontalListviewThree,
-                //TODO SET DATE
                 subtitle: 'Today',
                 loadNextPage: () {
                   ref.read(upcomingMoviesProvider.notifier).loadNextPage();
@@ -89,7 +86,6 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
               MovieHorizontalListview(
                 movies: topRatedMovies,
                 title: Strings.movieHorizontalListviewFour,
-                //TODO SET DATE
                 subtitle: 'Today',
                 loadNextPage: () {
                   ref.read(topRatedMoviesProvider.notifier).loadNextPage();
