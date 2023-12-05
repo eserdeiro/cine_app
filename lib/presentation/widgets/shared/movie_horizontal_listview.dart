@@ -1,7 +1,5 @@
-import 'package:animate_do/animate_do.dart';
+import 'package:cine_app/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:cine_app/config/constants/strings.dart';
 import 'package:cine_app/config/helpers/formats.dart';
 import 'package:cine_app/domain/entities/movie_entity.dart';
 
@@ -86,20 +84,7 @@ class _Slide extends StatelessWidget {
                    SizedBox(
                   width: 150,
                   height: 222,
-                  child: Image.network(
-                    movie.posterPath,
-                    fit: BoxFit.cover,
-                    loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress != null) {
-                        return const _SlideLoadingProgress();
-                      } else {
-                        //redirect from '/movie' to '/home/0/move/id' because movie is not recognized
-                        return GestureDetector(
-                          onTap: () => context.push('${Strings.movieRoute}${movie.id}'),
-                          child: FadeIn(child: child));
-                      }
-                    },
-                  ),
+                  child:  MoviePoster(movie: movie),
                 ),
               //Vote average
               Positioned(
@@ -155,22 +140,6 @@ class _Slide extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-//_SlideLoadingProgress
-class _SlideLoadingProgress extends StatelessWidget {
-  const _SlideLoadingProgress();
-  @override
-  Widget build(BuildContext context) {
-    return FadeIn(
-      child: Container(
-          height: 222,
-          color : Colors.black12,
-          child : SpinPerfect(
-              infinite: true,
-              child: const Icon(Icons.refresh_outlined, size: 40))),
     );
   }
 }

@@ -4,5 +4,5 @@ export 'package:cine_app/presentation/widgets/shared/movie_horizontal_listview.d
 export 'package:cine_app/presentation/widgets/shared/movies_gridview.dart';
 export 'package:cine_app/presentation/widgets/shared/movies_slideshow.dart';
 export "package:cine_app/presentation/widgets/shared/custom_appbar.dart";
-export "package:cine_app/presentation/widgets/shared/movie_poster_link.dart";
+export 'package:cine_app/presentation/widgets/shared/movie_poster.dart';
 export "package:cine_app/presentation/widgets/shared/main_title_subtitle.dart";

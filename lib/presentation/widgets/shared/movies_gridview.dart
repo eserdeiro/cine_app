@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cine_app/domain/entities/movie_entity.dart';
-import 'package:cine_app/presentation/widgets/shared/movie_poster_link.dart';
+import 'package:cine_app/presentation/widgets/shared/movie_poster.dart';
 
 class MoviesGridView extends StatefulWidget {
 
@@ -52,7 +52,7 @@ class _MoviesGridViewState extends State<MoviesGridView> {
             crossAxisCount: 3,
             childAspectRatio: 0.7,
             children: [
-              ...widget.movies.map((movie) => MoviePosterLink(movie: movie))
+              ...widget.movies.map((movie) => MoviePoster(movie: movie))
             ],
           ),
         ),
