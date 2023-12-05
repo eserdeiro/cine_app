@@ -154,7 +154,6 @@ class _MovieItem extends StatelessWidget {
           ),
         Expanded(
           child: GridView.count(
-            //TODO add controller to load more pages
             mainAxisSpacing: 3,
             crossAxisSpacing: 3,
             crossAxisCount: 3,
