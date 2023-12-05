@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
 
-class MainTitleSubtitle extends StatelessWidget {
+class TitleSubtitle extends StatelessWidget {
   final String? title;
   final String? subtitle;
   final double? titleFontSize;
   final FontWeight? titleFontWeight;
   final double? subtitleFontSize;
   final Color? subtitleFontColor;
+  final double? horizontalPadding;
 
-  const MainTitleSubtitle({super.key, this.title, this.subtitle, this.titleFontSize, this.subtitleFontSize, this.subtitleFontColor, this.titleFontWeight});
+  const TitleSubtitle({super.key, 
+  this.title, 
+  this.subtitle, 
+  this.titleFontSize, 
+  this.subtitleFontSize, 
+  this.subtitleFontColor, 
+  this.titleFontWeight, this.horizontalPadding});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10),
+      margin: EdgeInsets.symmetric(horizontal: (horizontalPadding != null) ? horizontalPadding! : 10),
       padding: const EdgeInsets.only(top: 10),
       child: Row(
         children: [

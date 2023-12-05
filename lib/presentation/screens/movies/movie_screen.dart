@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:cine_app/presentation/widgets/shared/title_subtitle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cine_app/config/helpers/formats.dart';
@@ -53,7 +54,6 @@ class _MovieDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //final size = MediaQuery.of(context).size;
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       child: Column(
@@ -62,28 +62,15 @@ class _MovieDetails extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            //PosterPath
-             const Text('Overview', style: TextStyle(
-              fontFamily: 'Montserrat', 
-              fontWeight: FontWeight.w600,
-              fontSize: 20)),
-              const SizedBox(width: 10),
             //Overview
-            Text(movie.overview, style: const TextStyle(
-              fontFamily: 'Montserrat', 
-              fontWeight: FontWeight.w400,
-            ))
+            const TitleSubtitle(title: 'Overview', horizontalPadding: 0),
+            const SizedBox(width: 10),
+            Text(movie.overview)
           ],
         ),
-          //Cast view
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 10),
-            child: Text('Cast', style: TextStyle(
-                    fontFamily: 'Montserrat', 
-                    fontWeight: FontWeight.w600,
-                    fontSize: 20)),
-          ),
-    
+        
+        //Cast view
+        const TitleSubtitle(title: 'Cast', horizontalPadding: 0),
         _ActorsByMovie(movieId: movie.id.toString()),
         const SizedBox(height: 50)
       ]),
@@ -135,17 +122,14 @@ class _ActorsByMovie extends ConsumerWidget {
                     children: [
                       Text(actor.name,
                        style: const TextStyle(
-                        fontFamily: 'Montserrat', 
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600)),
+                         fontWeight: FontWeight.w600)),
                       const SizedBox(height: 5),
                       //Actor character
                       Text(actor.character ?? '',
                           maxLines: 2,
                            style: const TextStyle(
-                            fontFamily: 'Montserrat', 
                             fontSize: 12,
-                            fontWeight: FontWeight.w400)),
+                      )),
                     ],
                   ),
                 ),
@@ -195,7 +179,7 @@ class _CustomSliverAppBar extends ConsumerWidget {
         titlePadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
         background: Stack(
           children: [
-            //Background posterpath
+           //Background posterpath
           SizedBox.expand(
             child: Image.network(movie.posterPath, 
             fit: BoxFit.cover,
@@ -245,7 +229,8 @@ class _CustomSliverAppBar extends ConsumerWidget {
                   ),
 
                   const SizedBox(height: 20),
-                //Age
+
+                //Year
                  if (movie.releaseDate?.year != null)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

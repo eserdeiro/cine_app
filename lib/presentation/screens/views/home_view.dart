@@ -54,8 +54,8 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
             children: [
               MoviesSlideshow(movies: slideshowProvider),
               //NowPlaying
-          MainTitleSubtitle(title: Strings.movieHorizontalListviewOne, subtitle: 'xd', subtitleFontColor: Colors.cyan),
-          const MainTitleSubtitle(title: 'Movies', titleFontSize: 14, titleFontWeight: FontWeight.w400),
+          TitleSubtitle(title: Strings.nowPlaying, subtitle: 'xd', subtitleFontColor: Colors.cyan),
+          const TitleSubtitle(title: 'Movies', titleFontSize: 14, titleFontWeight: FontWeight.w400),
 
           const SizedBox(height: 10),
               ItemHorizontalListview(
@@ -65,8 +65,8 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
                 },
               ),
 
-              MainTitleSubtitle(title: Strings.movieHorizontalListviewTwo, subtitle: 'xd', subtitleFontColor: Colors.cyan),
-              const MainTitleSubtitle(title: 'Movies', titleFontSize: 14, titleFontWeight: FontWeight.w400),
+              TitleSubtitle(title: Strings.popular, subtitle: 'xd', subtitleFontColor: Colors.cyan),
+              const TitleSubtitle(title: 'Movies', titleFontSize: 14, titleFontWeight: FontWeight.w400),
               //Popular
               ItemHorizontalListview(
                 movies: popularMovies,
@@ -75,8 +75,8 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
                 },
               ),
               
-              MainTitleSubtitle(title: Strings.movieHorizontalListviewThree, subtitle: 'xd', subtitleFontColor: Colors.cyan),
-              const MainTitleSubtitle(title: 'Movies', titleFontSize: 14, titleFontWeight: FontWeight.w400),
+              TitleSubtitle(title: Strings.upcoming, subtitle: 'xd', subtitleFontColor: Colors.cyan),
+              const TitleSubtitle(title: 'Movies', titleFontSize: 14, titleFontWeight: FontWeight.w400),
                //Upcoming
               ItemHorizontalListview(
                 movies: upcomingMovies,
@@ -85,8 +85,8 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
                 },
               ),
 
-              MainTitleSubtitle(title: Strings.movieHorizontalListviewFour, subtitle: 'xd', subtitleFontColor: Colors.cyan),
-              const MainTitleSubtitle(title: 'Movies', titleFontSize: 14, titleFontWeight: FontWeight.w400),
+              TitleSubtitle(title: Strings.topRated, subtitle: 'xd', subtitleFontColor: Colors.cyan),
+              const TitleSubtitle(title: 'Movies', titleFontSize: 14, titleFontWeight: FontWeight.w400),
                //Toprated
               ItemHorizontalListview(
                 movies: topRatedMovies,

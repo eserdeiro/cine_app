@@ -1,4 +1,4 @@
-import 'package:cine_app/presentation/widgets/shared/main_title_subtitle.dart';
+import 'package:cine_app/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:card_swiper/card_swiper.dart';
@@ -19,7 +19,7 @@ class MoviesSlideshow extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 10),
-          child: MainTitleSubtitle(title: Strings.upComing),
+          child: TitleSubtitle(title: Strings.upComingMovies),
         ),
         SizedBox(
           height: 220,
@@ -76,7 +76,7 @@ class _Slide extends StatelessWidget {
               fit: BoxFit.cover,
               loadingBuilder: (context, child, loadingProgress) {
                 if (loadingProgress != null) {
-                  return const _SlideLoadingProgress();
+                  return const PosterLoadingProgress();
                 } else {
                   return FadeIn(child: child);
                 }
@@ -87,16 +87,3 @@ class _Slide extends StatelessWidget {
   }
 }
 
-class _SlideLoadingProgress extends StatelessWidget {
-  const _SlideLoadingProgress();
-
-  @override
-  Widget build(BuildContext context) {
-    return SpinPerfect(
-      infinite: true,
-      child: const Center(
-        child: Icon(Icons.refresh, size: 40),
-      ),
-    );
-  }
-}

@@ -68,7 +68,7 @@ class _Slide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme;
-   
+    final colors = Theme.of(context).colorScheme;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ClipRRect(
@@ -88,13 +88,14 @@ class _Slide extends StatelessWidget {
                 ),
               //Vote average
               Positioned(
+           
                 right: 10,
                 top: 10,
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(5)),
                   child: Container(
                     color: const Color.fromRGBO(31, 29, 43, 50),
-                    width: 50,
+                    width: 55,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
                       child: Row(
