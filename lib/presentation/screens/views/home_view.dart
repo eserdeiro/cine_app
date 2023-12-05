@@ -20,6 +20,7 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
     ref.read(popularMoviesProvider.notifier).loadNextPage();
     ref.read(upcomingMoviesProvider.notifier).loadNextPage();
     ref.read(topRatedMoviesProvider.notifier).loadNextPage();
+    
   }
 
   @override
@@ -53,45 +54,46 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
             children: [
               MoviesSlideshow(movies: slideshowProvider),
               //NowPlaying
-              MovieHorizontalListview(
+          MainTitleSubtitle(title: Strings.movieHorizontalListviewOne, subtitle: 'xd', subtitleFontColor: Colors.cyan),
+          const MainTitleSubtitle(title: 'Movies', titleFontSize: 14, titleFontWeight: FontWeight.w400),
+
+          const SizedBox(height: 10),
+              ItemHorizontalListview(
                 movies: nowPlayingMovies,
-                title: Strings.movieHorizontalListviewOne,
-                subtitle: 'Today',
                 loadNextPage: () {
                   ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
                 },
               ),
 
+              MainTitleSubtitle(title: Strings.movieHorizontalListviewTwo, subtitle: 'xd', subtitleFontColor: Colors.cyan),
+              const MainTitleSubtitle(title: 'Movies', titleFontSize: 14, titleFontWeight: FontWeight.w400),
               //Popular
-              MovieHorizontalListview(
+              ItemHorizontalListview(
                 movies: popularMovies,
-                title: Strings.movieHorizontalListviewTwo,
-                subtitle: 'Today',
                 loadNextPage: () {
                   ref.read(popularMoviesProvider.notifier).loadNextPage();
                 },
               ),
-
+              
+              MainTitleSubtitle(title: Strings.movieHorizontalListviewThree, subtitle: 'xd', subtitleFontColor: Colors.cyan),
+              const MainTitleSubtitle(title: 'Movies', titleFontSize: 14, titleFontWeight: FontWeight.w400),
                //Upcoming
-              MovieHorizontalListview(
+              ItemHorizontalListview(
                 movies: upcomingMovies,
-                title: Strings.movieHorizontalListviewThree,
-                subtitle: 'Today',
                 loadNextPage: () {
                   ref.read(upcomingMoviesProvider.notifier).loadNextPage();
                 },
               ),
 
+              MainTitleSubtitle(title: Strings.movieHorizontalListviewFour, subtitle: 'xd', subtitleFontColor: Colors.cyan),
+              const MainTitleSubtitle(title: 'Movies', titleFontSize: 14, titleFontWeight: FontWeight.w400),
                //Toprated
-              MovieHorizontalListview(
+              ItemHorizontalListview(
                 movies: topRatedMovies,
-                title: Strings.movieHorizontalListviewFour,
-                subtitle: 'Today',
                 loadNextPage: () {
                   ref.read(topRatedMoviesProvider.notifier).loadNextPage();
                 },
               ),
-
             ],
           );
         }, childCount: 1))

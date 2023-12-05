@@ -1,3 +1,4 @@
+import 'package:cine_app/presentation/widgets/shared/main_title_subtitle.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:card_swiper/card_swiper.dart';
@@ -16,14 +17,10 @@ class MoviesSlideshow extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-         Padding(
-           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-           child: Text(Strings.upComing, 
-                 style: const TextStyle(
-            fontFamily: 'Montserrat', 
-            fontWeight: FontWeight.w600, 
-            fontSize: 18)),
-         ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 10),
+          child: MainTitleSubtitle(title: Strings.upComing),
+        ),
         SizedBox(
           height: 220,
           width: double.infinity,
@@ -73,7 +70,7 @@ class _Slide extends StatelessWidget {
         child: DecoratedBox(
           decoration: decorationBackground,
           child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
             child: Image.network(
               movie.backdropPath,
               fit: BoxFit.cover,

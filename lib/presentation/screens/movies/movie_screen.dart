@@ -168,6 +168,7 @@ class _CustomSliverAppBar extends ConsumerWidget {
     final isFavoriteFutureProvider = ref.watch(isFavoriteProvider(movie.id));
     final size = MediaQuery.of(context).size;
     final titleStyle = Theme.of(context).textTheme;
+    final colors = Theme.of(context).colorScheme;
     return SliverAppBar(
       centerTitle: true,
       title: Text(movie.title),
@@ -204,23 +205,23 @@ class _CustomSliverAppBar extends ConsumerWidget {
             }),
           ),
          // Gradients
-        const _CustomGradient(
+        _CustomGradient(
             begin: Alignment.topCenter, 
             end: Alignment.bottomCenter, 
-            stops: [0.5, 1.0],
-            colors: [Colors.transparent, Color(0xff1f1d2b)]),
+            stops: const [0.5, 1.0],
+            colors: [Colors.transparent, colors.background]),
 
-          const _CustomGradient(
+          _CustomGradient(
             begin: Alignment.topLeft, 
             end: Alignment.bottomRight, 
-            stops: [0.0, 0.5],
-            colors: [Colors.black87, Colors.transparent]),
+            stops: const [0.0, 0.5],
+            colors: [colors.background, Colors.transparent]),
 
-          const _CustomGradient(
+          _CustomGradient(
             begin: Alignment.topRight, 
             end: Alignment.bottomLeft, 
-            stops: [0.0, 0.5],
-            colors: [Colors.black87, Colors.transparent]),
+            stops: const [0.0, 0.5],
+            colors: [colors.background, Colors.transparent]),
             
             //Center posterpah
             Center(

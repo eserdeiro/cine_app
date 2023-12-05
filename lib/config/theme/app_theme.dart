@@ -11,7 +11,8 @@ class AppTheme {
     //     statusBarIconBrightness: Brightness.light,
     //   ),
     // ),
-    
+    fontFamily: 'Montserrat',
+
     colorScheme: const ColorScheme(
       brightness: Brightness.dark, 
       primary: Colors.cyan, // 

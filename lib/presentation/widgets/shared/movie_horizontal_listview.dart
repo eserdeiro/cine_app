@@ -6,13 +6,13 @@ import 'package:cine_app/config/helpers/formats.dart';
 import 'package:cine_app/domain/entities/movie_entity.dart';
 
 
-class MovieHorizontalListview extends StatefulWidget {
+class ItemHorizontalListview extends StatefulWidget {
   final List<Movie> movies;
   final String?     title;
   final String?     subtitle;
   final VoidCallback? loadNextPage;
 
-  const MovieHorizontalListview(
+  const ItemHorizontalListview(
       {super.key,
       required this.movies,
       this.title,
@@ -20,17 +20,17 @@ class MovieHorizontalListview extends StatefulWidget {
       this.loadNextPage});
 
   @override
-  State<MovieHorizontalListview> createState() => _MovieHorizontalListviewState();
+  State<ItemHorizontalListview> createState() => _ItemHorizontalListviewState();
 }
 
-class _MovieHorizontalListviewState extends State<MovieHorizontalListview> {
+class _ItemHorizontalListviewState extends State<ItemHorizontalListview> {
 
   final scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    //When you reach the end, load more movies 
+    //When you reach the end, load more items (movies & tv shows)
     scrollController.addListener(() {
       if(widget.loadNextPage == null) return;
 
@@ -49,27 +49,16 @@ class _MovieHorizontalListviewState extends State<MovieHorizontalListview> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 350,
-      child: Column(
-        //Title listview & Date(subtitle)
-        children: [
-          if (widget.title != null || widget.subtitle != null)
-            _Title(title: widget.title, subtitle: widget.subtitle),
-
-          const SizedBox(height: 10),
-
-          //ListView Movies
-          Expanded(
-              child: ListView.builder(
-                  controller     : scrollController,
-                  scrollDirection: Axis.horizontal,
-                  physics        : const BouncingScrollPhysics(),
-                  itemCount      : widget.movies.length,
-                  itemBuilder    : (context, index) {
-                    return _Slide(movie: widget.movies[index]);
-                  })),
-        ],
-      ),
+      height: 300,
+      child: //ListView items
+          ListView.builder(
+              controller: scrollController,
+              scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(),
+              itemCount: widget.movies.length,
+              itemBuilder: (context, index) {
+                return _Slide(movie: widget.movies[index]);
+              }),
     );
   }
 }
@@ -139,9 +128,9 @@ class _Slide extends StatelessWidget {
               )
                 ]
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 5),
       
-              //Movie title
+              //Item title
               SizedBox(
                   width: 150,
                   child:
@@ -150,7 +139,7 @@ class _Slide extends StatelessWidget {
                         child: Text(
                           movie.title, 
                           maxLines: 1, 
-                          style: const TextStyle(fontFamily: 'Montserrat', fontWeight: FontWeight.w600),
+                          style: const TextStyle(fontWeight: FontWeight.w600),
                           overflow: TextOverflow.ellipsis,),
                       )),
                
@@ -182,29 +171,6 @@ class _SlideLoadingProgress extends StatelessWidget {
           child : SpinPerfect(
               infinite: true,
               child: const Icon(Icons.refresh_outlined, size: 40))),
-    );
-  }
-}
-
-//_Title & date screen
-class _Title extends StatelessWidget {
-  final String? title;
-  final String? subtitle;
-
-  const _Title({this.title, this.subtitle});
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10),
-      padding: const EdgeInsets.only(top: 10),
-      child: Row(children: [
-        if (title != null) Text(title!, style: const TextStyle(fontFamily: 'Montserrat', fontSize: 18, fontWeight: FontWeight.w600)),
-        const Spacer(),
-        if (subtitle != null)
-          Text(subtitle!, style: const TextStyle(fontFamily: 'Montserrat', fontWeight: FontWeight.w400, color: Colors.cyan))
-      ]),
     );
   }
 }

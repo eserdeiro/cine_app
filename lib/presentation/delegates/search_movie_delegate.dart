@@ -42,14 +42,15 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
 
   @override
   ThemeData appBarTheme(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Theme.of(context).copyWith(
-      appBarTheme: const AppBarTheme(color: Color(0xff1f1d2b)),
-      inputDecorationTheme: const InputDecorationTheme(
+      appBarTheme: AppBarTheme(color: colors.background),
+      inputDecorationTheme: InputDecorationTheme(
         focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Color(0xff1f1d2b)),
+          borderSide: BorderSide(color: colors.background),
         ),
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Color(0xff1f1d2b)),
+          borderSide: BorderSide(color: colors.background),
         ),
       ),
     );

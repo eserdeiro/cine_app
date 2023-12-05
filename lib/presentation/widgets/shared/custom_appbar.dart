@@ -18,7 +18,7 @@ class CustomAppbar extends ConsumerWidget {
     return SafeArea(
       bottom: false,
       child: Container(
-        color: const Color(0xff1f1d2b),
+        color: colors.background,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: SizedBox(
