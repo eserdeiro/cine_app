@@ -2,10 +2,16 @@ import 'package:cine_app/domain/entities/actor_entity.dart';
 import 'package:cine_app/presentation/providers/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final actorsByMovieProvider = StateNotifierProvider<ActorsByMovieNotifier, Map<String, List<Actor>>>((ref) {
-  final actorsRepository = ref.watch(actorsRepositoryProvider).getActorsByMovie;
+final castByMovieProvider = StateNotifierProvider<ActorsByMovieNotifier, Map<String, List<Actor>>>((ref) {
+  final castRepository = ref.watch(actorsRepositoryProvider).getCastByMovie;
 
-  return ActorsByMovieNotifier(getActors: actorsRepository);
+  return ActorsByMovieNotifier(getActors: castRepository);
+});
+
+final crewByMovieProvider = StateNotifierProvider<ActorsByMovieNotifier, Map<String, List<Actor>>>((ref) {
+  final crewsRepository = ref.watch(actorsRepositoryProvider).getCrewByMovie;
+
+  return ActorsByMovieNotifier(getActors: crewsRepository);
 });
 
 typedef GetActorsCallback = Future<List<Actor>>Function(String movieId);

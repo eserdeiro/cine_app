@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:cine_app/domain/entities/actor_entity.dart';
 import 'package:cine_app/presentation/widgets/shared/title_subtitle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,7 +22,8 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
   void initState() {
     super.initState();
     ref.read(movieDetailProvider.notifier).loadMovie(widget.movieId);
-    ref.read(actorsByMovieProvider.notifier).loadActors(widget.movieId);
+    ref.read(castByMovieProvider.notifier).loadActors(widget.movieId);
+    ref.read(crewByMovieProvider.notifier).loadActors(widget.movieId);
   }
 
   @override
@@ -47,12 +49,17 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
   }
 }
 
-class _MovieDetails extends StatelessWidget {
+class _MovieDetails extends ConsumerWidget {
   final Movie movie;
   const _MovieDetails({required this.movie});
-
+    
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+   
+     final cast = ref.watch(castByMovieProvider);
+     final crew = ref.watch(crewByMovieProvider);
+     final bool castIsNotEmpty = cast.values.any((list) => list.isNotEmpty);
+     final bool crewIsNotEmpty = crew.values.any((list) => list.isNotEmpty);
     //final size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -63,6 +70,7 @@ class _MovieDetails extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             //Overview
+            if(movie.overview.isNotEmpty)
             const TitleSubtitle(title: 'Overview', horizontalPadding: 0),
             const SizedBox(width: 10),
             Text(movie.overview)
@@ -70,9 +78,16 @@ class _MovieDetails extends StatelessWidget {
         ),
         
         //Cast view
+        if(castIsNotEmpty)
         const TitleSubtitle(title: 'Cast', horizontalPadding: 0),
-        _ActorsByMovie(movieId: movie.id.toString()),
-        const SizedBox(height: 50)
+        _ActorsByMovie(movieId: movie.id.toString(), actorsByMovie: cast,),
+
+        //Crew view
+        if(crewIsNotEmpty) 
+        const TitleSubtitle(title: 'Crew', horizontalPadding: 0),
+        _ActorsByMovie(movieId: movie.id.toString(), actorsByMovie: crew),
+        const SizedBox(height: 50),
+    
       ]),
     );
   }
@@ -80,15 +95,15 @@ class _MovieDetails extends StatelessWidget {
 
 class _ActorsByMovie extends ConsumerWidget {
   final String movieId;
-  const _ActorsByMovie({required this.movieId});
+  final Map<String, List<Actor>> actorsByMovie;
+  const _ActorsByMovie({required this.movieId, required this.actorsByMovie});
 
   @override
   Widget build(BuildContext context, ref) {
-    final actorsByMovie = ref.watch(actorsByMovieProvider);
     // if has no data, show circularprogress
     if (actorsByMovie[movieId] == null) {
       return const SizedBox(
-          height: 270,
+          height: 65,
           child: Center(child: CircularProgressIndicator(strokeWidth: 3)));
     }
 
@@ -124,12 +139,14 @@ class _ActorsByMovie extends ConsumerWidget {
                        style: const TextStyle(
                          fontWeight: FontWeight.w600)),
                       const SizedBox(height: 5),
-                      //Actor character
-                      Text(actor.character ?? '',
-                          maxLines: 2,
-                           style: const TextStyle(
-                            fontSize: 12,
+                      
+                      //Actor character, if null, show job.
+                      Text((actor.character == null) ? actor.job! : actor.character! ,
+                          maxLines: 1,
+                          style: const TextStyle(
+                            fontSize: 12, overflow: TextOverflow.ellipsis
                       )),
+                      
                     ],
                   ),
                 ),
@@ -254,7 +271,7 @@ class _CustomSliverAppBar extends ConsumerWidget {
                  const SizedBox(height: 20),
                 //Vote average 
                  SizedBox(
-                   width: 50,
+                   width: 55,
                    child: Padding(
                      padding: const EdgeInsets.symmetric(horizontal: 5),
                      child: Row(

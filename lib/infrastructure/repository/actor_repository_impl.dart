@@ -9,8 +9,13 @@ class ActorsRepositoryImpl extends ActorsRepository{
   ActorsRepositoryImpl({required this.datasource});
 
   @override
-  Future<List<Actor>> getActorsByMovie(String movieId) {
-    return datasource.getActorsByMovie(movieId);
+  Future<List<Actor>> getCastByMovie(String movieId) {
+    return datasource.getCastByMovie(movieId);
+  }
+
+  @override
+  Future<List<Actor>> getCrewByMovie(String movieId) {
+    return datasource.getCrewByMovie(movieId);
   }
   
 }
