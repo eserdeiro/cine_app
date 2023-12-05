@@ -11,11 +11,10 @@
 //]
 
 import 'package:animate_do/animate_do.dart';
-import 'package:cine_app/config/helpers/formats.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:cine_app/config/helpers/formats.dart';
 import 'package:cine_app/domain/entities/movie_entity.dart';
-import 'package:cine_app/presentation/providers/movies/movie_details_provider.dart';
 import 'package:cine_app/presentation/providers/providers.dart';
 
 class MovieScreen extends ConsumerStatefulWidget {

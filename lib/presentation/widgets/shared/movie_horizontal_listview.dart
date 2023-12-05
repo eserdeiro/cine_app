@@ -1,9 +1,10 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:cine_app/config/constants/strings.dart';
 import 'package:cine_app/config/helpers/formats.dart';
 import 'package:cine_app/domain/entities/movie_entity.dart';
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+
 
 class MovieHorizontalListview extends StatefulWidget {
   final List<Movie> movies;

@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:cine_app/domain/entities/movie_entity.dart';
 import 'package:cine_app/presentation/widgets/shared/movie_poster_link.dart';
-import 'package:flutter/material.dart';
 
 class MoviesGridView extends StatefulWidget {
 

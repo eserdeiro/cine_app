@@ -1,10 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:cine_app/config/constants/strings.dart';
 import 'package:cine_app/domain/entities/movie_entity.dart';
 import 'package:cine_app/presentation/delegates/search_movie_delegate.dart';
 import 'package:cine_app/presentation/providers/providers.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 class CustomAppbar extends ConsumerWidget {
   const CustomAppbar({super.key});
