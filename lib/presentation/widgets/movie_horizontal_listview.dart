@@ -6,15 +6,11 @@ import 'package:cine_app/domain/entities/movie_entity.dart';
 
 class ItemHorizontalListview extends StatefulWidget {
   final List<Movie> movies;
-  final String?     title;
-  final String?     subtitle;
   final VoidCallback? loadNextPage;
 
   const ItemHorizontalListview(
       {super.key,
       required this.movies,
-      this.title,
-      this.subtitle,
       this.loadNextPage});
 
   @override
@@ -29,6 +25,7 @@ class _ItemHorizontalListviewState extends State<ItemHorizontalListview> {
   void initState() {
     super.initState();
     //When you reach the end, load more items (movies & tv shows)
+
     scrollController.addListener(() {
       if(widget.loadNextPage == null) return;
 
@@ -36,6 +33,8 @@ class _ItemHorizontalListviewState extends State<ItemHorizontalListview> {
         widget.loadNextPage!();
       }
     });
+
+    
   }
 
   @override

@@ -25,6 +25,7 @@ class TheMovieDbDataSource extends MoviesDataSource {
     .toList();
     return movies;  
   }
+
   //NowPlaying
   @override
   Future<List<Movie>> getNowPlaying({int page = 1}) async { 
@@ -82,6 +83,5 @@ class TheMovieDbDataSource extends MoviesDataSource {
       });
     return _jsonToMovies(response.data);
   }
-
   
 }

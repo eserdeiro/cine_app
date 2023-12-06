@@ -1,3 +1,4 @@
+import 'package:cine_app/infrastructure/repository/genre_repository_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cine_app/config/constants/strings.dart';
@@ -20,7 +21,6 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
     ref.read(popularMoviesProvider.notifier).loadNextPage();
     ref.read(upcomingMoviesProvider.notifier).loadNextPage();
     ref.read(topRatedMoviesProvider.notifier).loadNextPage();
-    
   }
 
   @override
@@ -35,7 +35,6 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
     final upcomingMovies   = ref.watch(upcomingMoviesProvider);
     final topRatedMovies   = ref.watch(topRatedMoviesProvider);
     final slideshowProvider = ref.watch(moviesSlideshowProvider);
-
     //CustomScrollView + Slivers
     return CustomScrollView(
       slivers: [
