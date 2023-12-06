@@ -18,8 +18,8 @@ class ActorFromMovieDbDatasource extends ActorsDatasource {
     );
     
   @override
-  Future<List<ActorEntity>> getCastByMovie(String movieId) async{
-    final response = await dio.get('/movie/$movieId/credits');
+  Future<List<ActorEntity>> getCastByItem(String itemId) async{
+    final response = await dio.get('/movie/$itemId/credits');
     //print('response ${response.data}');
     final castResponse = CreditsResponse.fromJson(response.data);
 
@@ -31,8 +31,8 @@ class ActorFromMovieDbDatasource extends ActorsDatasource {
 
   }
     @override
-  Future<List<ActorEntity>> getCrewByMovie(String movieId) async{
-    final response = await dio.get('/movie/$movieId/credits');
+  Future<List<ActorEntity>> getCrewByItem(String itemId) async{
+    final response = await dio.get('/movie/$itemId/credits');
     //print('response ${response.data}');
     final castResponse = CreditsResponse.fromJson(response.data);
 
