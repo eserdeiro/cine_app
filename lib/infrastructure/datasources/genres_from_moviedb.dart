@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:cine_app/config/constants/environment.dart';
 import 'package:cine_app/domain/datasources/genres_datasource.dart';
@@ -19,20 +18,16 @@ class GenresFromMovieDb extends GenresDatasource {
     );
     
       @override
-      Future<List<GenreData>> getGenres() async{
+      Future<List<GenreEntity>> getGenres() async{
         final response = await dio.get('/genre/movie/list');
-        
-    final genresResponse = GenreResponse.fromJson(response.data);
+          
+      final genresResponse = GenreFromMovieDb.fromJson(response.data);
 
-    List<GenreData> genres = genresResponse.genres.map(
-      (genre) => GenresMapper.genreToEntity(genre)
-    ).toList();
-     log('variable: $genres');
-  return genres;
-
-  
-      }
-
+      List<GenreEntity> genres = genresResponse.genres
+          .map((genre) => GenresMapper.genreToEntity(genre))
+          .toList();
+      return genres;
+        }
 }
 
 

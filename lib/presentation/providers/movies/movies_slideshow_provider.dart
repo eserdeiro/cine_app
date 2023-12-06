@@ -7,5 +7,4 @@ final moviesSlideshowProvider = Provider<List<Movie>>((ref) {
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
     if(nowPlayingMovies.isEmpty) return [];
       return nowPlayingMovies.sublist(0,20);
-
 });

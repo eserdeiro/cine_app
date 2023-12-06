@@ -6,10 +6,10 @@ class GenresRepositoryImpl extends GenresRepository{
 
   final GenresDatasource datasource;
 
-  GenresRepositoryImpl({required this.datasource});
+  GenresRepositoryImpl(this.datasource);
 
   @override
-  Future<List<GenreData>> getGenres() {
+  Future<List<GenreEntity>> getGenres() {
     return datasource.getGenres();
   }
   

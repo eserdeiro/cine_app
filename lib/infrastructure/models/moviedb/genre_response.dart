@@ -1,18 +1,18 @@
 import 'dart:convert';
 
-GenreResponse castResponseFromJson(String str) => GenreResponse.fromJson(json.decode(str));
+GenreFromMovieDb castResponseFromJson(String str) => GenreFromMovieDb.fromJson(json.decode(str));
 
-String castResponseToJson(GenreResponse data) => json.encode(data.toJson());
+String castResponseToJson(GenreFromMovieDb data) => json.encode(data.toJson());
 
-class GenreResponse {
-    final List<GenreDates> genres;
+class GenreFromMovieDb {
+    final List<GenreFromGenresMovieDb> genres;
 
-    GenreResponse({
+    GenreFromMovieDb({
         required this.genres,
     });
 
-    factory GenreResponse.fromJson(Map<String, dynamic> json) => GenreResponse(
-        genres: List<GenreDates>.from(json["genres"].map((x) => GenreDates.fromJson(x))),
+    factory GenreFromMovieDb.fromJson(Map<String, dynamic> json) => GenreFromMovieDb(
+        genres: List<GenreFromGenresMovieDb>.from(json["genres"].map((x) => GenreFromGenresMovieDb.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
@@ -20,16 +20,16 @@ class GenreResponse {
     };
 }
 
-class GenreDates {
+class GenreFromGenresMovieDb {
     final int id;
     final String name;
 
-    GenreDates({
+    GenreFromGenresMovieDb({
         required this.id,
         required this.name,
     });
 
-    factory GenreDates.fromJson(Map<String, dynamic> json) => GenreDates(
+    factory GenreFromGenresMovieDb.fromJson(Map<String, dynamic> json) => GenreFromGenresMovieDb(
         id: json["id"],
         name: json["name"],
     );

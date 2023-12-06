@@ -3,7 +3,7 @@ import 'package:cine_app/infrastructure/models/moviedb/genre_response.dart';
 
 class GenresMapper {
 
-  static GenreData genreToEntity(GenreDates genre) => GenreData(
+  static GenreEntity genreToEntity(GenreFromGenresMovieDb genre) => GenreEntity(
     id: genre.id, 
     name: genre.name, 
     );

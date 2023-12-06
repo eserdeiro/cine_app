@@ -1,8 +1,8 @@
-class GenreData { 
+class GenreEntity { 
 final int id;
 final String name; 
 
-  GenreData({
+  GenreEntity({
     required this.id, 
     required this.name
     });
