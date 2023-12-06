@@ -2,25 +2,25 @@ import 'package:cine_app/domain/entities/actor_entity.dart';
 import 'package:cine_app/presentation/providers/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final castByMovieProvider = StateNotifierProvider<ActorsByMovieNotifier, Map<String, List<ActorEntity>>>((ref) {
+final castByItemProvider = StateNotifierProvider<ActorsByItemNotifier, Map<String, List<ActorEntity>>>((ref) {
   final castRepository = ref.watch(actorsRepositoryProvider).getCastByItem;
 
-  return ActorsByMovieNotifier(getActors: castRepository);
+  return ActorsByItemNotifier(getActors: castRepository);
 });
 
-final crewByMovieProvider = StateNotifierProvider<ActorsByMovieNotifier, Map<String, List<ActorEntity>>>((ref) {
+final crewByItemProvider = StateNotifierProvider<ActorsByItemNotifier, Map<String, List<ActorEntity>>>((ref) {
   final crewsRepository = ref.watch(actorsRepositoryProvider).getCrewByItem;
 
-  return ActorsByMovieNotifier(getActors: crewsRepository);
+  return ActorsByItemNotifier(getActors: crewsRepository);
 });
 
 typedef GetActorsCallback = Future<List<ActorEntity>>Function(String itemId);
 
-class ActorsByMovieNotifier extends StateNotifier<Map<String, List<ActorEntity>>>{
+class ActorsByItemNotifier extends StateNotifier<Map<String, List<ActorEntity>>>{
 
   final GetActorsCallback getActors;
 //  Maps each movie and maintains the cache in memory 
-  ActorsByMovieNotifier({
+  ActorsByItemNotifier({
       required this.getActors
       }) : super({});
 

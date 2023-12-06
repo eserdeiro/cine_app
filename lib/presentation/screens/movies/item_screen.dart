@@ -7,28 +7,28 @@ import 'package:cine_app/config/helpers/formats.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/presentation/providers/providers.dart';
 
-class MovieScreen extends ConsumerStatefulWidget {
-  final String movieId;
+class ItemScreen extends ConsumerStatefulWidget {
+  final String itemId;
   static const name = 'movie_screen';
 
-  const MovieScreen({super.key, required this.movieId});
+  const ItemScreen({super.key, required this.itemId});
 
   @override
-  MovieScreenState createState() => MovieScreenState();
+  ItemScreenState createState() => ItemScreenState();
 }
 
-class MovieScreenState extends ConsumerState<MovieScreen> {
+class ItemScreenState extends ConsumerState<ItemScreen> {
   @override
   void initState() {
     super.initState();
-    ref.read(movieDetailProvider.notifier).loadMovie(widget.movieId);
-    ref.read(castByMovieProvider.notifier).loadActors(widget.movieId);
-    ref.read(crewByMovieProvider.notifier).loadActors(widget.movieId);
+    ref.read(movieDetailProvider.notifier).loadMovie(widget.itemId);
+    ref.read(castByItemProvider.notifier).loadActors(widget.itemId);
+    ref.read(crewByItemProvider.notifier).loadActors(widget.itemId);
   }
 
   @override
   Widget build(BuildContext context) {
-    final ItemEntity? movie = ref.watch(movieDetailProvider)[widget.movieId];
+    final ItemEntity? movie = ref.watch(movieDetailProvider)[widget.itemId];
     if (movie == null) {
       return const Scaffold(
           body: Center(child: CircularProgressIndicator(strokeWidth: 3)));
@@ -38,10 +38,10 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
       body: CustomScrollView(
         physics: const ClampingScrollPhysics(),
         slivers: [
-          _CustomSliverAppBar(movie: movie),
+          _CustomSliverAppBar(item: movie),
           SliverList(
               delegate: SliverChildBuilderDelegate(
-                  (context, index) => _MovieDetails(movie: movie),
+                  (context, index) => _ItemDetails(item: movie),
                   childCount: 1))
         ],
       ),
@@ -49,15 +49,15 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
   }
 }
 
-class _MovieDetails extends ConsumerWidget {
-  final ItemEntity movie;
-  const _MovieDetails({required this.movie});
+class _ItemDetails extends ConsumerWidget {
+  final ItemEntity item;
+  const _ItemDetails({required this.item});
     
   @override
   Widget build(BuildContext context, ref) {
    
-     final cast = ref.watch(castByMovieProvider);
-     final crew = ref.watch(crewByMovieProvider);
+     final cast = ref.watch(castByItemProvider);
+     final crew = ref.watch(crewByItemProvider);
      final bool castIsNotEmpty = cast.values.any((list) => list.isNotEmpty);
      final bool crewIsNotEmpty = crew.values.any((list) => list.isNotEmpty);
     //final size = MediaQuery.of(context).size;
@@ -70,22 +70,22 @@ class _MovieDetails extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             //Overview
-            if(movie.overview.isNotEmpty)
+            if(item.overview.isNotEmpty)
             const TitleSubtitle(title: 'Overview', horizontalPadding: 0),
             const SizedBox(width: 10),
-            Text(movie.overview)
+            Text(item.overview)
           ],
         ),
         
         //Cast view
         if(castIsNotEmpty)
         const TitleSubtitle(title: 'Cast', horizontalPadding: 0),
-        _ActorsByMovie(movieId: movie.id.toString(), actorsByMovie: cast,),
+        _ActorsByItem(itemId: item.id.toString(), actorsByItem: cast,),
 
         //Crew view
         if(crewIsNotEmpty) 
         const TitleSubtitle(title: 'Crew', horizontalPadding: 0),
-        _ActorsByMovie(movieId: movie.id.toString(), actorsByMovie: crew),
+        _ActorsByItem(itemId: item.id.toString(), actorsByItem: crew),
         const SizedBox(height: 50),
     
       ]),
@@ -93,21 +93,21 @@ class _MovieDetails extends ConsumerWidget {
   }
 }
 
-class _ActorsByMovie extends ConsumerWidget {
-  final String movieId;
-  final Map<String, List<ActorEntity>> actorsByMovie;
-  const _ActorsByMovie({required this.movieId, required this.actorsByMovie});
+class _ActorsByItem extends ConsumerWidget {
+  final String itemId;
+  final Map<String, List<ActorEntity>> actorsByItem;
+  const _ActorsByItem({required this.itemId, required this.actorsByItem});
 
   @override
   Widget build(BuildContext context, ref) {
     // if has no data, show circularprogress
-    if (actorsByMovie[movieId] == null) {
+    if (actorsByItem[itemId] == null) {
       return const SizedBox(
           height: 65,
           child: Center(child: CircularProgressIndicator(strokeWidth: 3)));
     }
 
-    final actors = actorsByMovie[movieId]!;
+    final actors = actorsByItem[itemId]!;
     return SizedBox(
       height: 65,
       child: ListView.builder(
@@ -161,28 +161,28 @@ class _ActorsByMovie extends ConsumerWidget {
 }
 
 class _CustomSliverAppBar extends ConsumerWidget {
-  final ItemEntity movie;
-  const _CustomSliverAppBar({required this.movie});
+  final ItemEntity item;
+  const _CustomSliverAppBar({required this.item});
 
   @override
   Widget build(BuildContext context,ref) {
-    final isFavoriteFutureProvider = ref.watch(isFavoriteProvider(movie.id));
+    final isFavoriteFutureProvider = ref.watch(isFavoriteProvider(item.id));
     final size = MediaQuery.of(context).size;
     final titleStyle = Theme.of(context).textTheme;
     final colors = Theme.of(context).colorScheme;
     return SliverAppBar(
       centerTitle: true,
-      title: Text(movie.title),
+      title: Text(item.title),
       expandedHeight: size.height * 0.6,
       backgroundColor: Colors.black,
       foregroundColor: Colors.white,
       actions: [
         IconButton(
           onPressed: () async{
-            await ref.read(favoriteMoviesProvider.notifier)
-            .toggleFavorite(movie);
+            await ref.read(favoriteItemsProvider.notifier)
+            .toggleFavorite(item);
             
-            ref.invalidate(isFavoriteProvider(movie.id));
+            ref.invalidate(isFavoriteProvider(item.id));
           }, icon: isFavoriteFutureProvider.when(
             data:(isFavorite){
               return isFavorite 
@@ -198,7 +198,7 @@ class _CustomSliverAppBar extends ConsumerWidget {
           children: [
            //Background posterpath
           SizedBox.expand(
-            child: Image.network(movie.posterPath, 
+            child: Image.network(item.posterPath, 
             fit: BoxFit.cover,
             loadingBuilder: (context, child, loadingProgress) {
               if(loadingProgress != null) return const SizedBox();
@@ -236,7 +236,7 @@ class _CustomSliverAppBar extends ConsumerWidget {
                   ClipRRect(
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
                     child: SizedBox.fromSize(
-                      child: Image.network(movie.posterPath, height: 300,
+                      child: Image.network(item.posterPath, height: 300,
                           //fit: BoxFit.cover,
                           loadingBuilder: (context, child, loadingProgress) {
                         if (loadingProgress != null) return const SizedBox();
@@ -248,12 +248,12 @@ class _CustomSliverAppBar extends ConsumerWidget {
                   const SizedBox(height: 20),
 
                 //Year
-                 if (movie.releaseDate?.year != null)
+                 if (item.releaseDate?.year != null)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Icon(Icons.calendar_month),
-                      Text('${movie.releaseDate!.year}'),
+                      Text('${item.releaseDate!.year}'),
                     ],
                   ),
 
@@ -262,7 +262,7 @@ class _CustomSliverAppBar extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Icon(Icons.local_movies_rounded),
-                  ...movie.genreIds.map((genreIds) {
+                  ...item.genreIds.map((genreIds) {
                     return Text("$genreIds ");
                   }),
                   ],
@@ -278,7 +278,7 @@ class _CustomSliverAppBar extends ConsumerWidget {
                        children: [
                          const Icon(Icons.star, color: Color(0xfffd8701), size: 15),
                          const SizedBox(width: 2),
-                         Text(Formats.number(movie.voteAverage , 1),
+                         Text(Formats.number(item.voteAverage , 1),
                              style: titleStyle.bodyMedium
                                  ?.copyWith(color: const Color(0xfffd8701))),
                          const Spacer(),

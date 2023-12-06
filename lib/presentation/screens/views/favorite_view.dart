@@ -25,7 +25,7 @@ class FavoriteViewState extends ConsumerState<FavoriteView> with AutomaticKeepAl
     if(isLoading || isLastPage) return;
     isLoading = true; 
 
-    final movies = await ref.read(favoriteMoviesProvider.notifier).loadNextPage();
+    final movies = await ref.read(favoriteItemsProvider.notifier).loadNextPage();
     isLoading = false;
 
     if(movies.isEmpty){
@@ -38,7 +38,7 @@ class FavoriteViewState extends ConsumerState<FavoriteView> with AutomaticKeepAl
   Widget build(BuildContext context) {
     super.build(context);
 
-    final favoriteMovies = ref.watch(favoriteMoviesProvider).values.toList();
+    final favoriteMovies = ref.watch(favoriteItemsProvider).values.toList();
 
     return Scaffold( 
       appBar: AppBar(

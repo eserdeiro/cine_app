@@ -3,46 +3,46 @@ import 'package:cine_app/domain/repository/local_database_repository.dart';
 import 'package:cine_app/presentation/providers/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final favoriteMoviesProvider = StateNotifierProvider<DatabaseMoviesNotifier, Map<int, ItemEntity>>((ref) {
+final favoriteItemsProvider = StateNotifierProvider<DatabaseItemsNotifier, Map<int, ItemEntity>>((ref) {
   final localDatabaseRepository = ref.watch(localDatabaseProvider);
-  return DatabaseMoviesNotifier(localDatabaseRepository: localDatabaseRepository);
+  return DatabaseItemsNotifier(localDatabaseRepository: localDatabaseRepository);
 
 });
 
 
-class DatabaseMoviesNotifier extends StateNotifier<Map<int, ItemEntity>>{
+class DatabaseItemsNotifier extends StateNotifier<Map<int, ItemEntity>>{
 
   int page = 0;
   final LocalDatabaseRepository localDatabaseRepository;
 
-  DatabaseMoviesNotifier({required this.localDatabaseRepository}) : super({});
+  DatabaseItemsNotifier({required this.localDatabaseRepository}) : super({});
 
   Future<List<ItemEntity>> loadNextPage() async {
 
-    final movies = await localDatabaseRepository.loadFavoriteItems(offset: page * 10, limit: 12); // 
+    final items = await localDatabaseRepository.loadFavoriteItems(offset: page * 10, limit: 12); // 
     page++;
 
-    final tempMovieMap = <int, ItemEntity>{};
+    final tempItemMap = <int, ItemEntity>{};
 
-    for(final movie in movies ){
-      tempMovieMap[movie.id] = movie;
+    for(final movie in items ){
+      tempItemMap[movie.id] = movie;
     }
 
-    state = {...state, ...tempMovieMap};
+    state = {...state, ...tempItemMap};
 
-    return movies;
+    return items;
     }
 
-  Future<void> toggleFavorite(ItemEntity movie) async{
-    await localDatabaseRepository.toggleFavorite(movie);
-    final bool isMovieInFavorites = state[movie.id] != null;
+  Future<void> toggleFavorite(ItemEntity item) async{
+    await localDatabaseRepository.toggleFavorite(item);
+    final bool isItemInFavorites = state[item.id] != null;
 
-    if(isMovieInFavorites){
-      state.remove(movie.id);
+    if(isItemInFavorites){
+      state.remove(item.id);
       state = {...state};
     }
     else {
-      state = {...state, movie.id: movie};
+      state = {...state, item.id: item};
     }
   }
 
