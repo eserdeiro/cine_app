@@ -1,10 +1,14 @@
-import 'package:cine_app/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:cine_app/domain/entities/genre_entity.dart';
+import 'package:cine_app/presentation/providers/genres/genres_providers.dart';
+import 'package:cine_app/presentation/widgets/widgets.dart';
 import 'package:cine_app/config/helpers/formats.dart';
 import 'package:cine_app/domain/entities/movie_entity.dart';
 
 
-class ItemHorizontalListview extends StatefulWidget {
+
+class ItemHorizontalListview extends ConsumerStatefulWidget {
   final List<Movie> movies;
   final VoidCallback? loadNextPage;
 
@@ -14,10 +18,10 @@ class ItemHorizontalListview extends StatefulWidget {
       this.loadNextPage});
 
   @override
-  State<ItemHorizontalListview> createState() => _ItemHorizontalListviewState();
+  ItemHorizontalListviewState createState() => ItemHorizontalListviewState();
 }
 
-class _ItemHorizontalListviewState extends State<ItemHorizontalListview> {
+class ItemHorizontalListviewState extends ConsumerState<ItemHorizontalListview> {
 
   final scrollController = ScrollController();
 
@@ -25,7 +29,6 @@ class _ItemHorizontalListviewState extends State<ItemHorizontalListview> {
   void initState() {
     super.initState();
     //When you reach the end, load more items (movies & tv shows)
-
     scrollController.addListener(() {
       if(widget.loadNextPage == null) return;
 
@@ -60,14 +63,27 @@ class _ItemHorizontalListviewState extends State<ItemHorizontalListview> {
   }
 }
 
-class _Slide extends StatelessWidget {
+class _Slide extends ConsumerStatefulWidget {
   final Movie movie;
   const _Slide({required this.movie});
 
   @override
+  _SlideState createState() => _SlideState();
+}
+
+class _SlideState extends ConsumerState<_Slide> {
+  @override
   Widget build(BuildContext context) {
+    final genresData        = ref.watch(genresDataNotifierProvider);
     final textStyle = Theme.of(context).textTheme;
-    final colors = Theme.of(context).colorScheme;
+    List<GenreEntity> matchingGenres = genresData
+        .where((genre) => widget.movie.genreIds.contains(genre.id.toString()))
+        .toList();
+
+    List<String> genreNames =
+        matchingGenres.map((genre) => genre.name).toList();
+
+    String genreNamesGroup = genreNames.join(', ');
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ClipRRect(
@@ -83,7 +99,7 @@ class _Slide extends StatelessWidget {
                    SizedBox(
                   width: 150,
                   height: 222,
-                  child:  MoviePoster(movie: movie),
+                  child:  MoviePoster(movie: widget.movie),
                 ),
               //Vote average
               Positioned(
@@ -101,7 +117,7 @@ class _Slide extends StatelessWidget {
                         children: [
                           const Icon(Icons.star, color: Color(0xfffd8701), size: 15),
                           const SizedBox(width: 2),
-                          Text(Formats.number(movie.voteAverage , 1),
+                          Text(Formats.number(widget.movie.voteAverage , 1),
                               style: textStyle.bodyMedium
                                   ?.copyWith(color: const Color(0xfffd8701))),
                           const Spacer(),
@@ -122,18 +138,20 @@ class _Slide extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5),
                         child: Text(
-                          movie.title, 
+                          widget.movie.title, 
                           maxLines: 1, 
                           style: const TextStyle(fontWeight: FontWeight.w600),
                           overflow: TextOverflow.ellipsis,),
                       )),
-               
+                      
               //GenreID
               SizedBox(
                 width: 150,
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 10, left: 5, right: 5, top: 5),
-                  child: Text(movie.genreIds.toString(), maxLines: 1),
+                  child: Text(
+                    genreNamesGroup, 
+                  overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 12)),
                 ),
               )
             ],

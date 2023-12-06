@@ -1,19 +1,27 @@
 
 import 'package:cine_app/domain/entities/genre_entity.dart';
+import 'package:cine_app/presentation/providers/genres/genre_repository_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final genresDataNotifierProvider = StateNotifierProvider<GenresDataNotifier, GenresData>((ref) {
-  return GenresDataNotifier();
-});
+final genresDataNotifierProvider =
+    StateNotifierProvider<GenresDataNotifier, List<GenreEntity>>(
+        (ref) => GenresDataNotifier(ref));
 
 class GenresData {
-  List<GenreEntity> genres = [];
+  List<GenreEntity> genres;
+
+  GenresData({required this.genres});
 }
 
-class GenresDataNotifier extends StateNotifier<GenresData> {
-  GenresDataNotifier() : super(GenresData());
+class GenresDataNotifier extends StateNotifier<List<GenreEntity>> {
+  GenresDataNotifier(ref)
+      : super([]) {
+    _loadGenres(ref);
+  }
 
-  void setGenres(List<GenreEntity> genres) {
-    state = GenresData()..genres = genres;
+  Future<void> _loadGenres(ref) async {
+    final genres = await ref.watch(genreRepositoryProvider).getGenres();
+    state = GenresData(genres: genres).genres;
   }
 }
+

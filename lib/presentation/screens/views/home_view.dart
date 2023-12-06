@@ -1,7 +1,3 @@
-import 'package:cine_app/domain/entities/genre_entity.dart';
-import 'package:cine_app/infrastructure/datasources/genres_from_moviedb.dart';
-import 'package:cine_app/presentation/providers/genres/genre_repository_provider.dart';
-import 'package:cine_app/presentation/providers/genres/genres_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cine_app/config/constants/strings.dart';
@@ -25,7 +21,6 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
     ref.read(upcomingMoviesProvider.notifier).loadNextPage();
     ref.read(topRatedMoviesProvider.notifier).loadNextPage();
     ref.read(topRatedMoviesProvider.notifier).loadNextPage();
-    ref.read(genreRepositoryProvider).getGenres();
   }
 
   @override
@@ -40,16 +35,7 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
     final upcomingMovies   = ref.watch(upcomingMoviesProvider);
     final topRatedMovies   = ref.watch(topRatedMoviesProvider);
     final slideshowProvider = ref.watch(moviesSlideshowProvider);
-     final genresData = ref.watch(genresDataNotifierProvider);
-
-    if (genresData.genres.isEmpty) {
-      // Si la lista de géneros está vacía, carga los datos
-      _loadGenres(context, ref);
-      return CircularProgressIndicator();
-    } 
-
-    print(genresData.genres[0].name);
-
+ 
     //CustomScrollView + Slivers
     return CustomScrollView(
       slivers: [
@@ -118,8 +104,3 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
   @override
   bool get wantKeepAlive => true;
 }
-
-Future<void> _loadGenres(BuildContext context, ref) async {
-    final genres = await ref.watch(genreRepositoryProvider).getGenres();
-    ref.watch(genresDataNotifierProvider.notifier).setGenres(genres);
-  }
