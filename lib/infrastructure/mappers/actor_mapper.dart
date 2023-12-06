@@ -3,7 +3,7 @@ import 'package:cine_app/infrastructure/models/models.dart';
 
 class ActorMapper {
 
-  static Actor castToEntity(Cast cast)=> Actor(
+  static ActorEntity castToEntity(Cast cast)=> ActorEntity(
     id: cast.id, 
     name: cast.name, 
     profilePath: (cast.profilePath != null)

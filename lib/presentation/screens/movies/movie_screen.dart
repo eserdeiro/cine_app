@@ -95,7 +95,7 @@ class _MovieDetails extends ConsumerWidget {
 
 class _ActorsByMovie extends ConsumerWidget {
   final String movieId;
-  final Map<String, List<Actor>> actorsByMovie;
+  final Map<String, List<ActorEntity>> actorsByMovie;
   const _ActorsByMovie({required this.movieId, required this.actorsByMovie});
 
   @override

@@ -21,7 +21,7 @@ class GenresFromMovieDb extends GenresDatasource {
       Future<List<GenreEntity>> getGenres() async{
         final response = await dio.get('/genre/movie/list');
           
-      final genresResponse = GenreFromMovieDb.fromJson(response.data);
+      final genresResponse = GenreResponse.fromJson(response.data);
 
       List<GenreEntity> genres = genresResponse.genres
           .map((genre) => GenresMapper.genreToEntity(genre))

@@ -18,26 +18,26 @@ class ActorFromMovieDbDatasource extends ActorsDatasource {
     );
     
   @override
-  Future<List<Actor>> getCastByMovie(String movieId) async{
+  Future<List<ActorEntity>> getCastByMovie(String movieId) async{
     final response = await dio.get('/movie/$movieId/credits');
     //print('response ${response.data}');
     final castResponse = CreditsResponse.fromJson(response.data);
 
     //Crew also available
-    List<Actor> actors = castResponse.cast.map(
+    List<ActorEntity> actors = castResponse.cast.map(
       (cast) => ActorMapper.castToEntity(cast)
     ).toList();
   return actors;
 
   }
     @override
-  Future<List<Actor>> getCrewByMovie(String movieId) async{
+  Future<List<ActorEntity>> getCrewByMovie(String movieId) async{
     final response = await dio.get('/movie/$movieId/credits');
     //print('response ${response.data}');
     final castResponse = CreditsResponse.fromJson(response.data);
 
     //Crew also available
-    List<Actor> actors = castResponse.crew.map(
+    List<ActorEntity> actors = castResponse.crew.map(
       (cast) => ActorMapper.castToEntity(cast)
     ).toList();
   return actors;
