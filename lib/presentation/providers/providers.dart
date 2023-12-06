@@ -2,7 +2,9 @@ export 'package:cine_app/presentation/providers/actors/actors_by_movie_providers
 export 'package:cine_app/presentation/providers/actors/actors_repository_provider.dart';
 export 'package:cine_app/presentation/providers/database/favorite_movies_provider.dart';
 export 'package:cine_app/presentation/providers/database/local_database_provider.dart';
-export 'package:cine_app/presentation/providers/movies/first_loading_provider.dart';
+export 'package:cine_app/presentation/providers/first_loading_provider.dart';
+export 'package:cine_app/presentation/providers/genres/genre_repository_provider.dart';
+export 'package:cine_app/presentation/providers/genres/genres_providers.dart';
 export 'package:cine_app/presentation/providers/movies/movie_details_provider.dart';
 export 'package:cine_app/presentation/providers/movies/movies_providers.dart';
 export 'package:cine_app/presentation/providers/movies/movies_repository_provider.dart';

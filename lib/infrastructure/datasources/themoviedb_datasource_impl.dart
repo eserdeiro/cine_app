@@ -1,9 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:cine_app/config/constants/environment.dart';
 import 'package:cine_app/domain/datasources/movies_datasource.dart';
 import 'package:cine_app/domain/entities/movie_entity.dart';
-import 'package:cine_app/infrastructure/mappers/movie_mapper.dart';
+import 'package:cine_app/infrastructure/mappers/mappers.dart';
 import 'package:cine_app/infrastructure/models/models.dart';
-import 'package:dio/dio.dart';
 
 class TheMovieDbDataSource extends MoviesDataSource {
 

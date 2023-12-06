@@ -1,4 +1,3 @@
-import 'package:cine_app/presentation/providers/genres/genres_providers.dart';
 import 'package:cine_app/presentation/providers/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

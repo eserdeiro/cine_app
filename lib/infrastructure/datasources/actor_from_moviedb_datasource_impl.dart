@@ -1,9 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:cine_app/config/constants/environment.dart';
 import 'package:cine_app/domain/datasources/actors_datasource.dart';
 import 'package:cine_app/domain/entities/actor_entity.dart';
-import 'package:cine_app/infrastructure/mappers/actor_mapper.dart';
+import 'package:cine_app/infrastructure/mappers/mappers.dart';
 import 'package:cine_app/infrastructure/models/moviedb/credits_response.dart';
-import 'package:dio/dio.dart';
 
 class ActorFromMovieDbDatasource extends ActorsDatasource {  
 

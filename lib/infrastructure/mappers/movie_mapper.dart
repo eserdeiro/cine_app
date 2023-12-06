@@ -1,6 +1,5 @@
 import 'package:cine_app/domain/entities/movie_entity.dart';
-import 'package:cine_app/infrastructure/models/models.dart';
-
+import 'package:cine_app/infrastructure/models/models.dart'; 
 class MovieMapper {
   //This is used to get the list of movies, for nowplaying, popular, etc.
   static Movie movieDbToEntity(MovieFromMovieDbResponse movieDb) => Movie(

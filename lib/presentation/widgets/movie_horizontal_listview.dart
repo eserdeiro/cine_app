@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:cine_app/domain/entities/genre_entity.dart';
-import 'package:cine_app/presentation/providers/genres/genres_providers.dart';
-import 'package:cine_app/presentation/widgets/widgets.dart';
 import 'package:cine_app/config/helpers/formats.dart';
 import 'package:cine_app/domain/entities/movie_entity.dart';
+import 'package:cine_app/presentation/providers/genres/genres_providers.dart';
+import 'package:cine_app/presentation/widgets/widgets.dart';
 
 
 
@@ -76,14 +75,14 @@ class _SlideState extends ConsumerState<_Slide> {
   Widget build(BuildContext context) {
     final genresData        = ref.watch(genresDataNotifierProvider);
     final textStyle = Theme.of(context).textTheme;
-    List<GenreEntity> matchingGenres = genresData
-        .where((genre) => widget.movie.genreIds.contains(genre.id.toString()))
-        .toList();
+    // List<GenreEntity> matchingGenres = genresData
+    //     .where((genre) => widget.movie.genreIds.contains(genre.id.toString()))
+    //     .toList();
 
-    List<String> genreNames =
-        matchingGenres.map((genre) => genre.name).toList();
+    // List<String> genreNames =
+    //     matchingGenres.map((genre) => genre.name).toList();
 
-    String genreNamesGroup = genreNames.join(', ');
+    // String genreNamesGroup = genreNames.join(', ');
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ClipRRect(
@@ -143,14 +142,14 @@ class _SlideState extends ConsumerState<_Slide> {
                           style: const TextStyle(fontWeight: FontWeight.w600),
                           overflow: TextOverflow.ellipsis,),
                       )),
-                      
+
               //GenreID
               SizedBox(
                 width: 150,
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 10, left: 5, right: 5, top: 5),
                   child: Text(
-                    genreNamesGroup, 
+                    Formats.genreIdsToNames(widget.movie.genreIds, genresData), 
                   overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 12)),
                 ),
               )

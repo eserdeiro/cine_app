@@ -1,7 +1,7 @@
-import 'package:cine_app/domain/datasources/local_database_datasource.dart';
-import 'package:cine_app/domain/entities/movie_entity.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:cine_app/domain/datasources/local_database_datasource.dart';
+import 'package:cine_app/domain/entities/movie_entity.dart';
 //isarDatasource
 class LocalDatabaseDataSourceImpl extends LocalDatabaseDatasource{
 
