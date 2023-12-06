@@ -19,7 +19,7 @@ class DatabaseMoviesNotifier extends StateNotifier<Map<int, ItemEntity>>{
 
   Future<List<ItemEntity>> loadNextPage() async {
 
-    final movies = await localDatabaseRepository.loadFavoriteMovies(offset: page * 10, limit: 12); // 
+    final movies = await localDatabaseRepository.loadFavoriteItems(offset: page * 10, limit: 12); // 
     page++;
 
     final tempMovieMap = <int, ItemEntity>{};

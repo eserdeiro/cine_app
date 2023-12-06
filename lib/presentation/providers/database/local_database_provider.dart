@@ -10,6 +10,6 @@ return LocalDatabaseRepositoryImpl(LocalDatabaseDataSourceImpl());
 
 final isFavoriteProvider = FutureProvider.family((ref, int movieId) {
   final localDatabaseRepository = ref.watch(localDatabaseProvider);
-  return localDatabaseRepository.isMoviefavorite(movieId);
+  return localDatabaseRepository.isItemFavorite(movieId);
 
 });

@@ -19,22 +19,22 @@ class LocalDatabaseDataSourceImpl extends LocalDatabaseDatasource{
     return Future.value(Isar.getInstance());
   }
 
-  //Check each movie if it is favorite or not, by id
+  //Check each item if it is favorite or not, by id
   @override
-  Future<bool> isMoviefavorite(int movieId) async{
+  Future<bool> isItemFavorite(int itemId) async{
     
     final isar = await database;
     final ItemEntity? isItemFavorite = await isar.itemEntitys
     .filter()
-    .idEqualTo(movieId)
+    .idEqualTo(itemId)
     .findFirst();
 
     return isItemFavorite != null;
   }
-  //Offset brings the movies after x, example 
-  //If offset is 10, bring the movies after the next 10
+  //Offset brings the items after x, example 
+  //If offset is 10, bring the items after the next 10
   @override
-  Future<List<ItemEntity>> loadFavoriteMovies({int limit = 9, int offset = 0}) async{
+  Future<List<ItemEntity>> loadFavoriteItems({int limit = 9, int offset = 0}) async{
     final isar = await database;
     return isar.itemEntitys.where()
     .offset(offset)
@@ -45,12 +45,12 @@ class LocalDatabaseDataSourceImpl extends LocalDatabaseDatasource{
 
   //We save, update or delete when tap favorite icon
   @override
-  Future<void> toggleFavorite(ItemEntity movie) async{
+  Future<void> toggleFavorite(ItemEntity item) async{
     
     final isar = await database;
     final favoriteItem = await isar.itemEntitys
     .filter()
-    .idEqualTo(movie.id)
+    .idEqualTo(item.id)
     .findFirst();
 
     if(favoriteItem != null ){
@@ -60,7 +60,7 @@ class LocalDatabaseDataSourceImpl extends LocalDatabaseDatasource{
       return;
     }
     //Insert 
-    isar.writeTxnSync(() => isar.itemEntitys.putSync(movie));
+    isar.writeTxnSync(() => isar.itemEntitys.putSync(item));
   }
 
 }

@@ -18,10 +18,10 @@ class MovieMapNotifier extends StateNotifier<Map<String, ItemEntity>>{
       required this.getMovieDetail
       }) : super({});
 
-  Future<void> loadMovie(String movieId) async{
-    if(state[movieId] != null ) return;
-    final movie = await getMovieDetail( movieId );
-    state = {...state, movieId : movie};
+  Future<void> loadMovie(String itemId) async{
+    if(state[itemId] != null ) return;
+    final movie = await getMovieDetail( itemId );
+    state = {...state, itemId : movie};
   }
 
 }

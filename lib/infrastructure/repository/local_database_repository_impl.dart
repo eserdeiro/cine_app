@@ -9,18 +9,18 @@ class LocalDatabaseRepositoryImpl extends LocalDatabaseRepository{
   LocalDatabaseRepositoryImpl(this.datasource);
 
   @override
-  Future<bool> isMoviefavorite(int movieId) {
-    return datasource.isMoviefavorite(movieId);
+  Future<bool> isItemFavorite(int itemId) {
+    return datasource.isItemFavorite(itemId);
   }
 
   @override
-  Future<List<ItemEntity>> loadFavoriteMovies({int limit = 9, int offset = 0}) {
-    return datasource.loadFavoriteMovies(limit: limit, offset: offset);
+  Future<List<ItemEntity>> loadFavoriteItems({int limit = 9, int offset = 0}) {
+    return datasource.loadFavoriteItems(limit: limit, offset: offset);
   }
 
   @override
-  Future<void> toggleFavorite(ItemEntity movie) {
-   return datasource.toggleFavorite(movie);
+  Future<void> toggleFavorite(ItemEntity item) {
+   return datasource.toggleFavorite(item);
   }
 
 }
