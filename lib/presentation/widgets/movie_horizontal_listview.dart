@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cine_app/config/helpers/formats.dart';
-import 'package:cine_app/domain/entities/movie_entity.dart';
+import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/presentation/providers/genres/genres_providers.dart';
 import 'package:cine_app/presentation/widgets/widgets.dart';
 
 
 
 class ItemHorizontalListview extends ConsumerStatefulWidget {
-  final List<Movie> movies;
+  final List<ItemEntity> movies;
   final VoidCallback? loadNextPage;
 
   const ItemHorizontalListview(
@@ -63,7 +63,7 @@ class ItemHorizontalListviewState extends ConsumerState<ItemHorizontalListview> 
 }
 
 class _Slide extends ConsumerStatefulWidget {
-  final Movie movie;
+  final ItemEntity movie;
   const _Slide({required this.movie});
 
   @override

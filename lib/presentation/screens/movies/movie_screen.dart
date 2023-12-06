@@ -4,7 +4,7 @@ import 'package:cine_app/presentation/widgets/shared/title_subtitle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cine_app/config/helpers/formats.dart';
-import 'package:cine_app/domain/entities/movie_entity.dart';
+import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/presentation/providers/providers.dart';
 
 class MovieScreen extends ConsumerStatefulWidget {
@@ -28,7 +28,7 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final Movie? movie = ref.watch(movieDetailProvider)[widget.movieId];
+    final ItemEntity? movie = ref.watch(movieDetailProvider)[widget.movieId];
     if (movie == null) {
       return const Scaffold(
           body: Center(child: CircularProgressIndicator(strokeWidth: 3)));
@@ -50,7 +50,7 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
 }
 
 class _MovieDetails extends ConsumerWidget {
-  final Movie movie;
+  final ItemEntity movie;
   const _MovieDetails({required this.movie});
     
   @override
@@ -161,7 +161,7 @@ class _ActorsByMovie extends ConsumerWidget {
 }
 
 class _CustomSliverAppBar extends ConsumerWidget {
-  final Movie movie;
+  final ItemEntity movie;
   const _CustomSliverAppBar({required this.movie});
 
   @override

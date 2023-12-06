@@ -17,7 +17,7 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
     super.initState();
 
     ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
-    ref.read(popularMoviesProvider.notifier).loadNextPage();
+    ref.read(popularMoviesProvider.notifier) .loadNextPage();
     ref.read(upcomingMoviesProvider.notifier).loadNextPage();
     ref.read(topRatedMoviesProvider.notifier).loadNextPage();
     ref.read(topRatedMoviesProvider.notifier).loadNextPage();
@@ -34,7 +34,7 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
     final popularMovies    = ref.watch(popularMoviesProvider);
     final upcomingMovies   = ref.watch(upcomingMoviesProvider);
     final topRatedMovies   = ref.watch(topRatedMoviesProvider);
-    final slideshowProvider = ref.watch(moviesSlideshowProvider);
+    final slideshowProvider= ref.watch(moviesSlideshowProvider);
  
     //CustomScrollView + Slivers
     return CustomScrollView(
@@ -54,10 +54,11 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
             children: [
               
               MoviesSlideshow(movies: slideshowProvider),
+
               //NowPlaying
-          TitleSubtitle(title: Strings.nowPlaying, subtitle: 'xd', subtitleFontColor: Colors.cyan),
-          const TitleSubtitle(title: 'Movies', titleFontSize: 14, titleFontWeight: FontWeight.w400),
-          const SizedBox(height: 10),
+              TitleSubtitle(title: Strings.nowPlaying, subtitle: 'Today', subtitleFontColor: Colors.cyan),
+              const TitleSubtitle(title: 'Movies', titleFontSize: 14, titleFontWeight: FontWeight.w400),
+              const SizedBox(height: 10),
               ItemHorizontalListview(
                 movies: nowPlayingMovies,
                 loadNextPage: () {
@@ -65,29 +66,32 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
                 },
               ),
 
-              TitleSubtitle(title: Strings.popular, subtitle: 'xd', subtitleFontColor: Colors.cyan),
-              const TitleSubtitle(title: 'Movies', titleFontSize: 14, titleFontWeight: FontWeight.w400),
               //Popular
+              TitleSubtitle(title: Strings.popular, subtitle: 'Today', subtitleFontColor: Colors.cyan),
+              const TitleSubtitle(title: 'Movies', titleFontSize: 14, titleFontWeight: FontWeight.w400),
+
               ItemHorizontalListview(
                 movies: popularMovies,
                 loadNextPage: () {
                   ref.read(popularMoviesProvider.notifier).loadNextPage();
                 },
               ),
-              
-              TitleSubtitle(title: Strings.upcoming, subtitle: 'xd', subtitleFontColor: Colors.cyan),
+
+              //Upcoming
+              TitleSubtitle(title: Strings.upcoming, subtitle: 'Today', subtitleFontColor: Colors.cyan),
               const TitleSubtitle(title: 'Movies', titleFontSize: 14, titleFontWeight: FontWeight.w400),
-               //Upcoming
+               
               ItemHorizontalListview(
                 movies: upcomingMovies,
                 loadNextPage: () {
                   ref.read(upcomingMoviesProvider.notifier).loadNextPage();
                 },
               ),
-
-              TitleSubtitle(title: Strings.topRated, subtitle: 'xd', subtitleFontColor: Colors.cyan),
-              const TitleSubtitle(title: 'Movies', titleFontSize: 14, titleFontWeight: FontWeight.w400),
+              
                //Toprated
+              TitleSubtitle(title: Strings.topRated, subtitle: 'Today', subtitleFontColor: Colors.cyan),
+              const TitleSubtitle(title: 'Movies', titleFontSize: 14, titleFontWeight: FontWeight.w400),
+              
               ItemHorizontalListview(
                 movies: topRatedMovies,
                 loadNextPage: () {

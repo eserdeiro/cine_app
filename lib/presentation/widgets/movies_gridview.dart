@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:cine_app/domain/entities/movie_entity.dart';
+import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/presentation/widgets/shared/movie_poster.dart';
 
 class MoviesGridView extends StatefulWidget {
 
-  final List<Movie> movies;
+  final List<ItemEntity> movies;
   final VoidCallback? loadNextPage;
 
   const MoviesGridView({super.key, required this.movies, this.loadNextPage});

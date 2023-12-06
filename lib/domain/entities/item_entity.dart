@@ -1,8 +1,8 @@
 
 import 'package:isar/isar.dart';
-part 'movie_entity.g.dart';
+part 'item_entity.g.dart';
 @collection
-class Movie {
+class ItemEntity {
   Id? isarId = Isar.autoIncrement;
   final bool adult;
   final String backdropPath;
@@ -19,7 +19,7 @@ class Movie {
   final double voteAverage;
   final int voteCount;
 
-  Movie({
+  ItemEntity({
     required this.adult,
     required this.backdropPath,
     required this.genreIds,

@@ -1,12 +1,12 @@
 
 
-import 'package:cine_app/domain/entities/movie_entity.dart';
+import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/presentation/providers/movies/movies_repository_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
 //NowPlaying 
-final nowPlayingMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
+final nowPlayingMoviesProvider = StateNotifierProvider<MoviesNotifier, List<ItemEntity>>((ref) {
   final fetchMoreMovies = ref.watch(movieRepositoryProvider).getNowPlaying;
   return MoviesNotifier(
     fetchMoreMovies: fetchMoreMovies
@@ -14,7 +14,7 @@ final nowPlayingMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Movi
 });
 
 //Popular
-final popularMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
+final popularMoviesProvider = StateNotifierProvider<MoviesNotifier, List<ItemEntity>>((ref) {
   final fetchMoreMovies = ref.watch(movieRepositoryProvider).getPopular;
   return MoviesNotifier(
     fetchMoreMovies: fetchMoreMovies
@@ -22,7 +22,7 @@ final popularMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Movie>>
 });
 
 //Upcoming
-final upcomingMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
+final upcomingMoviesProvider = StateNotifierProvider<MoviesNotifier, List<ItemEntity>>((ref) {
   final fetchMoreMovies = ref.watch(movieRepositoryProvider).getUpcoming;
   return MoviesNotifier(
     fetchMoreMovies: fetchMoreMovies
@@ -30,16 +30,16 @@ final upcomingMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Movie>
 });
 
 //TopRated
-final topRatedMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
+final topRatedMoviesProvider = StateNotifierProvider<MoviesNotifier, List<ItemEntity>>((ref) {
   final fetchMoreMovies = ref.watch(movieRepositoryProvider).getTopRated;
   return MoviesNotifier(
     fetchMoreMovies: fetchMoreMovies
   );
 });
 
-typedef MovieCallback = Future<List<Movie>> Function({int page});
+typedef MovieCallback = Future<List<ItemEntity>> Function({int page});
 
-class MoviesNotifier extends StateNotifier<List<Movie>>{
+class MoviesNotifier extends StateNotifier<List<ItemEntity>>{
 
   int currentPage = 0;
   bool isLoading = false;
@@ -54,7 +54,7 @@ class MoviesNotifier extends StateNotifier<List<Movie>>{
 
     isLoading = true;
     currentPage++;
-    final List<Movie> movies = await fetchMoreMovies(page: currentPage);
+    final List<ItemEntity> movies = await fetchMoreMovies(page: currentPage);
     state = [...state, ...movies];
     await Future.delayed(const Duration(milliseconds: 300));
     isLoading = false;

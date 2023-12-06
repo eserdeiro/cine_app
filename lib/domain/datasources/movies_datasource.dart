@@ -1,17 +1,17 @@
-import 'package:cine_app/domain/entities/movie_entity.dart';
+import 'package:cine_app/domain/entities/item_entity.dart';
 
 abstract class MoviesDataSource {
 
-  Future<List<Movie>> getNowPlaying({int page = 1});
+  Future<List<ItemEntity>> getNowPlaying({int page = 1});
 
-  Future<List<Movie>> getPopular({int page = 1});
+  Future<List<ItemEntity>> getPopular({int page = 1});
   
-  Future<List<Movie>> getUpcoming({int page = 1});
+  Future<List<ItemEntity>> getUpcoming({int page = 1});
 
-  Future<List<Movie>> getTopRated({int page = 1});
+  Future<List<ItemEntity>> getTopRated({int page = 1});
   
-  Future<Movie> getMovieById(String id);
+  Future<ItemEntity> getMovieById(String id);
 
-  Future<List<Movie>> searchMoviesByQuery(String query);
+  Future<List<ItemEntity>> searchMoviesByQuery(String query);
   
 }

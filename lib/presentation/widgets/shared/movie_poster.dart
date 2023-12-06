@@ -3,10 +3,10 @@ import 'package:cine_app/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cine_app/config/constants/strings.dart';
-import 'package:cine_app/domain/entities/movie_entity.dart';
+import 'package:cine_app/domain/entities/item_entity.dart';
 
 class MoviePoster extends StatelessWidget {
-  final Movie movie;
+  final ItemEntity movie;
   const MoviePoster({super.key, required this.movie});
 
   @override

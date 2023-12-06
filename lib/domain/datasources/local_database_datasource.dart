@@ -1,9 +1,9 @@
-import 'package:cine_app/domain/entities/movie_entity.dart';
+import 'package:cine_app/domain/entities/item_entity.dart';
 
 abstract class LocalDatabaseDatasource {
-  Future<void> toggleFavorite(Movie movie);
+  Future<void> toggleFavorite(ItemEntity movie);
 
   Future<bool> isMoviefavorite(int movieId);
 
-  Future<List<Movie>> loadFavoriteMovies({int limit = 9, int offset = 0});
+  Future<List<ItemEntity>> loadFavoriteMovies({int limit = 9, int offset = 0});
 }

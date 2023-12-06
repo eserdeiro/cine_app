@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:cine_app/config/constants/strings.dart';
-import 'package:cine_app/domain/entities/movie_entity.dart';
+import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/presentation/widgets/widgets.dart';
 
 class MoviesSlideshow extends StatelessWidget {
-  final List<Movie> movies;
+  final List<ItemEntity> movies;
   const MoviesSlideshow({
     super.key,
     required this.movies});
@@ -49,7 +49,7 @@ class MoviesSlideshow extends StatelessWidget {
 
 
 class _Slide extends StatelessWidget {
-  final Movie movie;
+  final ItemEntity movie;
   const _Slide({required this.movie});
 
   @override

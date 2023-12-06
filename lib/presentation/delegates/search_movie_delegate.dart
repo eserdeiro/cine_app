@@ -2,17 +2,17 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:animate_do/animate_do.dart';
-import 'package:cine_app/domain/entities/movie_entity.dart';
+import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:flutter/material.dart';
 
-typedef SearchMovieCallback = Future <List<Movie>> Function(String query);
+typedef SearchMovieCallback = Future <List<ItemEntity>> Function(String query);
 
-class SearchMovieDelegate extends SearchDelegate<Movie?> {
+class SearchMovieDelegate extends SearchDelegate<ItemEntity?> {
 
   final SearchMovieCallback searchMovies;
-  List<Movie> initialMovies;
+  List<ItemEntity> initialMovies;
 
-  StreamController<List<Movie>> debouncedMovies  = StreamController.broadcast();
+  StreamController<List<ItemEntity>> debouncedMovies  = StreamController.broadcast();
   StreamController<bool> isLoading  = StreamController.broadcast();
   Timer? _debounceTimer;
 
@@ -130,7 +130,7 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
 
 
 class _MovieItem extends StatelessWidget {
-  final List<Movie> movies;
+  final List<ItemEntity> movies;
   final String query;
   final Function onMovieSelected;
   const _MovieItem({
