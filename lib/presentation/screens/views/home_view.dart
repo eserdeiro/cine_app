@@ -25,7 +25,6 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
     ref.read(upcomingMoviesProvider.notifier).loadNextPage();
     ref.read(topRatedMoviesProvider.notifier).loadNextPage();
     ref.read(topRatedMoviesProvider.notifier).loadNextPage();
-    ref.read(genreRepositoryProvider);
     ref.read(genreRepositoryProvider).getGenres();
   }
 
@@ -47,7 +46,10 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
       // Si la lista de géneros está vacía, carga los datos
       _loadGenres(context, ref);
       return CircularProgressIndicator();
-    }
+    } 
+
+    print(genresData.genres[0].name);
+
     //CustomScrollView + Slivers
     return CustomScrollView(
       slivers: [
