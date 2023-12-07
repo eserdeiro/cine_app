@@ -116,7 +116,7 @@ class SearchMovieDelegate extends SearchDelegate<ItemEntity?> {
       builder: (context, snapshot) {
         final movies = snapshot.data ?? [];
         return _MovieItem(
-          movies: movies, 
+          item: movies, 
           query: query,
           onMovieSelected: (context, movie){
             clearStreams();
@@ -132,11 +132,11 @@ class SearchMovieDelegate extends SearchDelegate<ItemEntity?> {
 
 
 class _MovieItem extends StatelessWidget {
-  final List<ItemEntity> movies;
+  final List<ItemEntity> item;
   final String query;
   final Function onMovieSelected;
   const _MovieItem({
-    required this.movies,
+    required this.item,
     required this.query,
     required this.onMovieSelected,
   });
@@ -147,7 +147,7 @@ class _MovieItem extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (movies.isNotEmpty)
+        if (item.isNotEmpty)
           Padding(
             padding: const EdgeInsets.all(10),
             child: Text(
@@ -157,7 +157,7 @@ class _MovieItem extends StatelessWidget {
           ),
         Expanded(
           child: ItemsGridView(
-        movies: movies)
+        items: item)
         ),
       ],
     );

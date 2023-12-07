@@ -10,7 +10,7 @@ class GenresRepositoryImpl extends GenresRepository{
 
   @override
   Future<List<GenreEntity>> getGenres() {
-    return datasource.getGenres();
+    return datasource.getMovieGenres();
   }
   
 }

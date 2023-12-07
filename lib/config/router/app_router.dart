@@ -22,9 +22,9 @@ final appRouter = GoRouter(
         //TODO if page > 2 || page < 0. redirect to home
       },
       routes: [
-        //the initial slash /item/:id is'nt needed by the parent
+        //the initial slash /movie/:id is'nt needed by the parent
         GoRoute(
-      path: 'item/:id',
+      path: 'movie/:id',
       name: ItemScreen.name,
       builder: (context, state) {
         final itemId = state.pathParameters['id'] ?? 'no-id';

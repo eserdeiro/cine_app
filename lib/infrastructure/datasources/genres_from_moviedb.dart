@@ -18,7 +18,7 @@ class GenresFromMovieDb extends GenresDatasource {
     );
     
       @override
-      Future<List<GenreEntity>> getGenres() async{
+      Future<List<GenreEntity>> getMovieGenres() async{
         final response = await dio.get('/genre/movie/list');
           
       final genresResponse = GenreResponse.fromJson(response.data);

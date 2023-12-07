@@ -1,13 +1,16 @@
+import 'dart:io';
+
 import 'package:animate_do/animate_do.dart';
 import 'package:cine_app/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/presentation/providers/providers.dart';
+import 'package:go_router/go_router.dart';
 
 class ItemScreen extends ConsumerStatefulWidget {
   final String itemId;
-  static const name = 'movie_screen';
+  static const name = 'item_screen';
 
   const ItemScreen({super.key, required this.itemId});
 
@@ -64,6 +67,9 @@ class CustomSliverAppBarState extends ConsumerState<CustomSliverAppBar> {
         MediaQuery.of(context).orientation == Orientation.landscape;
 
     return SliverAppBar(
+      leading: IconButton(onPressed: () {
+        context.pop();
+      }, icon: Icon(Platform.isAndroid? Icons.arrow_back_outlined : Icons.arrow_back_ios),),
       centerTitle: true,
       title: Text(widget.item.title),
       expandedHeight: size.height * 0.6,

@@ -45,8 +45,9 @@ class FavoriteViewState extends ConsumerState<FavoriteView> with AutomaticKeepAl
         title: const Text('Favorites'),
       ),
       body: ItemsGridView(
-        movies: favoriteMovies,
-        loadNextPage: loadNextPage)
+        items: favoriteMovies,
+        loadNextPage: loadNextPage,
+        text: 'No movies :(')
     );
   }
   

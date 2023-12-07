@@ -3,11 +3,11 @@ import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/presentation/widgets/shared/movie_poster.dart';
 
 class ItemsGridView extends StatefulWidget {
-
-  final List<ItemEntity> movies;
+  final String? text;
+  final List<ItemEntity> items;
   final VoidCallback? loadNextPage;
 
-  const ItemsGridView({super.key, required this.movies, this.loadNextPage});
+  const ItemsGridView({super.key, required this.items, this.loadNextPage, this.text = ''});
 
   @override
   State<ItemsGridView> createState() => _ItemsGridViewState();
@@ -42,7 +42,7 @@ class _ItemsGridViewState extends State<ItemsGridView> {
     final bool landscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     final titleStyle = Theme.of(context).textTheme;
-   if (widget.movies.isNotEmpty) {
+   if (widget.items.isNotEmpty) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -54,13 +54,13 @@ class _ItemsGridViewState extends State<ItemsGridView> {
             crossAxisCount: landscape ? 5 : 3,
             childAspectRatio: 0.7,
             children: [
-              ...widget.movies.map((movie) => MoviePoster(movie: movie))
+              ...widget.items.map((movie) => MoviePoster(movie: movie))
             ],
           ),
         ),
       ],
     );
    } 
-   return Center(child: Text('No movies :(', style: titleStyle.titleLarge));
+   return Center(child: Text('${widget.text}', style: titleStyle.titleLarge));
   }
 }
