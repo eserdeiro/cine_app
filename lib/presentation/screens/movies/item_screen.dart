@@ -106,7 +106,7 @@ class CustomSliverAppBarState extends ConsumerState<CustomSliverAppBar> {
                 if (!landscape)
                 //Center posterpath
                   MainImageItem(imagePath: widget.item.posterPath, height: 300),
-
+                  
                 const SizedBox(height: 20),
 
                 //ReleaseDate

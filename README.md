@@ -1,8 +1,8 @@
 # Preview
 
-<img src="https://raw.githubusercontent.com/eserdeiro/cine_app/main/assets/images/one.png" width="30%"><img src="https://raw.githubusercontent.com/eserdeiro/cine_app/main/assets/images/two.png" width="30%">
+<img src="https://raw.githubusercontent.com/eserdeiro/cine_app/main/lib/assets/images/one.png" width="30%"><img src="https://raw.githubusercontent.com/eserdeiro/cine_app/main/assets/images/two.png" width="30%">
 
-<img src="https://raw.githubusercontent.com/eserdeiro/cine_app/main/assets/images/three.png" width="30%"><img src="https://raw.githubusercontent.com/eserdeiro/cine_app/main/assets/images/four.png" width="30%">
+<img src="https://raw.githubusercontent.com/eserdeiro/cine_app/main/lib/assets/images/three.png" width="30%"><img src="https://raw.githubusercontent.com/eserdeiro/cine_app/main/lib/assets/images/four.png" width="30%">
 
 # Getting Started
 

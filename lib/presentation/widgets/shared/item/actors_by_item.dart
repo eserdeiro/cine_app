@@ -38,7 +38,7 @@ class ActorsByItem extends ConsumerWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(50),
                   child: Image.network(actor.profilePath,
-                      height: 50, width: 50,  ),
+                      height: 50, width: 50,  fit: BoxFit.cover),
                 ),
 
                 //Name
