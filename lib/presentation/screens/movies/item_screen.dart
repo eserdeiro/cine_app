@@ -106,7 +106,7 @@ class CustomSliverAppBarState extends ConsumerState<CustomSliverAppBar> {
                 if (!landscape)
                 //Center posterpath
                   MainImageItem(imagePath: widget.item.posterPath, height: 300),
-                  
+
                 const SizedBox(height: 20),
 
                 //ReleaseDate
@@ -144,7 +144,7 @@ class _ItemDetails extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-           SizedBox(height: 10),
+           const SizedBox(height: 10),
         LayoutBuilder(
           builder: (context, constraints) {
             if (landscape) {
@@ -172,17 +172,14 @@ class _ItemDetails extends ConsumerWidget {
               );
             } else {
              if (item.overview.isNotEmpty) {
-              return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const TitleSubtitle(title: 'Overview', horizontalPadding: 0),
-                            const SizedBox(height: 10),
-                            Text(item.overview),
-                          ],
-                        ),
-                      );
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const TitleSubtitle(title: 'Overview', horizontalPadding: 0),
+                  const SizedBox(height: 10),
+                  Text(item.overview),
+                ],
+              );
               } else {
                 return const SizedBox();
               }

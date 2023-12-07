@@ -5,6 +5,8 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/widgets.dart';
+
 typedef SearchMovieCallback = Future <List<ItemEntity>> Function(String query);
 
 class SearchMovieDelegate extends SearchDelegate<ItemEntity?> {
@@ -154,25 +156,8 @@ class _MovieItem extends StatelessWidget {
             ),
           ),
         Expanded(
-          child: GridView.count(
-            mainAxisSpacing: 3,
-            crossAxisSpacing: 3,
-            crossAxisCount: 3,
-            childAspectRatio: 0.7,
-            children: [
-              ...movies.map((movie) => SizedBox(
-                      child: FadeIn(
-                    delay: const Duration(milliseconds: 500),
-                    duration: const Duration(milliseconds: 1500),
-                    child: GestureDetector(
-                      onTap: () {
-                        onMovieSelected(context, movie);
-                      },
-                      child: Image.network(movie.posterPath, fit: BoxFit.cover),
-                    ),
-                  )))
-            ],
-          ),
+          child: ItemsGridView(
+        movies: movies)
         ),
       ],
     );

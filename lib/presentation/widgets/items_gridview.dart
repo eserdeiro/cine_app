@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/presentation/widgets/shared/movie_poster.dart';
 
-class MoviesGridView extends StatefulWidget {
+class ItemsGridView extends StatefulWidget {
 
   final List<ItemEntity> movies;
   final VoidCallback? loadNextPage;
 
-  const MoviesGridView({super.key, required this.movies, this.loadNextPage});
+  const ItemsGridView({super.key, required this.movies, this.loadNextPage});
 
   @override
-  State<MoviesGridView> createState() => _MoviesGridViewState();
+  State<ItemsGridView> createState() => _ItemsGridViewState();
   
 }
 
-class _MoviesGridViewState extends State<MoviesGridView> {
+class _ItemsGridViewState extends State<ItemsGridView> {
 
   final scrollController = ScrollController();
 
@@ -39,6 +39,8 @@ class _MoviesGridViewState extends State<MoviesGridView> {
 
   @override
   Widget build(BuildContext context) {
+    final bool landscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     final titleStyle = Theme.of(context).textTheme;
    if (widget.movies.isNotEmpty) {
     return Column(
@@ -49,7 +51,7 @@ class _MoviesGridViewState extends State<MoviesGridView> {
             controller: scrollController,
             mainAxisSpacing: 3,
             crossAxisSpacing: 3,
-            crossAxisCount: 3,
+            crossAxisCount: landscape ? 5 : 3,
             childAspectRatio: 0.7,
             children: [
               ...widget.movies.map((movie) => MoviePoster(movie: movie))
