@@ -1,9 +1,7 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:cine_app/domain/entities/actor_entity.dart';
-import 'package:cine_app/presentation/widgets/shared/title_subtitle.dart';
+import 'package:cine_app/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:cine_app/config/helpers/formats.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/presentation/providers/providers.dart';
 
@@ -28,22 +26,104 @@ class ItemScreenState extends ConsumerState<ItemScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final ItemEntity? movie = ref.watch(movieDetailProvider)[widget.itemId];
-    if (movie == null) {
+    final ItemEntity? item = ref.watch(movieDetailProvider)[widget.itemId];
+    if (item == null) {
       return const Scaffold(
           body: Center(child: CircularProgressIndicator(strokeWidth: 3)));
     }
-
     return Scaffold(
       body: CustomScrollView(
         physics: const ClampingScrollPhysics(),
         slivers: [
-          _CustomSliverAppBar(item: movie),
+          CustomSliverAppBar(item: item),
           SliverList(
               delegate: SliverChildBuilderDelegate(
-                  (context, index) => _ItemDetails(item: movie),
+                  (context, index) => _ItemDetails(item: item),
                   childCount: 1))
         ],
+      ),
+    );
+  }
+}
+
+class CustomSliverAppBar extends ConsumerStatefulWidget {
+  final ItemEntity item;
+  const CustomSliverAppBar({super.key, required this.item});
+
+  @override
+  CustomSliverAppBarState createState() => CustomSliverAppBarState();
+}
+
+class CustomSliverAppBarState extends ConsumerState<CustomSliverAppBar> {
+  @override
+  Widget build(BuildContext context) {
+    final isFavoriteFutureProvider =
+        ref.watch(isFavoriteProvider(widget.item.id));
+    final size = MediaQuery.of(context).size;
+    final bool landscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+
+    return SliverAppBar(
+      centerTitle: true,
+      title: Text(widget.item.title),
+      expandedHeight: size.height * 0.6,
+      backgroundColor: Colors.black,
+      foregroundColor: Colors.white,
+      actions: [
+        IconButton(
+            onPressed: () async {
+              await ref
+                  .read(favoriteItemsProvider.notifier)
+                  .toggleFavorite(widget.item);
+
+              ref.invalidate(isFavoriteProvider(widget.item.id));
+            },
+            icon: isFavoriteFutureProvider.when(
+                data: (isFavorite) {
+                  return isFavorite
+                      ? const Icon(Icons.favorite_border_outlined,
+                          color: Colors.red)
+                      : const Icon(Icons.favorite_border_outlined);
+                },
+                error: (e, __) => const Icon(Icons.cancel_outlined),
+                loading: () =>
+                    SpinPerfect(child: const Icon(Icons.refresh_outlined))))
+      ],
+      flexibleSpace: FlexibleSpaceBar(
+        background: Stack(children: [
+          BackgroundImageItem(
+              imagePath: landscape
+                  ? widget.item.backdropPath
+                  : widget.item.posterPath),
+
+          //Center image
+          Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 100),
+                if (!landscape)
+                //Center posterpath
+                  MainImageItem(imagePath: widget.item.posterPath, height: 300),
+
+                const SizedBox(height: 20),
+
+                //ReleaseDate
+                if (widget.item.releaseDate?.year != null)
+                  ReleaseDate(releaseDate: widget.item.releaseDate),
+
+                //Genres
+                GenresItem(genreIds: widget.item.genreIds),
+
+                const SizedBox(height: 20),
+                //Vote average
+                VoteAvergateItem(voteAverage: widget.item.voteAverage),
+                if (landscape) const SizedBox(height: 50)
+              ],
+            ),
+          ),
+        ]),
       ),
     );
   }
@@ -52,272 +132,79 @@ class ItemScreenState extends ConsumerState<ItemScreen> {
 class _ItemDetails extends ConsumerWidget {
   final ItemEntity item;
   const _ItemDetails({required this.item});
-    
+
   @override
   Widget build(BuildContext context, ref) {
-   
-     final cast = ref.watch(castByItemProvider);
-     final crew = ref.watch(crewByItemProvider);
-     final bool castIsNotEmpty = cast.values.any((list) => list.isNotEmpty);
-     final bool crewIsNotEmpty = crew.values.any((list) => list.isNotEmpty);
-    //final size = MediaQuery.of(context).size;
+    final bool landscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+    final cast = ref.watch(castByItemProvider);
+    final crew = ref.watch(crewByItemProvider);
+    final bool castIsNotEmpty = cast.values.any((list) => list.isNotEmpty);
+    final bool crewIsNotEmpty = crew.values.any((list) => list.isNotEmpty);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start, 
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            //Overview
-            if(item.overview.isNotEmpty)
-            const TitleSubtitle(title: 'Overview', horizontalPadding: 0),
-            const SizedBox(width: 10),
-            Text(item.overview)
-          ],
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+           SizedBox(height: 10),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            if (landscape) {
+              return Row(
+                children: [
+                  //Landscape posterpath
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: MainImageItem(imagePath: item.posterPath, height: 200),
+                  ),
+                  Expanded(
+                      child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        if (item.overview.isNotEmpty)
+                          const TitleSubtitle(
+                              title: 'Overview', horizontalPadding: 0),
+                        const SizedBox(width: 10),
+                        Text(item.overview),
+                      ],
+                    ),
+                  ))
+                ],
+              );
+            } else {
+             if (item.overview.isNotEmpty) {
+              return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const TitleSubtitle(title: 'Overview', horizontalPadding: 0),
+                            const SizedBox(height: 10),
+                            Text(item.overview),
+                          ],
+                        ),
+                      );
+              } else {
+                return const SizedBox();
+              }
+            }
+          },
         ),
-        
+
+        //Actors
         //Cast view
-        if(castIsNotEmpty)
-        const TitleSubtitle(title: 'Cast', horizontalPadding: 0),
-        _ActorsByItem(itemId: item.id.toString(), actorsByItem: cast,),
+        if (castIsNotEmpty)
+          const TitleSubtitle(title: 'Cast', horizontalPadding: 0),
+        ActorsByItem(
+          itemId: item.id.toString(),
+          actorsByItem: cast,
+        ),
 
         //Crew view
-        if(crewIsNotEmpty) 
-        const TitleSubtitle(title: 'Crew', horizontalPadding: 0),
-        _ActorsByItem(itemId: item.id.toString(), actorsByItem: crew),
+        if (crewIsNotEmpty)
+          const TitleSubtitle(title: 'Crew', horizontalPadding: 0),
+        ActorsByItem(itemId: item.id.toString(), actorsByItem: crew),
         const SizedBox(height: 50),
-    
       ]),
-    );
-  }
-}
-
-class _ActorsByItem extends ConsumerWidget {
-  final String itemId;
-  final Map<String, List<ActorEntity>> actorsByItem;
-  const _ActorsByItem({required this.itemId, required this.actorsByItem});
-
-  @override
-  Widget build(BuildContext context, ref) {
-    // if has no data, show circularprogress
-    if (actorsByItem[itemId] == null) {
-      return const SizedBox(
-          height: 65,
-          child: Center(child: CircularProgressIndicator(strokeWidth: 3)));
-    }
-
-    final actors = actorsByItem[itemId]!;
-    return SizedBox(
-      height: 65,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: actors.length,
-        itemBuilder: (context, index) {
-          final actor = actors[index];
-          return Container(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-
-                //Actor photo
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: Image.network(actor.profilePath,
-                      height: 50, width: 50, fit: BoxFit.cover),
-                ),
-
-                //Name
-                const SizedBox(height: 5),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(actor.name,
-                       style: const TextStyle(
-                         fontWeight: FontWeight.w600)),
-                      const SizedBox(height: 5),
-                      
-                      //Actor character, if null, show job.
-                      Text((actor.character == null) ? actor.job! : actor.character! ,
-                          maxLines: 1,
-                          style: const TextStyle(
-                            fontSize: 12, overflow: TextOverflow.ellipsis
-                      )),
-                      
-                    ],
-                  ),
-                ),
-                //
-              ],
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
-
-class _CustomSliverAppBar extends ConsumerWidget {
-  final ItemEntity item;
-  const _CustomSliverAppBar({required this.item});
-
-  @override
-  Widget build(BuildContext context,ref) {
-    final isFavoriteFutureProvider = ref.watch(isFavoriteProvider(item.id));
-    final size = MediaQuery.of(context).size;
-    final titleStyle = Theme.of(context).textTheme;
-    final colors = Theme.of(context).colorScheme;
-    return SliverAppBar(
-      centerTitle: true,
-      title: Text(item.title),
-      expandedHeight: size.height * 0.6,
-      backgroundColor: Colors.black,
-      foregroundColor: Colors.white,
-      actions: [
-        IconButton(
-          onPressed: () async{
-            await ref.read(favoriteItemsProvider.notifier)
-            .toggleFavorite(item);
-            
-            ref.invalidate(isFavoriteProvider(item.id));
-          }, icon: isFavoriteFutureProvider.when(
-            data:(isFavorite){
-              return isFavorite 
-            ? const Icon(Icons.favorite_border_outlined, color: Colors.red) 
-            : const Icon(Icons.favorite_border_outlined);
-            } , 
-            error: (e, __) => throw UnimplementedError(e.toString()), 
-            loading: () => SpinPerfect(child: const Icon(Icons.refresh_outlined))))
-      ],
-      flexibleSpace: FlexibleSpaceBar(
-        titlePadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-        background: Stack(
-          children: [
-           //Background posterpath
-          SizedBox.expand(
-            child: Image.network(item.posterPath, 
-            fit: BoxFit.cover,
-            loadingBuilder: (context, child, loadingProgress) {
-              if(loadingProgress != null) return const SizedBox();
-              return FadeIn(child: child);
-            }),
-          ),
-         // Gradients
-        _CustomGradient(
-            begin: Alignment.topCenter, 
-            end: Alignment.bottomCenter, 
-            stops: const [0.5, 1.0],
-            colors: [Colors.transparent, colors.background]),
-
-          _CustomGradient(
-            begin: Alignment.topLeft, 
-            end: Alignment.bottomRight, 
-            stops: const [0.0, 0.5],
-            colors: [colors.background, Colors.transparent]),
-
-          _CustomGradient(
-            begin: Alignment.topRight, 
-            end: Alignment.bottomLeft, 
-            stops: const [0.0, 0.5],
-            colors: [colors.background, Colors.transparent]),
-            
-            //Center posterpah
-            Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-
-                  const SizedBox(height: 100),
-                  
-                  ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    child: SizedBox.fromSize(
-                      child: Image.network(item.posterPath, height: 300,
-                          //fit: BoxFit.cover,
-                          loadingBuilder: (context, child, loadingProgress) {
-                        if (loadingProgress != null) return const SizedBox();
-                        return FadeIn(child: child);
-                      }),
-                    ),
-                  ),
-
-                  const SizedBox(height: 20),
-
-                //Year
-                 if (item.releaseDate?.year != null)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.calendar_month),
-                      Text('${item.releaseDate!.year}'),
-                    ],
-                  ),
-
-                 //Genres
-                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.local_movies_rounded),
-                  ...item.genreIds.map((genreIds) {
-                    return Text("$genreIds ");
-                  }),
-                  ],
-                 ),
-
-                 const SizedBox(height: 20),
-                //Vote average 
-                 SizedBox(
-                   width: 55,
-                   child: Padding(
-                     padding: const EdgeInsets.symmetric(horizontal: 5),
-                     child: Row(
-                       children: [
-                         const Icon(Icons.star, color: Color(0xfffd8701), size: 15),
-                         const SizedBox(width: 2),
-                         Text(Formats.number(item.voteAverage , 1),
-                             style: titleStyle.bodyMedium
-                                 ?.copyWith(color: const Color(0xfffd8701))),
-                         const Spacer(),
-                       ],
-                     ),
-                   ), 
-                 )
-                ],
-              ),
-            ),
-        ]),
-          
-      ),
-    );
-  }
-}
-
-class _CustomGradient extends StatelessWidget {
-  final Alignment begin;
-  final Alignment end;
-  final List<double> stops;
-  final List<Color> colors;
-  const _CustomGradient({
-    required this.begin,
-    required this.end,
-    required this.stops,
-    required this.colors,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox.expand(
-      child: DecoratedBox(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: begin, 
-                  end: end, 
-                  stops: stops, 
-                  colors: colors))),
     );
   }
 }
