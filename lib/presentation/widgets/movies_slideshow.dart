@@ -14,6 +14,8 @@ class MoviesSlideshow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
+    final bool landscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -25,8 +27,8 @@ class MoviesSlideshow extends StatelessWidget {
           height: 220,
           width: double.infinity,
           child: Swiper(
-            viewportFraction: 0.8,
-            scale: 0.8,
+            viewportFraction: landscape ? 0.4 : 0.8,
+            scale: landscape ? 0.4 : 0.8,
             autoplay: true,
             pagination: SwiperPagination(
               margin: const EdgeInsets.only(top: 0),
@@ -61,7 +63,7 @@ class _Slide extends StatelessWidget {
           BoxShadow(
             color: Colors.black26,
             blurRadius: 10,
-            offset: Offset(0, 10),
+            offset: Offset(0, 15),
           )
         ]);
 
