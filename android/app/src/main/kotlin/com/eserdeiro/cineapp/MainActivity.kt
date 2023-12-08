@@ -1,4 +1,4 @@
-package com.example.cine_app
+package com.eserdeiro.cineapp
 
 import io.flutter.embedding.android.FlutterActivity
 
