@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -30,7 +31,9 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
     
     final initialLoading = ref.watch(firstLoadingProvider);
     if(initialLoading) return const FullScreenLoader();
-    FlutterNativeSplash.remove();
+    if(!kIsWeb){
+      FlutterNativeSplash.remove();
+    }
     //If changed to nowPlayingMovies, a list of 20 movies will be displayed
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
     final popularMovies    = ref.watch(popularMoviesProvider);

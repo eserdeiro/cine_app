@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -9,8 +10,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 Future<void> main() async{
   await dotenv.load(fileName: ".env");
    Hive.initFlutter();
-   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  if(!kIsWeb){
+     WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  }
   runApp(const ProviderScope(child: MainApp()));
 }
 
