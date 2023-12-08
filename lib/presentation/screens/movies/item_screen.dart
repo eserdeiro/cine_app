@@ -60,6 +60,7 @@ class CustomSliverAppBar extends ConsumerStatefulWidget {
 class CustomSliverAppBarState extends ConsumerState<CustomSliverAppBar> {
   @override
   Widget build(BuildContext context) {
+    const bool isWeb = bool.fromEnvironment('dart.library.js_util');
     final isFavoriteFutureProvider =
         ref.watch(isFavoriteProvider(widget.item.id));
     final size = MediaQuery.of(context).size;
@@ -69,7 +70,14 @@ class CustomSliverAppBarState extends ConsumerState<CustomSliverAppBar> {
     return SliverAppBar(
       leading: IconButton(onPressed: () {
         context.pop();
-      }, icon: Icon(Platform.isAndroid? Icons.arrow_back_outlined : Icons.arrow_back_ios),),
+      }, icon: Icon(
+        isWeb
+            ? Icons.arrow_back_outlined 
+            : Platform.isAndroid
+                ? Icons.arrow_back_outlined
+                : Icons.arrow_back_ios,
+      ),
+      ),
       centerTitle: true,
       title: Text(widget.item.title),
       expandedHeight: size.height * 0.6,

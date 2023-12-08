@@ -90,10 +90,18 @@ class SearchMovieDelegate extends SearchDelegate<ItemEntity?> {
 
   @override
   Widget? buildLeading(BuildContext context) {
+    const bool isWeb = bool.fromEnvironment('dart.library.js_util');
     return IconButton(onPressed: () {
       clearStreams();
       close(context, null);
-    }, icon: Icon(Platform.isAndroid? Icons.arrow_back_outlined : Icons.arrow_back_ios));
+    }, icon: Icon(
+            isWeb
+            ? Icons.arrow_back_outlined  // No modifica el ícono si es Web
+            : Platform.isAndroid
+                ? Icons.arrow_back_outlined  // Modifica el ícono solo si no es Web y es Android
+                : Icons.arrow_back_ios,  // Modifica el ícono solo si no es Web y no es Android
+      ),
+    );
   }
 
   @override
