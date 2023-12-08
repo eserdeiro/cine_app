@@ -1,5 +1,4 @@
-import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:cine_app/domain/datasources/local_database_datasource.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
 //isarDatasource
@@ -7,13 +6,13 @@ class LocalDatabaseDataSourceImpl extends LocalDatabaseDatasource{
   late Future<Box<ItemEntity>> database;
 
   LocalDatabaseDataSourceImpl() {
-    Hive.registerAdapter(ItemEntityAdapter());
     database = openDB();
+    Hive.registerAdapter(ItemEntityAdapter());
   }
 
   Future<Box<ItemEntity>> openDB() async {
-    final dir = await getApplicationCacheDirectory();
-    Hive.init(dir.path);
+    //   final dir = await getApplicationCacheDirectory();
+    //   Hive.initFlutter(dir.path);
 
     final box = await Hive.openBox<ItemEntity>('item_entity_box');
     return box;
