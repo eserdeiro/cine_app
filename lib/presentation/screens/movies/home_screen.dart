@@ -1,4 +1,5 @@
 import 'package:cine_app/presentation/screens/views.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cine_app/presentation/widgets/widgets.dart';
 
@@ -37,9 +38,6 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
 
   @override
   Widget build(BuildContext context) {
-
-    const bool isWeb = bool.fromEnvironment('dart.library.js_util');
-
     super.build(context);
 
       if ( pageController.hasClients ) {
@@ -50,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
       );
     }
     
-    if(isWeb){
+    if(kIsWeb){
           return Scaffold(
         body: IndexedStack(
           index: widget.page,

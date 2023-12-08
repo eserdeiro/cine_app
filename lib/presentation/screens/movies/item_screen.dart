@@ -2,11 +2,12 @@ import 'dart:io';
 
 import 'package:animate_do/animate_do.dart';
 import 'package:cine_app/presentation/widgets/widgets.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/presentation/providers/providers.dart';
-import 'package:go_router/go_router.dart';
 
 class ItemScreen extends ConsumerStatefulWidget {
   final String itemId;
@@ -60,7 +61,6 @@ class CustomSliverAppBar extends ConsumerStatefulWidget {
 class CustomSliverAppBarState extends ConsumerState<CustomSliverAppBar> {
   @override
   Widget build(BuildContext context) {
-    const bool isWeb = bool.fromEnvironment('dart.library.js_util');
     final isFavoriteFutureProvider =
         ref.watch(isFavoriteProvider(widget.item.id));
     final size = MediaQuery.of(context).size;
@@ -71,7 +71,7 @@ class CustomSliverAppBarState extends ConsumerState<CustomSliverAppBar> {
       leading: IconButton(onPressed: () {
         context.pop();
       }, icon: Icon(
-        isWeb
+        kIsWeb
             ? Icons.arrow_back_outlined 
             : Platform.isAndroid
                 ? Icons.arrow_back_outlined

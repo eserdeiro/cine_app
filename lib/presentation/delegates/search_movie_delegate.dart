@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:animate_do/animate_do.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/widgets.dart';
@@ -90,12 +91,11 @@ class SearchMovieDelegate extends SearchDelegate<ItemEntity?> {
 
   @override
   Widget? buildLeading(BuildContext context) {
-    const bool isWeb = bool.fromEnvironment('dart.library.js_util');
     return IconButton(onPressed: () {
       clearStreams();
       close(context, null);
     }, icon: Icon(
-            isWeb
+            kIsWeb
             ? Icons.arrow_back_outlined  // No modifica el ícono si es Web
             : Platform.isAndroid
                 ? Icons.arrow_back_outlined  // Modifica el ícono solo si no es Web y es Android
