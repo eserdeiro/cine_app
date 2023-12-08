@@ -32,7 +32,7 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
     final initialLoading = ref.watch(firstLoadingProvider);
     if(initialLoading) return const FullScreenLoader();
     if(!kIsWeb){
-      FlutterNativeSplash.remove();
+      FlutterNativeSplash.remove(); 
     }
     //If changed to nowPlayingMovies, a list of 20 movies will be displayed
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
