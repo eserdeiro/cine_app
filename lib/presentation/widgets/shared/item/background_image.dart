@@ -9,6 +9,8 @@ class BackgroundImageItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+        final bool landscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     final colors = Theme.of(context).colorScheme;
     return  Stack(
       children: [
@@ -19,23 +21,52 @@ class BackgroundImageItem extends StatelessWidget {
             return FadeIn(child: child);
           }),
         ),
-          CustomGradient(
-            begin: Alignment.topCenter, 
-            end: Alignment.bottomCenter, 
-            stops: const [0.5, 1.0],
-            colors: [Colors.transparent, colors.background]),
+        LayoutBuilder(builder: (context, constraints) {
+          if(landscape){
+            return Stack(children: [
+                CustomGradient(
+                begin: Alignment.topCenter, 
+                end: Alignment.bottomCenter, 
+                stops: const [0.0, 1.0],
+                colors: [Colors.transparent, colors.background]),
 
-          CustomGradient(
-            begin: Alignment.topLeft, 
-            end: Alignment.bottomRight, 
-            stops: const [0.0, 0.5],
-            colors: [colors.background, Colors.transparent]),
+              CustomGradient(
+                begin: Alignment.topLeft, 
+                end: Alignment.bottomRight, 
+                stops: const [0.0, 0.7],
+                colors: [colors.background, Colors.transparent]),
 
-          CustomGradient(
-            begin: Alignment.topRight, 
-            end: Alignment.bottomLeft, 
-            stops: const [0.0, 0.5],
-            colors: [colors.background, Colors.transparent]),    
+              CustomGradient(
+                begin: Alignment.topRight, 
+                end: Alignment.bottomLeft, 
+                stops: const [0.0, 0.7],
+                colors: [colors.background, Colors.transparent]),
+            ],);
+          }else {
+            return   Stack(
+            children: [
+              CustomGradient(
+                begin: Alignment.topCenter, 
+                end: Alignment.bottomCenter, 
+                stops: const [0.5, 1.0],
+                colors: [Colors.transparent, colors.background]),
+
+              CustomGradient(
+                begin: Alignment.topLeft, 
+                end: Alignment.bottomRight, 
+                stops: const [0.0, 0.5],
+                colors: [colors.background, Colors.transparent]),
+
+              CustomGradient(
+                begin: Alignment.topRight, 
+                end: Alignment.bottomLeft, 
+                stops: const [0.0, 0.5],
+                colors: [colors.background, Colors.transparent]),
+            ],
+          );
+          }
+        },)
+        
       ],
     );
   }

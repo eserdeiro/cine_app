@@ -161,10 +161,10 @@ class _ItemDetails extends ConsumerWidget {
            const SizedBox(height: 10),
         LayoutBuilder(
           builder: (context, constraints) {
+             //Landscape posterpath + overview
             if (landscape) {
               return Row(
                 children: [
-                  //Landscape posterpath
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: MainImageItem(imagePath: item.posterPath, height: 200),
@@ -174,29 +174,25 @@ class _ItemDetails extends ConsumerWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
-                        if (item.overview.isNotEmpty)
                           const TitleSubtitle(
                               title: 'Overview', horizontalPadding: 0),
                         const SizedBox(width: 10),
-                        Text(item.overview),
+                        Text(item.overview.isEmpty? 'No available overview' : item.overview),
                       ],
                     ),
                   ))
                 ],
               );
             } else {
-             if (item.overview.isNotEmpty) {
+            //Portrait overview without posterpath
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const TitleSubtitle(title: 'Overview', horizontalPadding: 0),
                   const SizedBox(height: 10),
-                  Text(item.overview),
+                  Text(item.overview.isEmpty? 'No available overview' : item.overview),
                 ],
               );
-              } else {
-                return const SizedBox();
-              }
             }
           },
         ),
