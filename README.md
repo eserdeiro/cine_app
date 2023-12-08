@@ -27,6 +27,4 @@ The app has one dark theme that uses predefined colors.
 
 # Compatibility 
 
-Currently only available for Android and iOS
-
-I have incompatibilities with search delegate & isar database, which do not allow me to function on the web
+Currently only available for Android and iOS, and Web 
