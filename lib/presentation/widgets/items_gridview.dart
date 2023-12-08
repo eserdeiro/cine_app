@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/presentation/widgets/shared/movie_poster.dart';
@@ -51,7 +52,7 @@ class _ItemsGridViewState extends State<ItemsGridView> {
             controller: scrollController,
             mainAxisSpacing: 3,
             crossAxisSpacing: 3,
-            crossAxisCount: landscape ? 5 : 3,
+            crossAxisCount: kIsWeb ? 6 : (landscape ? 5 : 3),
             childAspectRatio: 0.7,
             children: [
               ...widget.items.map((movie) => MoviePoster(movie: movie))
