@@ -12,7 +12,7 @@ class MovieMapper {
       id          : movieDb.id,
       originalLanguage: movieDb.originalLanguage,
       originalTitle   : movieDb.originalTitle,
-      overview    : (movieDb.overview != '')? movieDb.overview : 'sdfdsf',
+      overview    : movieDb.overview,
       popularity  : movieDb.popularity,
       posterPath  : (movieDb.posterPath != '')
           ? 'https://image.tmdb.org/t/p/w500/${movieDb.posterPath}' 
@@ -34,7 +34,9 @@ class MovieMapper {
         id: movieDetails.id, 
         originalLanguage: movieDetails.originalLanguage, 
         originalTitle: movieDetails.originalTitle, 
-        overview: movieDetails.overview , 
+        overview: (movieDetails.overview != '') 
+        ? movieDetails.overview 
+        : 'No overview available' , 
         popularity: movieDetails.popularity, 
         posterPath: (movieDetails.posterPath != '')
           ? 'https://image.tmdb.org/t/p/w500/${movieDetails.posterPath}' 

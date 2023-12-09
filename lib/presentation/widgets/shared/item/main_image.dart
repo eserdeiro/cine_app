@@ -11,17 +11,14 @@ class MainImageItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-        child: SizedBox.fromSize(
-          child: Image.network(imagePath, height: height,
-              //fit: BoxFit.cover,
-              loadingBuilder: (context, child, loadingProgress) {
-            if (loadingProgress != null) return const SizedBox();
-            return FadeIn(child: child);
-          }),
-        ),
+    return ClipRRect(
+      borderRadius: const BorderRadius.all(Radius.circular(10)),
+      child: SizedBox(
+        child: Image.network(imagePath, height: height,
+            loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress != null) return const SizedBox();
+          return FadeIn(child: child);
+        }),
       ),
     );
   }

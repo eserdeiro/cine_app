@@ -79,7 +79,7 @@ class CustomSliverAppBarState extends ConsumerState<CustomSliverAppBar> {
       ),
       centerTitle: true,
       title: Text(widget.item.title),
-      expandedHeight: size.height * 0.6,
+      expandedHeight: size.height * 0.60,
       backgroundColor: Colors.black,
       foregroundColor: Colors.white,
       actions: [
@@ -98,27 +98,35 @@ class CustomSliverAppBarState extends ConsumerState<CustomSliverAppBar> {
                           color: Colors.red)
                       : const Icon(Icons.favorite_border_outlined);
                 },
-                error: (e, __) => const Icon(Icons.cancel_outlined),
+                error: (_, __) => const Icon(Icons.cancel_outlined),
                 loading: () =>
                     SpinPerfect(child: const Icon(Icons.refresh_outlined))))
       ],
+
       flexibleSpace: FlexibleSpaceBar(
-        background: Stack(children: [
+        background: LayoutBuilder(builder: (context, constraints) {
+           double availableHeight = constraints.biggest.height;
+
+          return Stack(
+          children: [
+
           BackgroundImageItem(
               imagePath: landscape
                   ? widget.item.backdropPath
                   : widget.item.posterPath),
 
           //Center image
-          Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+
+                //If the screen is very small, we eliminate the sizesbox and posterpath
+                if (availableHeight >= 270)
                 const SizedBox(height: 60),
                 //Center posterpath
-                if (!landscape)
-                  MainImageItem(imagePath: widget.item.posterPath, height: 300),
+                if (!landscape && availableHeight >= 270)
+                  MainImageItem(imagePath: widget.item.posterPath, height: availableHeight * 0.45),
                     
                 const SizedBox(height: 20),
               
@@ -131,12 +139,11 @@ class CustomSliverAppBarState extends ConsumerState<CustomSliverAppBar> {
                     
                 //Vote average
                 VoteAvergateItem(voteAverage: widget.item.voteAverage),
-               // if (landscape) const SizedBox(height: 50)
               ],
             ),
-          ),
-        ]),
-      ),
+          ]);
+        },
+      )),
     );
   }
 }
@@ -163,10 +170,12 @@ class _ItemDetails extends ConsumerWidget {
             if (landscape) {
               return Row(
                 children: [
+
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: MainImageItem(imagePath: item.posterPath, height: 200),
                   ),
+
                   Expanded(
                       child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -175,10 +184,11 @@ class _ItemDetails extends ConsumerWidget {
                           const TitleSubtitle(
                               title: 'Overview', horizontalPadding: 0),
                         const SizedBox(width: 10),
-                        Text(item.overview.isEmpty? 'No available overview' : item.overview),
+                        Text(item.overview),
                       ],
                     ),
                   ))
+
                 ],
               );
             } else {
@@ -188,7 +198,7 @@ class _ItemDetails extends ConsumerWidget {
                 children: [
                   const TitleSubtitle(title: 'Overview', horizontalPadding: 0),
                   const SizedBox(height: 10),
-                  Text(item.overview.isEmpty? 'No available overview' : item.overview),
+                  Text(item.overview),
                 ],
               );
             }
