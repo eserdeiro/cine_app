@@ -115,24 +115,23 @@ class CustomSliverAppBarState extends ConsumerState<CustomSliverAppBar> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 100),
-                if (!landscape)
+                const SizedBox(height: 60),
                 //Center posterpath
+                if (!landscape)
                   MainImageItem(imagePath: widget.item.posterPath, height: 300),
-
+                    
                 const SizedBox(height: 20),
-
+              
                 //ReleaseDate
                 if (widget.item.releaseDate?.year != null)
                   ReleaseDate(releaseDate: widget.item.releaseDate),
-
+                    
                 //Genres
                 GenresItem(genreIds: widget.item.genreIds),
-
-                const SizedBox(height: 20),
+                    
                 //Vote average
                 VoteAvergateItem(voteAverage: widget.item.voteAverage),
-                if (landscape) const SizedBox(height: 50)
+               // if (landscape) const SizedBox(height: 50)
               ],
             ),
           ),

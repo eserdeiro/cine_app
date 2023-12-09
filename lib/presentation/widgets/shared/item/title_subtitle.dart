@@ -32,15 +32,13 @@ class TitleSubtitle extends StatelessWidget {
         ),
       
         const Spacer(),
-      
+
         if (subtitle != null)
-          Expanded(
-            child: Text(subtitle!, style: TextStyle(
-              fontSize: (subtitleFontSize != null) ? subtitleFontSize: 14 ,
-              fontWeight: FontWeight.w400, 
-              color: (subtitleFontColor != null) ? subtitleFontColor: Colors.white, overflow: TextOverflow.ellipsis )
-              ),
-          )
+          Text(subtitle!, textAlign: TextAlign.end, style: TextStyle(
+            fontSize: (subtitleFontSize != null) ? subtitleFontSize: 14 ,
+            fontWeight: FontWeight.w400, 
+            color: (subtitleFontColor != null) ? subtitleFontColor: Colors.white)
+            )
       ]
       ),
     );
