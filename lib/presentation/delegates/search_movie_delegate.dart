@@ -96,10 +96,10 @@ class SearchMovieDelegate extends SearchDelegate<ItemEntity?> {
       close(context, null);
     }, icon: Icon(
             kIsWeb
-            ? Icons.arrow_back_outlined  // No modifica el ícono si es Web
+            ? Icons.arrow_back_outlined 
             : Platform.isAndroid
-                ? Icons.arrow_back_outlined  // Modifica el ícono solo si no es Web y es Android
-                : Icons.arrow_back_ios,  // Modifica el ícono solo si no es Web y no es Android
+                ? Icons.arrow_back_outlined
+                : Icons.arrow_back_ios, 
       ),
     );
   }

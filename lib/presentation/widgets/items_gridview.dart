@@ -52,7 +52,7 @@ class _ItemsGridViewState extends State<ItemsGridView> {
             controller: scrollController,
             mainAxisSpacing: 3,
             crossAxisSpacing: 3,
-            crossAxisCount: kIsWeb ? 6 : (landscape ? 5 : 3),
+            crossAxisCount: landscape ? 6 : 3,
             childAspectRatio: 0.7,
             children: [
               ...widget.items.map((movie) => MoviePoster(movie: movie))
