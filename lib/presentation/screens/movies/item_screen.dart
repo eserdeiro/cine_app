@@ -64,8 +64,7 @@ class CustomSliverAppBarState extends ConsumerState<CustomSliverAppBar> {
     final isFavoriteFutureProvider =
         ref.watch(isFavoriteProvider(widget.item.id));
     final size = MediaQuery.of(context).size;
-    final bool landscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    final bool landscape = size.width > 600;
 
     return SliverAppBar(
       leading: IconButton(onPressed: () {
@@ -149,8 +148,8 @@ class _ItemDetails extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final bool landscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+        final size = MediaQuery.of(context).size;
+    final bool landscape = size.width > 600;
     final cast = ref.watch(castByItemProvider);
     final crew = ref.watch(crewByItemProvider);
     final bool castIsNotEmpty = cast.values.any((list) => list.isNotEmpty);

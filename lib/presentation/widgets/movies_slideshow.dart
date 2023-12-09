@@ -14,8 +14,8 @@ class MoviesSlideshow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-    final bool landscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+        final size = MediaQuery.of(context).size;
+    final bool landscape = size.width > 600;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

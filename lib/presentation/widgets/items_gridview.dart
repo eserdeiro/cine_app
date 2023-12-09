@@ -40,8 +40,8 @@ class _ItemsGridViewState extends State<ItemsGridView> {
 
   @override
   Widget build(BuildContext context) {
-    final bool landscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+        final size = MediaQuery.of(context).size;
+    final bool landscape = size.width > 600;
     final titleStyle = Theme.of(context).textTheme;
    if (widget.items.isNotEmpty) {
     return Column(

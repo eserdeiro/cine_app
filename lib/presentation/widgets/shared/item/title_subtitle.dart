@@ -24,19 +24,23 @@ class TitleSubtitle extends StatelessWidget {
       padding: const EdgeInsets.only(top: 10),
       child: Row(
         children: [
-        if (title != null) Text(title!, style: TextStyle(
-          fontSize:(titleFontSize != null) ? titleFontSize: 18,  
-          fontWeight: (titleFontWeight != null) ? titleFontWeight: FontWeight.w600,)
-          ),
-
+        if (title != null) Expanded(
+          child: Text(title!,maxLines: 1,style: TextStyle(
+            fontSize:(titleFontSize != null) ? titleFontSize: 18,  
+            fontWeight: (titleFontWeight != null) ? titleFontWeight: FontWeight.w600, overflow: TextOverflow.ellipsis)
+            ),
+        ),
+      
         const Spacer(),
-
+      
         if (subtitle != null)
-          Text(subtitle!, style: TextStyle(
-            fontSize: (subtitleFontSize != null) ? subtitleFontSize: 14 ,
-            fontWeight: FontWeight.w400, 
-            color: (subtitleFontColor != null) ? subtitleFontColor: Colors.white )
-            )
+          Expanded(
+            child: Text(subtitle!, style: TextStyle(
+              fontSize: (subtitleFontSize != null) ? subtitleFontSize: 14 ,
+              fontWeight: FontWeight.w400, 
+              color: (subtitleFontColor != null) ? subtitleFontColor: Colors.white, overflow: TextOverflow.ellipsis )
+              ),
+          )
       ]
       ),
     );
