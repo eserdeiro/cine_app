@@ -46,6 +46,8 @@ flutter_native_splash:
   android_12:
     color: "#1f1d2b"
   web: false
+  ios: true 
+  image_ios: lib/assets/icon/icon.png
 # image_web: lib/assets/icon/icon.png
 #flutter pub run flutter_native_splash:create
 flutter:

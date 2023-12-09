@@ -1,8 +1,15 @@
 # Preview
 
+## Android
 <img src="https://raw.githubusercontent.com/eserdeiro/cine_app/main/lib/assets/images/one.png" width="30%"><img src="https://raw.githubusercontent.com/eserdeiro/cine_app/main/lib/assets/images/two.png" width="30%">
 
 <img src="https://raw.githubusercontent.com/eserdeiro/cine_app/main/lib/assets/images/three.png" width="30%"><img src="https://raw.githubusercontent.com/eserdeiro/cine_app/main/lib/assets/images/four.png" width="30%">
+
+## IOS
+
+<img src="https://raw.githubusercontent.com/eserdeiro/cine_app/main/lib/assets/images/one-ios.png" width="30%"><img src="https://raw.githubusercontent.com/eserdeiro/cine_app/main/lib/assets/images/two-ios.png" width="30%">
+
+<img src="https://raw.githubusercontent.com/eserdeiro/cine_app/main/lib/assets/images/three-ios.png" width="30%"><img src="https://raw.githubusercontent.com/eserdeiro/cine_app/main/lib/assets/images/four-ios.png" width="30%">
 
 # Getting Started
 
