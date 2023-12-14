@@ -39,14 +39,13 @@ flutter_launcher_icons:
   web:
     generate: true
     image_path: "lib/assets/icon/icon.png"
-  #flutter pub run flutter_launcher_icons    
-
+  #flutter pub run flutter_launcher_icons
 flutter_native_splash:
   color: "#1f1d2b"
   android_12:
     color: "#1f1d2b"
   web: false
-  ios: true 
+  ios: true
   image_ios: lib/assets/icon/icon.png
 # image_web: lib/assets/icon/icon.png
 #flutter pub run flutter_native_splash:create

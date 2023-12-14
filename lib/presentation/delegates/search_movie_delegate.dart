@@ -130,7 +130,7 @@ class SearchMovieDelegate extends SearchDelegate<ItemEntity?> {
             clearStreams();
             close(context, movie);
           });
-        //TODO add similar movies
+
       },
     );
   }
