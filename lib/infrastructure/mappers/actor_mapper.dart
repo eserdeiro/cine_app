@@ -1,5 +1,5 @@
 import 'package:cine_app/domain/entities/actor_entity.dart';
-import 'package:cine_app/infrastructure/models/models.dart';
+import 'package:cine_app/infrastructure/models/index.dart';
 
 class ActorMapper {
 
@@ -10,6 +10,6 @@ class ActorMapper {
      ? 'https://image.tmdb.org/t/p/w500/${cast.profilePath}' 
      : 'https://raw.githubusercontent.com/eserdeiro/cine_app/main/lib/assets/images/not-found.jpeg', 
     character: cast.character,
-    job: cast.job
+    job: cast.job,
     );
 }

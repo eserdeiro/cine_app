@@ -1,7 +1,7 @@
 class Strings {
-  static String appName    = "Cine App";
+  static String appName    = 'Cine App';
   static String initialLocation = '/home/0';
-  static String movieRoute = "/home/0/movie/";
+  static String movieRoute = '/home/0/movie/';
   static String nowPlaying = 'Now Playing';
   static String popular   = 'Popular';
   static String upcoming  = 'Upcoming';

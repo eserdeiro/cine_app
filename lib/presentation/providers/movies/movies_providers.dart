@@ -9,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final nowPlayingMoviesProvider = StateNotifierProvider<MoviesNotifier, List<ItemEntity>>((ref) {
   final fetchMoreMovies = ref.watch(movieRepositoryProvider).getNowPlaying;
   return MoviesNotifier(
-    fetchMoreMovies: fetchMoreMovies
+    fetchMoreMovies: fetchMoreMovies,
   );
 });
 
@@ -17,7 +17,7 @@ final nowPlayingMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Item
 final popularMoviesProvider = StateNotifierProvider<MoviesNotifier, List<ItemEntity>>((ref) {
   final fetchMoreMovies = ref.watch(movieRepositoryProvider).getPopular;
   return MoviesNotifier(
-    fetchMoreMovies: fetchMoreMovies
+    fetchMoreMovies: fetchMoreMovies,
   );
 });
 
@@ -25,7 +25,7 @@ final popularMoviesProvider = StateNotifierProvider<MoviesNotifier, List<ItemEnt
 final upcomingMoviesProvider = StateNotifierProvider<MoviesNotifier, List<ItemEntity>>((ref) {
   final fetchMoreMovies = ref.watch(movieRepositoryProvider).getUpcoming;
   return MoviesNotifier(
-    fetchMoreMovies: fetchMoreMovies
+    fetchMoreMovies: fetchMoreMovies,
   );
 });
 
@@ -33,7 +33,7 @@ final upcomingMoviesProvider = StateNotifierProvider<MoviesNotifier, List<ItemEn
 final topRatedMoviesProvider = StateNotifierProvider<MoviesNotifier, List<ItemEntity>>((ref) {
   final fetchMoreMovies = ref.watch(movieRepositoryProvider).getTopRated;
   return MoviesNotifier(
-    fetchMoreMovies: fetchMoreMovies
+    fetchMoreMovies: fetchMoreMovies,
   );
 });
 
@@ -46,7 +46,7 @@ class MoviesNotifier extends StateNotifier<List<ItemEntity>>{
   MovieCallback fetchMoreMovies;
 
   MoviesNotifier({
-    required this.fetchMoreMovies
+    required this.fetchMoreMovies,
     }) : super([]);
   
   Future<void> loadNextPage() async {
@@ -54,7 +54,7 @@ class MoviesNotifier extends StateNotifier<List<ItemEntity>>{
 
     isLoading = true;
     currentPage++;
-    final List<ItemEntity> movies = await fetchMoreMovies(page: currentPage);
+    final movies = await fetchMoreMovies(page: currentPage);
     state = [...state, ...movies];
     await Future.delayed(const Duration(milliseconds: 300));
     isLoading = false;

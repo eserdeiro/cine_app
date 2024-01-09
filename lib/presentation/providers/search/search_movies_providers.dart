@@ -10,7 +10,7 @@ final movieRepository= ref.read(movieRepositoryProvider);
  
   return SearchedMoviesNotifier(
     searchMovies: movieRepository.searchMoviesByQuery, 
-    ref: ref);
+    ref: ref,);
 });
 
 typedef SearchMoviesCallback = Future<List<ItemEntity>> Function(String query);
@@ -21,11 +21,11 @@ class SearchedMoviesNotifier extends StateNotifier<List<ItemEntity>> {
   final Ref ref;
   SearchedMoviesNotifier({
     required this.searchMovies,
-    required this.ref
+    required this.ref,
   }): super([]);
   
   Future<List<ItemEntity>> searchMoviesByQuery(String query) async{
-      final List<ItemEntity> movies = await searchMovies(query);
+      final movies = await searchMovies(query);
       ref.read(searchMoviesQueryProvider.notifier).update((state) => query);
         state = movies;
       return movies;

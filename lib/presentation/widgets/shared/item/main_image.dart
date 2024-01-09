@@ -5,8 +5,9 @@ class MainImageItem extends StatelessWidget {
   final String imagePath;
   final double height;
   const MainImageItem({
+    required this.imagePath,
+    required this.height,
     super.key,
-    required this.imagePath, required this.height,
   });
 
   @override
@@ -14,11 +15,14 @@ class MainImageItem extends StatelessWidget {
     return ClipRRect(
       borderRadius: const BorderRadius.all(Radius.circular(10)),
       child: SizedBox(
-        child: Image.network(imagePath, height: height,
-            loadingBuilder: (context, child, loadingProgress) {
-          if (loadingProgress != null) return const SizedBox();
-          return FadeIn(child: child);
-        }),
+        child: Image.network(
+          imagePath,
+          height: height,
+          loadingBuilder: (context, child, loadingProgress) {
+            if (loadingProgress != null) return const SizedBox();
+            return FadeIn(child: child);
+          },
+        ),
       ),
     );
   }

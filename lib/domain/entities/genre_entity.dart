@@ -1,9 +1,9 @@
-class GenreEntity { 
-final int id;
-final String name; 
-
+class GenreEntity {
   GenreEntity({
-    required this.id, 
-    required this.name
-    });
+    required this.id,
+    required this.name,
+  });
+  
+  final int id;
+  final String name;
 }

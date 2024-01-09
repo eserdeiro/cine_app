@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/presentation/widgets/shared/movie_poster.dart';
+import 'package:flutter/material.dart';
 
 class ItemsGridView extends StatefulWidget {
   final String? text;
   final List<ItemEntity> items;
   final VoidCallback? loadNextPage;
 
-  const ItemsGridView({super.key, required this.items, this.loadNextPage, this.text = ''});
+  const ItemsGridView({required this.items, super.key, this.loadNextPage, this.text = ''});
 
   @override
   State<ItemsGridView> createState() => _ItemsGridViewState();
@@ -40,7 +40,7 @@ class _ItemsGridViewState extends State<ItemsGridView> {
   @override
   Widget build(BuildContext context) {
         final size = MediaQuery.of(context).size;
-    final bool landscape = size.width > 600;
+    final landscape = size.width > 600;
     final titleStyle = Theme.of(context).textTheme;
    if (widget.items.isNotEmpty) {
     return Column(
@@ -54,7 +54,7 @@ class _ItemsGridViewState extends State<ItemsGridView> {
             crossAxisCount: landscape ? 6 : 3,
             childAspectRatio: 0.7,
             children: [
-              ...widget.items.map((movie) => MoviePoster(movie: movie))
+              ...widget.items.map((movie) => MoviePoster(movie: movie)),
             ],
           ),
         ),

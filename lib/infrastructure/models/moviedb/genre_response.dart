@@ -12,11 +12,11 @@ class GenreResponse {
     });
 
     factory GenreResponse.fromJson(Map<String, dynamic> json) => GenreResponse(
-        genres: List<GenreFromMovieDb>.from(json["genres"].map((x) => GenreFromMovieDb.fromJson(x))),
+        genres: List<GenreFromMovieDb>.from(json['genres'].map((x) => GenreFromMovieDb.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
-        "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
+        'genres': List<dynamic>.from(genres.map((x) => x.toJson())),
     };
 }
 
@@ -30,12 +30,12 @@ class GenreFromMovieDb {
     });
 
     factory GenreFromMovieDb.fromJson(Map<String, dynamic> json) => GenreFromMovieDb(
-        id: json["id"],
-        name: json["name"],
+        id: json['id'],
+        name: json['name'],
     );
 
     Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
+        'id': id,
+        'name': name,
     };
 }

@@ -1,6 +1,6 @@
 import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/domain/repository/local_database_repository.dart';
-import 'package:cine_app/presentation/providers/providers.dart';
+import 'package:cine_app/presentation/providers/index.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final favoriteItemsProvider = StateNotifierProvider<DatabaseItemsNotifier, Map<int, ItemEntity>>((ref) {
@@ -35,7 +35,7 @@ class DatabaseItemsNotifier extends StateNotifier<Map<int, ItemEntity>>{
 
   Future<void> toggleFavorite(ItemEntity item) async{
     await localDatabaseRepository.toggleFavorite(item);
-    final bool isItemInFavorites = state[item.id] != null;
+    final isItemInFavorites = state[item.id] != null;
 
     if(isItemInFavorites){
       state.remove(item.id);

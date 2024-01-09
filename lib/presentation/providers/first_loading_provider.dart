@@ -1,4 +1,4 @@
-import 'package:cine_app/presentation/providers/providers.dart';
+import 'package:cine_app/presentation/providers/index.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //when all providers load, return '', & the fullscreen loader closes

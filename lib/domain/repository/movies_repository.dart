@@ -13,4 +13,5 @@ abstract class MoviesRepository {
   Future<ItemEntity> getMovieById(String id);
 
   Future<List<ItemEntity>> searchMoviesByQuery(String query);
+  
 }

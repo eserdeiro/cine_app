@@ -1,5 +1,5 @@
 import 'package:cine_app/domain/entities/actor_entity.dart';
-import 'package:cine_app/presentation/providers/providers.dart';
+import 'package:cine_app/presentation/providers/index.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final castByItemProvider = StateNotifierProvider<ActorsByItemNotifier, Map<String, List<ActorEntity>>>((ref) {
@@ -21,7 +21,7 @@ class ActorsByItemNotifier extends StateNotifier<Map<String, List<ActorEntity>>>
   final GetActorsCallback getActors;
 //  Maps each movie and maintains the cache in memory 
   ActorsByItemNotifier({
-      required this.getActors
+      required this.getActors,
       }) : super({});
 
   Future<void> loadActors(String itemId) async{

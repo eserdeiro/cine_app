@@ -1,11 +1,27 @@
-
 import 'package:hive/hive.dart';
 
 part 'item_entity.g.dart';
+
 //@collection
 @HiveType(typeId: 1)
 class ItemEntity {
-  //Id? isarId = Isar.autoIncrement;
+  ItemEntity({
+    required this.adult,
+    required this.backdropPath,
+    required this.genreIds,
+    required this.id,
+    required this.originalLanguage,
+    required this.originalTitle,
+    required this.overview,
+    required this.popularity,
+    required this.posterPath,
+    required this.releaseDate,
+    required this.title,
+    required this.video,
+    required this.voteAverage,
+    required this.voteCount,
+  });
+
   @HiveField(0)
   final bool adult;
   @HiveField(1)
@@ -34,21 +50,4 @@ class ItemEntity {
   final double voteAverage;
   @HiveField(13)
   final int voteCount;
-
-  ItemEntity({
-    required this.adult,
-    required this.backdropPath,
-    required this.genreIds,
-    required this.id,
-    required this.originalLanguage,
-    required this.originalTitle,
-    required this.overview,
-    required this.popularity,
-    required this.posterPath,
-    required this.releaseDate,
-    required this.title,
-    required this.video,
-    required this.voteAverage,
-    required this.voteCount
-  });
 }

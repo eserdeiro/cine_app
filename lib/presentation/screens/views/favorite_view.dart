@@ -1,7 +1,7 @@
+import 'package:cine_app/presentation/providers/index.dart';
+import 'package:cine_app/presentation/widgets/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:cine_app/presentation/providers/providers.dart';
-import 'package:cine_app/presentation/widgets/widgets.dart';
 
 class FavoriteView extends ConsumerStatefulWidget {
   const FavoriteView({super.key});
@@ -21,7 +21,7 @@ class FavoriteViewState extends ConsumerState<FavoriteView> with AutomaticKeepAl
      loadNextPage();
     }
 
-  void loadNextPage() async{
+  Future<void> loadNextPage() async{
     if(isLoading || isLastPage) return;
     isLoading = true; 
 
@@ -47,7 +47,7 @@ class FavoriteViewState extends ConsumerState<FavoriteView> with AutomaticKeepAl
       body: ItemsGridView(
         items: favoriteMovies,
         loadNextPage: loadNextPage,
-        text: 'No movies :(')
+        text: 'No movies :(',),
     );
   }
   

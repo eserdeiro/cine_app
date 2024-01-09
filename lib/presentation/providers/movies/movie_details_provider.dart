@@ -1,5 +1,5 @@
 import 'package:cine_app/domain/entities/item_entity.dart';
-import 'package:cine_app/presentation/providers/providers.dart';
+import 'package:cine_app/presentation/providers/index.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final movieDetailProvider = StateNotifierProvider<MovieMapNotifier,Map<String, ItemEntity>>((ref) {
@@ -15,7 +15,7 @@ class MovieMapNotifier extends StateNotifier<Map<String, ItemEntity>>{
   final GetMovieCallback getMovieDetail;
 //  Maps each movie and maintains the cache in memory 
   MovieMapNotifier({
-      required this.getMovieDetail
+      required this.getMovieDetail,
       }) : super({});
 
   Future<void> loadMovie(String movieId) async{

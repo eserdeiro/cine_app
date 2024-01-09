@@ -1,19 +1,19 @@
 import 'dart:io';
 
 import 'package:animate_do/animate_do.dart';
-import 'package:cine_app/presentation/widgets/widgets.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:cine_app/domain/entities/item_entity.dart';
+import 'package:cine_app/presentation/providers/index.dart';
+import 'package:cine_app/presentation/widgets/index.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:cine_app/domain/entities/item_entity.dart';
-import 'package:cine_app/presentation/providers/providers.dart';
 
 class ItemScreen extends ConsumerStatefulWidget {
   final String itemId;
   static const name = 'item_screen';
 
-  const ItemScreen({super.key, required this.itemId});
+  const ItemScreen({required this.itemId, super.key});
 
   @override
   ItemScreenState createState() => ItemScreenState();
@@ -30,10 +30,10 @@ class ItemScreenState extends ConsumerState<ItemScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final ItemEntity? item = ref.watch(movieDetailProvider)[widget.itemId];
+    final item = ref.watch(movieDetailProvider)[widget.itemId];
     if (item == null) {
       return const Scaffold(
-          body: Center(child: CircularProgressIndicator(strokeWidth: 3)));
+          body: Center(child: CircularProgressIndicator(strokeWidth: 3)),);
     }
     return Scaffold(
       body: CustomScrollView(
@@ -43,7 +43,7 @@ class ItemScreenState extends ConsumerState<ItemScreen> {
           SliverList(
               delegate: SliverChildBuilderDelegate(
                   (context, index) => _ItemDetails(item: item),
-                  childCount: 1))
+                  childCount: 1,),),
         ],
       ),
     );
@@ -52,7 +52,7 @@ class ItemScreenState extends ConsumerState<ItemScreen> {
 
 class CustomSliverAppBar extends ConsumerStatefulWidget {
   final ItemEntity item;
-  const CustomSliverAppBar({super.key, required this.item});
+  const CustomSliverAppBar({required this.item, super.key});
 
   @override
   CustomSliverAppBarState createState() => CustomSliverAppBarState();
@@ -64,7 +64,7 @@ class CustomSliverAppBarState extends ConsumerState<CustomSliverAppBar> {
     final isFavoriteFutureProvider =
         ref.watch(isFavoriteProvider(widget.item.id));
     final size = MediaQuery.of(context).size;
-    final bool landscape = size.width > 600;
+    final landscape = size.width > 600;
 
     return SliverAppBar(
       leading: IconButton(onPressed: () {
@@ -95,17 +95,17 @@ class CustomSliverAppBarState extends ConsumerState<CustomSliverAppBar> {
                 data: (isFavorite) {
                   return isFavorite
                       ? const Icon(Icons.favorite_border_outlined,
-                          color: Colors.red)
+                          color: Colors.red,)
                       : const Icon(Icons.favorite_border_outlined);
                 },
                 error: (_, __) => const Icon(Icons.cancel_outlined),
                 loading: () =>
-                    SpinPerfect(child: const Icon(Icons.refresh_outlined))))
+                    SpinPerfect(child: const Icon(Icons.refresh_outlined)),),),
       ],
 
       flexibleSpace: FlexibleSpaceBar(
         background: LayoutBuilder(builder: (context, constraints) {
-           double availableHeight = constraints.biggest.height;
+           final availableHeight = constraints.biggest.height;
 
           return Stack(
           children: [
@@ -113,11 +113,10 @@ class CustomSliverAppBarState extends ConsumerState<CustomSliverAppBar> {
           BackgroundImageItem(
               imagePath: landscape
                   ? widget.item.backdropPath
-                  : widget.item.posterPath),
+                  : widget.item.posterPath,),
 
           //Center image
           Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
 
@@ -141,9 +140,9 @@ class CustomSliverAppBarState extends ConsumerState<CustomSliverAppBar> {
                 VoteAvergateItem(voteAverage: widget.item.voteAverage),
               ],
             ),
-          ]);
+          ],);
         },
-      )),
+      ),),
     );
   }
 }
@@ -153,13 +152,13 @@ class _ItemDetails extends ConsumerWidget {
   const _ItemDetails({required this.item});
 
   @override
-  Widget build(BuildContext context, ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
         final size = MediaQuery.of(context).size;
-    final bool landscape = size.width > 600;
+    final landscape = size.width > 600;
     final cast = ref.watch(castByItemProvider);
     final crew = ref.watch(crewByItemProvider);
-    final bool castIsNotEmpty = cast.values.any((list) => list.isNotEmpty);
-    final bool crewIsNotEmpty = crew.values.any((list) => list.isNotEmpty);
+    final castIsNotEmpty = cast.values.any((list) => list.isNotEmpty);
+    final crewIsNotEmpty = crew.values.any((list) => list.isNotEmpty);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -172,22 +171,22 @@ class _ItemDetails extends ConsumerWidget {
                 children: [
 
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8),
                     child: MainImageItem(imagePath: item.posterPath, height: 200),
                   ),
 
                   Expanded(
                       child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8),
                     child: Column(
                       children: [
                           const TitleSubtitle(
-                              title: 'Overview', horizontalPadding: 0),
+                              title: 'Overview', horizontalPadding: 0,),
                         const SizedBox(width: 10),
                         Text(item.overview),
                       ],
                     ),
-                  ))
+                  ),),
 
                 ],
               );
@@ -219,7 +218,7 @@ class _ItemDetails extends ConsumerWidget {
           const TitleSubtitle(title: 'Crew', horizontalPadding: 0),
         ActorsByItem(itemId: item.id.toString(), actorsByItem: crew),
         const SizedBox(height: 50),
-      ]),
+      ],),
     );
   }
 }

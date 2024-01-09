@@ -1,23 +1,24 @@
+import 'package:cine_app/domain/entities/actor_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:cine_app/domain/entities/actor_entity.dart';
 
 
 class ActorsByItem extends ConsumerWidget {
   final String itemId;
   final Map<String, List<ActorEntity>> actorsByItem;
   const ActorsByItem({
-    super.key, 
     required this.itemId, 
-    required this.actorsByItem});
+    required this.actorsByItem,
+    super.key, 
+    });
 
   @override
-  Widget build(BuildContext context, ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // if has no data, show circularprogress
     if (actorsByItem[itemId] == null) {
       return const SizedBox(
           height: 65,
-          child: Center(child: CircularProgressIndicator(strokeWidth: 3)));
+          child: Center(child: CircularProgressIndicator(strokeWidth: 3)),);
     }
 
     final actors = actorsByItem[itemId]!;
@@ -29,7 +30,7 @@ class ActorsByItem extends ConsumerWidget {
         itemBuilder: (context, index) {
           final actor = actors[index];
           return Container(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -38,7 +39,7 @@ class ActorsByItem extends ConsumerWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(50),
                   child: Image.network(actor.profilePath,
-                      height: 50, width: 50,  fit: BoxFit.cover),
+                      height: 50, width: 50,  fit: BoxFit.cover,),
                 ),
 
                 //Name
@@ -50,15 +51,15 @@ class ActorsByItem extends ConsumerWidget {
                     children: [
                       Text(actor.name,
                        style: const TextStyle(
-                         fontWeight: FontWeight.w600)),
+                         fontWeight: FontWeight.w600,),),
                       const SizedBox(height: 5),
                       
                       //Actor character, if null, show job.
                       Text((actor.character == null) ? actor.job! : actor.character! ,
                           maxLines: 1,
                           style: const TextStyle(
-                            fontSize: 12, overflow: TextOverflow.ellipsis
-                      )),
+                            fontSize: 12, overflow: TextOverflow.ellipsis,
+                      ),),
                       
                     ],
                   ),

@@ -1,9 +1,7 @@
-
-
 import 'package:cine_app/domain/entities/genre_entity.dart';
 
 abstract class GenresRepository {
 
-   Future<List<GenreEntity>> getGenres ();
-
+  Future<List<GenreEntity>> getGenres();
+  
 }

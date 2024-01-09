@@ -7,22 +7,20 @@ class Formats {
     final formattedNumber = NumberFormat.compactCurrency(
       decimalDigits: decimalDigits,
       symbol: '',
-      locale: 'en'
+      locale: 'en',
     ).format(number);
     return formattedNumber;
   }
 
 static String genreIdsToNames(List<String> itemGenreIds, List<GenreEntity> genresProvider) {
-    List<GenreEntity> matchingGenres = genresProvider
+    final matchingGenres = genresProvider
         .where((genre) => itemGenreIds.contains(genre.id.toString()))
         .toList();
 
-    List<String> genreNames = matchingGenres.map((genre) => genre.name).toList();
+    final genreNames = matchingGenres.map((genre) => genre.name).toList();
 
     return genreNames.join(', ');
     
   }
 
 }
-
-

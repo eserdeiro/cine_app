@@ -1,13 +1,13 @@
-import 'package:cine_app/presentation/screens/views.dart';
+import 'package:cine_app/presentation/screens/views/index.dart';
+import 'package:cine_app/presentation/widgets/index.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:cine_app/presentation/widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
-  static const name = "home-screen";
+  static const name = 'home-screen';
   final int page;
 
-  const HomeScreen({super.key, required this.page});
+  const HomeScreen({required this.page, super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMixin{
   final viewRoutes = const[
     HomeView(),
-    FavoriteView()
+    FavoriteView(),
   ];
 
  late PageController pageController;
@@ -24,9 +24,7 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
   @override
   void initState() {
     super.initState();
-    pageController = PageController(
-      keepPage: true
-    );
+    pageController = PageController();
   }
 
   @override
@@ -44,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
       pageController.animateToPage(
         widget.page, 
         curve: Curves.easeInOut, 
-        duration: const Duration( milliseconds: 250)
+        duration: const Duration( milliseconds: 250),
       );
     }
     

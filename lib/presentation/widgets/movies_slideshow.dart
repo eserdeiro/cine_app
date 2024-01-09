@@ -1,21 +1,22 @@
-import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:cine_app/config/constants/strings.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
-import 'package:cine_app/presentation/widgets/widgets.dart';
+import 'package:cine_app/presentation/widgets/index.dart';
+import 'package:flutter/material.dart';
 
 class MoviesSlideshow extends StatelessWidget {
   final List<ItemEntity> movies;
   const MoviesSlideshow({
+    required this.movies,
     super.key,
-    required this.movies});
+  });
 
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
         final size = MediaQuery.of(context).size;
-    final bool landscape = size.width > 600;
+    final landscape = size.width > 600;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -31,11 +32,11 @@ class MoviesSlideshow extends StatelessWidget {
             scale: landscape ? 0.4 : 0.8,
             autoplay: true,
             pagination: SwiperPagination(
-              margin: const EdgeInsets.only(top: 0),
+              margin: const EdgeInsets.only(top: 1),
               builder: DotSwiperPaginationBuilder(
                 activeColor: colors.primary,
-                color: colors.secondary
-              )
+                color: colors.secondary,
+              ),
             ),
             itemCount: movies.length,
             itemBuilder: (context, index) {
@@ -57,15 +58,15 @@ class _Slide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    var decorationBackground = BoxDecoration(
+    final decorationBackground = BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         boxShadow: const [
           BoxShadow(
             color: Colors.black26,
             blurRadius: 10,
             offset: Offset(0, 15),
-          )
-        ]);
+          ),
+        ],);
 
     return Padding(
         padding: const EdgeInsets.only(bottom: 30),
@@ -85,7 +86,6 @@ class _Slide extends StatelessWidget {
               },
             ),
           ),
-        ));
+        ),);
   }
 }
-

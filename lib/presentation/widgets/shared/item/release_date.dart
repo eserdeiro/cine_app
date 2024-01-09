@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 class ReleaseDate extends StatelessWidget {
   final DateTime? releaseDate;
   const ReleaseDate({
-    super.key, 
-    required this.releaseDate,
+    required this.releaseDate, super.key,
   });
 
   @override

@@ -1,5 +1,5 @@
 import 'package:cine_app/domain/entities/item_entity.dart';
-import 'package:cine_app/presentation/providers/providers.dart';
+import 'package:cine_app/presentation/providers/index.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final moviesSlideshowProvider = Provider<List<ItemEntity>>((ref) {

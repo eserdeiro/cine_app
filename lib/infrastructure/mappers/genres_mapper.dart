@@ -7,4 +7,5 @@ class GenresMapper {
     id: genre.id, 
     name: genre.name, 
     );
+    
 }

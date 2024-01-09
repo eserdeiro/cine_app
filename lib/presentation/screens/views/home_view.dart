@@ -1,10 +1,10 @@
+import 'package:cine_app/config/constants/strings.dart';
+import 'package:cine_app/presentation/providers/index.dart';
+import 'package:cine_app/presentation/widgets/index.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:cine_app/config/constants/strings.dart';
-import 'package:cine_app/presentation/providers/providers.dart';
-import 'package:cine_app/presentation/widgets/widgets.dart';
 
 class HomeView extends ConsumerStatefulWidget {
   const HomeView({super.key});
@@ -105,7 +105,10 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
               ),
             ],
           );
-        }, childCount: 1))
+        },
+            childCount: 1,
+          ),
+        ),
       ],
     );
   }
