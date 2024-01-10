@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:animate_do/animate_do.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/presentation/providers/index.dart';
+import 'package:cine_app/presentation/providers/show_all_provider.dart';
 import 'package:cine_app/presentation/widgets/index.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -166,12 +167,14 @@ class _ItemDetails extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
-
+    
+  //final showAll = ref.watch(itemDetailsControllerProvider);
     final size = MediaQuery.of(context).size;
     final landscape = size.width > 600;
     final cast = ref.watch(castByItemProvider);
     final crew = ref.watch(crewByItemProvider);
+    final castShowAll = ref.watch(castControllerProvider);
+    final crewShowAll = ref.watch(crewControllerProvider);
     final castIsNotEmpty = cast.values.any((list) => list.isNotEmpty);
     final crewIsNotEmpty = crew.values.any((list) => list.isNotEmpty);
     return Padding(
@@ -235,27 +238,29 @@ class _ItemDetails extends ConsumerWidget {
               horizontalPadding: 0,
               subtitle: 'Show all',
               onTapSubtitle: () {
-            // Cambiar el estado de showAll cuando se toque el subtítulo
-              
+              ref.read(castControllerProvider.notifier).toggleShowAll();
               },
             ),
           ActorsByItem(
             itemId: item.id.toString(),
             actorsByItem: cast,
-            showAll: false,
+            showAll: castShowAll,
           ),
 
           //Crew view
           if (crewIsNotEmpty)
-            const TitleSubtitle(
+            TitleSubtitle(
               title: 'Crew',
               horizontalPadding: 0,
               subtitle: 'Show all',
+              onTapSubtitle: () {
+               ref.read(crewControllerProvider.notifier).toggleShowAll();
+              },
             ),
           ActorsByItem(
             itemId: item.id.toString(),
             actorsByItem: crew,
-            showAll: false,
+            showAll: crewShowAll,
           ),
           const SizedBox(height: 50),
         ],
