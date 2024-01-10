@@ -207,7 +207,9 @@ class _ItemDetails extends ConsumerWidget {
         //Actors
         //Cast view
         if (castIsNotEmpty)
-          const TitleSubtitle(title: 'Cast', horizontalPadding: 0),
+           TitleSubtitle(title: 'Cast', horizontalPadding: 0, subtitle: 'Show all', onTapSubtitle: () {
+            print('hola xd');
+          },),
         ActorsByItem(
           itemId: item.id.toString(),
           actorsByItem: cast,

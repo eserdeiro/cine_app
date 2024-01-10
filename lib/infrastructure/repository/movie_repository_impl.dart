@@ -2,40 +2,41 @@ import 'package:cine_app/domain/datasources/movies_datasource.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/domain/repository/movies_repository.dart';
 
+typedef FutureListItemEntity = Future<List<ItemEntity>>;
+typedef FutureItemEntity = Future<ItemEntity>;
+
 class MovieRepositoryImpl extends MoviesRepository {
+  final MoviesDataSource datasource;
 
-      final MoviesDataSource datasource;
-
-  MovieRepositoryImpl({required this.datasource}); 
+  MovieRepositoryImpl({required this.datasource});
 
   @override
-  Future<List<ItemEntity>> getNowPlaying({int page = 1}) {
+  FutureListItemEntity getNowPlaying({int page = 1}) {
     return datasource.getNowPlaying(page: page);
   }
-  
+
   @override
-  Future<List<ItemEntity>> getPopular({int page = 1}) {
+  FutureListItemEntity getPopular({int page = 1}) {
     return datasource.getPopular(page: page);
   }
-  
-   @override
-  Future<List<ItemEntity>> getUpcoming({int page = 1}) {
+
+  @override
+  FutureListItemEntity getUpcoming({int page = 1}) {
     return datasource.getUpcoming(page: page);
   }
-  
+
   @override
-  Future<List<ItemEntity>> getTopRated({int page = 1}) {
+  FutureListItemEntity getTopRated({int page = 1}) {
     return datasource.getTopRated(page: page);
   }
-  
+
   @override
-  Future<ItemEntity> getMovieById(String id) {
-    return datasource.getMovieById(id);
-  }
-  
-  @override
-  Future<List<ItemEntity>> searchMoviesByQuery(String query) {
+  FutureListItemEntity searchMoviesByQuery(String query) {
     return datasource.searchMoviesByQuery(query);
   }
 
+  @override
+  FutureItemEntity getMovieById(String id) {
+    return datasource.getMovieById(id);
+  }
 }

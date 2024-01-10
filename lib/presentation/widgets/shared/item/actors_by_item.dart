@@ -24,7 +24,8 @@ class ActorsByItem extends ConsumerWidget {
     final actors = actorsByItem[itemId]!;
     return SizedBox(
       height: 65,
-      child: ListView.builder(
+      child:
+       ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: actors.length,
         itemBuilder: (context, index) {

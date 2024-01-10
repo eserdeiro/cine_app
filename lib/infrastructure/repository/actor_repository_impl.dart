@@ -2,6 +2,8 @@ import 'package:cine_app/domain/datasources/actors_datasource.dart';
 import 'package:cine_app/domain/entities/actor_entity.dart';
 import 'package:cine_app/domain/repository/actors_repository.dart';
 
+typedef FutureListActorEntity = Future<List<ActorEntity>>;
+
 class ActorsRepositoryImpl extends ActorsRepository{
 
   final ActorsDatasource datasource;
@@ -9,12 +11,12 @@ class ActorsRepositoryImpl extends ActorsRepository{
   ActorsRepositoryImpl({required this.datasource});
 
   @override
-  Future<List<ActorEntity>> getCastByItem(String itemId) {
+  FutureListActorEntity getCastByItem(String itemId) {
     return datasource.getCastByItem(itemId);
   }
 
   @override
-  Future<List<ActorEntity>> getCrewByItem(String itemId) {
+  FutureListActorEntity getCrewByItem(String itemId) {
     return datasource.getCrewByItem(itemId);
   }
   

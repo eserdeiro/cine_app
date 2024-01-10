@@ -1,48 +1,39 @@
-import 'package:cine_app/config/constants/environment.dart';
+import 'package:cine_app/config/helpers/api_provider.dart';
 import 'package:cine_app/domain/datasources/actors_datasource.dart';
 import 'package:cine_app/domain/entities/actor_entity.dart';
-import 'package:cine_app/infrastructure/mappers/mappers.dart';
+import 'package:cine_app/infrastructure/mappers/index.dart';
 import 'package:cine_app/infrastructure/models/moviedb/credits_response.dart';
-import 'package:dio/dio.dart';
+
+typedef FutureListActorEntity = Future<List<ActorEntity>>;
 
 class ActorFromMovieDbDatasource extends ActorsDatasource {
-  final dio = Dio(
-    BaseOptions(
-      baseUrl: 'https://api.themoviedb.org/3',
-      queryParameters: {
-        'api_key': Enviroment.theMovieDbKey,
-        'language': 'es-ARG',
-      },
-    ),
-  );
+  final dio = ApiProvider.dio;
 
   @override
-  Future<List<ActorEntity>> getCastByItem(String itemId) async {
+  FutureListActorEntity getCastByItem(String itemId) async {
     final response = await dio.get('/movie/$itemId/credits');
-    //print('response ${response.data}');
+    
     final castResponse = CreditsResponse.fromJson(response.data);
 
-    //Crew also available
-    final actors = castResponse.cast
+    final cast = castResponse.cast
         .map(
           ActorMapper.castToEntity,
         )
         .toList();
-    return actors;
+    return cast;
   }
 
   @override
-  Future<List<ActorEntity>> getCrewByItem(String itemId) async {
+  FutureListActorEntity getCrewByItem(String itemId) async {
     final response = await dio.get('/movie/$itemId/credits');
-    //print('response ${response.data}');
+    
     final castResponse = CreditsResponse.fromJson(response.data);
 
-    //Crew also available
-    final actors = castResponse.crew
+    final crew = castResponse.crew
         .map(
           ActorMapper.castToEntity,
         )
         .toList();
-    return actors;
+    return crew;
   }
 }

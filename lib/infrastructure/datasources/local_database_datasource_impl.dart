@@ -11,11 +11,10 @@ class LocalDatabaseDataSourceImpl extends LocalDatabaseDatasource {
   late Future<Box<ItemEntity>> database;
 
   Future<Box<ItemEntity>> openDB() async {
-    //   final dir = await getApplicationCacheDirectory();
-    //   Hive.initFlutter(dir.path);
-
+    
     final box = await Hive.openBox<ItemEntity>('item_entity_box');
     return box;
+
   }
 
   //Check each item if it is favorite or not, by id

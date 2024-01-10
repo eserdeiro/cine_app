@@ -1,4 +1,5 @@
 import 'package:cine_app/config/helpers/formats.dart';
+import 'package:cine_app/config/helpers/genre_utils.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/presentation/providers/genres/genres_providers.dart';
 import 'package:cine_app/presentation/widgets/index.dart';
@@ -150,7 +151,7 @@ class _SlideState extends ConsumerState<_Slide> {
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 10, left: 5, right: 5, top: 5),
                   child: Text(
-                    Formats.genreIdsToNames(widget.movie.genreIds, genresData), 
+                    GenreUtils.genreIdsToNames(widget.movie.genreIds, genresData), 
                   overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 12),),
                 ),
               ),

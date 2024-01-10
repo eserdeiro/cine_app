@@ -8,6 +8,7 @@ class TitleSubtitle extends StatelessWidget {
   final double? subtitleFontSize;
   final Color? subtitleFontColor;
   final double? horizontalPadding;
+  final Function()? onTapSubtitle;
 
   const TitleSubtitle({
     super.key,
@@ -17,7 +18,8 @@ class TitleSubtitle extends StatelessWidget {
     this.subtitleFontSize,
     this.subtitleFontColor,
     this.titleFontWeight,
-    this.horizontalPadding,
+    this.horizontalPadding, 
+    this.onTapSubtitle,
   });
 
   @override
@@ -45,15 +47,18 @@ class TitleSubtitle extends StatelessWidget {
             ),
           const Spacer(),
           if (subtitle != null)
-            Text(
-              subtitle!,
-              textAlign: TextAlign.end,
-              style: TextStyle(
-                fontSize: (subtitleFontSize != null) ? subtitleFontSize : 14,
-                fontWeight: FontWeight.w400,
-                color: (subtitleFontColor != null)
-                    ? subtitleFontColor
-                    : Colors.white,
+            GestureDetector(
+              onTap: onTapSubtitle,
+              child: Text(
+                subtitle!,
+                textAlign: TextAlign.end,
+                style: TextStyle(
+                  fontSize: (subtitleFontSize != null) ? subtitleFontSize : 14,
+                  fontWeight: FontWeight.w400,
+                  color: (subtitleFontColor != null)
+                      ? subtitleFontColor
+                      : Colors.white,
+                ),
               ),
             ),
         ],
