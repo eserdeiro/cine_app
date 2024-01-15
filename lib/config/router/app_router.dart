@@ -1,5 +1,5 @@
 import 'package:cine_app/config/constants/strings.dart';
-import 'package:cine_app/presentation/screens/index.dart';
+import 'package:cine_app/presentation/screens/movies/index.dart';
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(
