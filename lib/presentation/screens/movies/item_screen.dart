@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:animate_do/animate_do.dart';
+import 'package:cine_app/config/constants/strings.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/presentation/providers/index.dart';
-import 'package:cine_app/presentation/providers/show_all_provider.dart';
 import 'package:cine_app/presentation/widgets/index.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +12,7 @@ import 'package:go_router/go_router.dart';
 
 class ItemScreen extends ConsumerStatefulWidget {
   final String itemId;
-  static const name = 'item_screen';
+  static String name = Strings.itemScreen;
 
   const ItemScreen({required this.itemId, super.key});
 
@@ -175,7 +175,6 @@ class _ItemDetails extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     
-  //final showAll = ref.watch(itemDetailsControllerProvider);
     final size = MediaQuery.of(context).size;
     final landscape = size.width > 600;
     final cast = ref.watch(castByItemProvider);
@@ -208,8 +207,8 @@ class _ItemDetails extends ConsumerWidget {
                         padding: const EdgeInsets.all(8),
                         child: Column(
                           children: [
-                            const TitleSubtitle(
-                              title: 'Overview',
+                            TitleSubtitle(
+                              title: Strings.overview,
                               horizontalPadding: 0,
                             ),
                             const SizedBox(width: 10),
@@ -225,8 +224,8 @@ class _ItemDetails extends ConsumerWidget {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const TitleSubtitle(
-                      title: 'Overview',
+                    TitleSubtitle(
+                      title: Strings.overview,
                       horizontalPadding: 0,
                     ),
                     const SizedBox(height: 10),
@@ -241,9 +240,10 @@ class _ItemDetails extends ConsumerWidget {
           //Cast view
           if (castIsNotEmpty)
             TitleSubtitle(
-              title: 'Cast',
+              title: Strings.cast,
               horizontalPadding: 0,
-              subtitle: castShowAll ? 'Hide all' : 'Show all',
+              subtitle: castShowAll ? Strings.hideAll : Strings.showAll,
+              subtitleFontColor: Colors.cyan,
               onTapSubtitle: () {
               ref.read(castControllerProvider.notifier).toggleShowAll();
               },
@@ -257,9 +257,10 @@ class _ItemDetails extends ConsumerWidget {
           //Crew view
           if (crewIsNotEmpty)
             TitleSubtitle(
-              title: 'Crew',
+              title: Strings.crew,
               horizontalPadding: 0,
-              subtitle: crewShowAll ? 'Hide all' : 'Show all', 
+              subtitle: crewShowAll ? Strings.hideAll : Strings.showAll, 
+              subtitleFontColor: Colors.cyan,
               onTapSubtitle: () {
                ref.read(crewControllerProvider.notifier).toggleShowAll();
               },

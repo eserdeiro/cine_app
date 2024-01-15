@@ -1,10 +1,11 @@
+import 'package:cine_app/config/constants/strings.dart';
 import 'package:cine_app/presentation/screens/views/index.dart';
 import 'package:cine_app/presentation/widgets/index.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
-  static const name = 'home-screen';
+  static String name = Strings.homeScreen;
   final int page;
 
   const HomeScreen({required this.page, super.key});

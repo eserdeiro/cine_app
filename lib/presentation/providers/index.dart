@@ -5,8 +5,10 @@ export 'package:cine_app/presentation/providers/database/local_database_provider
 export 'package:cine_app/presentation/providers/first_loading_provider.dart';
 export 'package:cine_app/presentation/providers/genres/genre_repository_provider.dart';
 export 'package:cine_app/presentation/providers/genres/genres_providers.dart';
+export 'package:cine_app/presentation/providers/load_notifier.dart';
 export 'package:cine_app/presentation/providers/movies/movie_details_provider.dart';
 export 'package:cine_app/presentation/providers/movies/movies_providers.dart';
 export 'package:cine_app/presentation/providers/movies/movies_repository_provider.dart';
 export 'package:cine_app/presentation/providers/movies/movies_slideshow_provider.dart';
 export 'package:cine_app/presentation/providers/search/search_movies_providers.dart';
+export 'package:cine_app/presentation/providers/show_all_provider.dart';

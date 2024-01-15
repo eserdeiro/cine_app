@@ -1,8 +1,10 @@
 import 'package:cine_app/domain/entities/actor_entity.dart';
 
+typedef FutureListActorEntity = Future<List<ActorEntity>>;
+
 abstract class ActorsDatasource {
 
-  Future<List<ActorEntity>> getCastByItem (String itemId);
+  FutureListActorEntity getCastByItem (String itemId);
 
-  Future<List<ActorEntity>> getCrewByItem (String itemId);
+  FutureListActorEntity getCrewByItem (String itemId);
 }

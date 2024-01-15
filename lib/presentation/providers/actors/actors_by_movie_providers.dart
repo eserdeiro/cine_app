@@ -1,6 +1,5 @@
 import 'package:cine_app/domain/entities/actor_entity.dart';
 import 'package:cine_app/presentation/providers/index.dart';
-import 'package:cine_app/presentation/providers/load_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final castByItemProvider =
