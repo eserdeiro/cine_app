@@ -24,9 +24,16 @@ class ItemScreenState extends ConsumerState<ItemScreen> {
   @override
   void initState() {
     super.initState();
-    ref.read(movieDetailProvider.notifier).loadMovie(widget.itemId);
-    ref.read(castByItemProvider.notifier).loadActors(widget.itemId);
-    ref.read(crewByItemProvider.notifier).loadActors(widget.itemId);
+
+    final providers = <dynamic>[
+      movieDetailProvider,
+      castByItemProvider,
+      crewByItemProvider,
+    ];
+
+    for (final provider in providers) {
+      ref.read(provider.notifier).load(widget.itemId);
+    }
   }
 
   @override
@@ -236,7 +243,7 @@ class _ItemDetails extends ConsumerWidget {
             TitleSubtitle(
               title: 'Cast',
               horizontalPadding: 0,
-              subtitle: 'Show all',
+              subtitle: castShowAll ? 'Hide all' : 'Show all',
               onTapSubtitle: () {
               ref.read(castControllerProvider.notifier).toggleShowAll();
               },
@@ -252,7 +259,7 @@ class _ItemDetails extends ConsumerWidget {
             TitleSubtitle(
               title: 'Crew',
               horizontalPadding: 0,
-              subtitle: 'Show all',
+              subtitle: crewShowAll ? 'Hide all' : 'Show all', 
               onTapSubtitle: () {
                ref.read(crewControllerProvider.notifier).toggleShowAll();
               },
