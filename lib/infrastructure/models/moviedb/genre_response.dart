@@ -5,14 +5,14 @@ GenreResponse castResponseFromJson(String str) => GenreResponse.fromJson(json.de
 String castResponseToJson(GenreResponse data) => json.encode(data.toJson());
 
 class GenreResponse {
-    final List<GenreFromMovieDb> genres;
+    final List<Genre> genres;
 
     GenreResponse({
         required this.genres,
     });
 
     factory GenreResponse.fromJson(Map<String, dynamic> json) => GenreResponse(
-        genres: List<GenreFromMovieDb>.from(json['genres'].map((x) => GenreFromMovieDb.fromJson(x))),
+        genres: List<Genre>.from(json['genres'].map((x) => Genre.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
@@ -20,16 +20,16 @@ class GenreResponse {
     };
 }
 
-class GenreFromMovieDb {
+class Genre {
     final int id;
     final String name;
 
-    GenreFromMovieDb({
+    Genre({
         required this.id,
         required this.name,
     });
 
-    factory GenreFromMovieDb.fromJson(Map<String, dynamic> json) => GenreFromMovieDb(
+    factory Genre.fromJson(Map<String, dynamic> json) => Genre(
         id: json['id'],
         name: json['name'],
     );
