@@ -174,7 +174,6 @@ class _ItemDetails extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    
     final size = MediaQuery.of(context).size;
     final landscape = size.width > 600;
     final cast = ref.watch(castByItemProvider);
@@ -245,7 +244,7 @@ class _ItemDetails extends ConsumerWidget {
               subtitle: castShowAll ? Strings.hideAll : Strings.showAll,
               subtitleFontColor: Colors.cyan,
               onTapSubtitle: () {
-              ref.read(castControllerProvider.notifier).toggleShowAll();
+                ref.read(castControllerProvider.notifier).toggleShowAll();
               },
             ),
           ActorsByItem(
@@ -259,10 +258,10 @@ class _ItemDetails extends ConsumerWidget {
             TitleSubtitle(
               title: Strings.crew,
               horizontalPadding: 0,
-              subtitle: crewShowAll ? Strings.hideAll : Strings.showAll, 
+              subtitle: crewShowAll ? Strings.hideAll : Strings.showAll,
               subtitleFontColor: Colors.cyan,
               onTapSubtitle: () {
-               ref.read(crewControllerProvider.notifier).toggleShowAll();
+                ref.read(crewControllerProvider.notifier).toggleShowAll();
               },
             ),
           ActorsByItem(

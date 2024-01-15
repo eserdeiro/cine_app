@@ -14,13 +14,14 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMixin{
-  final viewRoutes = const[
+class _HomeScreenState extends State<HomeScreen>
+    with AutomaticKeepAliveClientMixin {
+  final viewRoutes = const [
     HomeView(),
     FavoriteView(),
   ];
 
- late PageController pageController;
+  late PageController pageController;
 
   @override
   void initState() {
@@ -30,25 +31,24 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
 
   @override
   void dispose() {
-   pageController.dispose();
+    pageController.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
 
-      if ( pageController.hasClients ) {
+    if (pageController.hasClients) {
       pageController.animateToPage(
-        widget.page, 
-        curve: Curves.easeInOut, 
-        duration: const Duration( milliseconds: 250),
+        widget.page,
+        curve: Curves.easeInOut,
+        duration: const Duration(milliseconds: 250),
       );
     }
-    
-    if(kIsWeb){
-          return Scaffold(
+
+    if (kIsWeb) {
+      return Scaffold(
         body: IndexedStack(
           index: widget.page,
           children: viewRoutes,
@@ -57,16 +57,16 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
             CustomBottomNavigationBar(currentIndex: widget.page),
       );
     }
-    //If is mobile 
-        return Scaffold(
+    //If is mobile
+    return Scaffold(
       body: PageView(
         controller: pageController,
         children: viewRoutes,
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(currentIndex : widget.page),
+      bottomNavigationBar: CustomBottomNavigationBar(currentIndex: widget.page),
     );
   }
-  
+
   @override
   bool get wantKeepAlive => true;
 }

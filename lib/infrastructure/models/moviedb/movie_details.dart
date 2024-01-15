@@ -4,7 +4,6 @@ class MovieDetails {
     final bool adult;
     final String backdropPath;
     final BelongsToCollection? belongsToCollection;
-    final int budget;
     final List<Genre> genres;
     final int id;
     final String originalLanguage;
@@ -22,7 +21,6 @@ class MovieDetails {
         required this.adult,
         required this.backdropPath,
         required this.belongsToCollection,
-        required this.budget,
         required this.genres,
         required this.id,
         required this.originalLanguage,
@@ -40,8 +38,9 @@ class MovieDetails {
     factory MovieDetails.fromJson(Map<String, dynamic> json) => MovieDetails(
         adult: json['adult'] ?? false,
         backdropPath: json['backdrop_path'] ?? '',
-        belongsToCollection:json['belongs_to_collection'] == null ? null : BelongsToCollection.fromJson(json['belongs_to_collection']),
-        budget: json['budget'],
+        belongsToCollection:json['belongs_to_collection'] == null 
+        ? null 
+        : BelongsToCollection.fromJson(json['belongs_to_collection']),
         genres: List<Genre>.from(json['genres'].map((x) => Genre.fromJson(x))),
         id: json['id'],
         originalLanguage: json['original_language'],
@@ -60,7 +59,6 @@ class MovieDetails {
         'adult': adult,
         'backdrop_path': backdropPath,
         'belongs_to_collection': belongsToCollection?.toJson(),
-        'budget': budget,
         'genres': List<dynamic>.from(genres.map((x) => x.toJson())),
         'id': id,
         'original_language': originalLanguage,

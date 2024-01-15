@@ -7,15 +7,18 @@ class ItemsGridView extends StatefulWidget {
   final List<ItemEntity> items;
   final VoidCallback? loadNextPage;
 
-  const ItemsGridView({required this.items, super.key, this.loadNextPage, this.text = ''});
+  const ItemsGridView({
+    required this.items,
+    super.key,
+    this.loadNextPage,
+    this.text = '',
+  });
 
   @override
   State<ItemsGridView> createState() => _ItemsGridViewState();
-  
 }
 
 class _ItemsGridViewState extends State<ItemsGridView> {
-
   final scrollController = ScrollController();
 
   @override
@@ -23,12 +26,12 @@ class _ItemsGridViewState extends State<ItemsGridView> {
     super.initState();
 
     scrollController.addListener(() {
-      if(widget.loadNextPage == null) return;
-      if((scrollController.position.pixels + 100) >= scrollController.position.maxScrollExtent) {
+      if (widget.loadNextPage == null) return;
+      if ((scrollController.position.pixels + 100) >=
+          scrollController.position.maxScrollExtent) {
         widget.loadNextPage!();
       }
     });
-
   }
 
   @override
@@ -39,28 +42,28 @@ class _ItemsGridViewState extends State<ItemsGridView> {
 
   @override
   Widget build(BuildContext context) {
-        final size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     final landscape = size.width > 600;
     final titleStyle = Theme.of(context).textTheme;
-   if (widget.items.isNotEmpty) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          child: GridView.count(
-            controller: scrollController,
-            mainAxisSpacing: 3,
-            crossAxisSpacing: 3,
-            crossAxisCount: landscape ? 6 : 3,
-            childAspectRatio: 0.7,
-            children: [
-              ...widget.items.map((movie) => MoviePoster(movie: movie)),
-            ],
+    if (widget.items.isNotEmpty) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: GridView.count(
+              controller: scrollController,
+              mainAxisSpacing: 3,
+              crossAxisSpacing: 3,
+              crossAxisCount: landscape ? 6 : 3,
+              childAspectRatio: 0.7,
+              children: [
+                ...widget.items.map((movie) => MoviePoster(movie: movie)),
+              ],
+            ),
           ),
-        ),
-      ],
-    );
-   } 
-   return Center(child: Text('${widget.text}', style: titleStyle.titleLarge));
+        ],
+      );
+    }
+    return Center(child: Text('${widget.text}', style: titleStyle.titleLarge));
   }
 }

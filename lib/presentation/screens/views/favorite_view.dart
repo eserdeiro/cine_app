@@ -10,27 +10,27 @@ class FavoriteView extends ConsumerStatefulWidget {
   FavoriteViewState createState() => FavoriteViewState();
 }
 
-class FavoriteViewState extends ConsumerState<FavoriteView> with AutomaticKeepAliveClientMixin{
+class FavoriteViewState extends ConsumerState<FavoriteView>
+    with AutomaticKeepAliveClientMixin {
+  bool isLastPage = false;
+  bool isLoading = false;
 
-    bool isLastPage = false;
-    bool isLoading = false;
+  @override
+  void initState() {
+    super.initState();
+    loadNextPage();
+  }
 
-    @override
-    void initState() {
-      super.initState();
-     loadNextPage();
-    }
+  Future<void> loadNextPage() async {
+    if (isLoading || isLastPage) return;
+    isLoading = true;
 
-  Future<void> loadNextPage() async{
-    if(isLoading || isLastPage) return;
-    isLoading = true; 
-
-    final movies = await ref.read(favoriteItemsProvider.notifier).loadNextPage();
+    final movies =
+        await ref.read(favoriteItemsProvider.notifier).loadNextPage();
     isLoading = false;
 
-    if(movies.isEmpty){
+    if (movies.isEmpty) {
       isLastPage = true;
-
     }
   }
 
@@ -40,17 +40,17 @@ class FavoriteViewState extends ConsumerState<FavoriteView> with AutomaticKeepAl
 
     final favoriteMovies = ref.watch(favoriteItemsProvider).values.toList();
 
-    return Scaffold( 
+    return Scaffold(
       appBar: AppBar(
         title: const Text('Favorites'),
       ),
       body: ItemsGridView(
         items: favoriteMovies,
         loadNextPage: loadNextPage,
-        text: 'No movies :(',),
+        text: 'No movies :(',
+      ),
     );
   }
-  
 
   @override
   bool get wantKeepAlive => true;

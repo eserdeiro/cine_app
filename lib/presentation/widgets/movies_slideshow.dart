@@ -4,6 +4,7 @@ import 'package:cine_app/config/constants/strings.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/presentation/widgets/index.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class MoviesSlideshow extends StatelessWidget {
   final List<ItemEntity> movies;
@@ -15,7 +16,7 @@ class MoviesSlideshow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-        final size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     final landscape = size.width > 600;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,13 +44,12 @@ class MoviesSlideshow extends StatelessWidget {
               final movie = movies[index];
               return _Slide(movie: movie);
             },
-            ),
+          ),
         ),
       ],
     );
   }
 }
-
 
 class _Slide extends StatelessWidget {
   final ItemEntity movie;
@@ -57,23 +57,25 @@ class _Slide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final decorationBackground = BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black26,
-            blurRadius: 10,
-            offset: Offset(0, 15),
-          ),
-        ],);
+      borderRadius: BorderRadius.circular(20),
+      boxShadow: const [
+        BoxShadow(
+          color: Colors.black26,
+          blurRadius: 10,
+          offset: Offset(0, 15),
+        ),
+      ],
+    );
 
     return Padding(
-        padding: const EdgeInsets.only(bottom: 30),
-        child: DecoratedBox(
-          decoration: decorationBackground,
-          child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
+      padding: const EdgeInsets.only(bottom: 30),
+      child: DecoratedBox(
+        decoration: decorationBackground,
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          child: GestureDetector(
+            onTap: () => context.push('${Strings.movieRoute}${movie.id}'),
             child: Image.network(
               movie.backdropPath,
               fit: BoxFit.cover,
@@ -86,6 +88,8 @@ class _Slide extends StatelessWidget {
               },
             ),
           ),
-        ),);
+        ),
+      ),
+    );
   }
 }
