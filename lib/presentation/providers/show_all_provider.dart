@@ -1,25 +1,17 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CastController extends StateNotifier<bool> {
-  CastController() : super(false);
+class ToggleController extends StateNotifier<bool> {
+  ToggleController() : super(false);
 
   void toggleShowAll() {
     state = !state;
   }
 }
 
-final castControllerProvider = StateNotifierProvider<CastController, bool>(
-  (_) => CastController(),
+final castControllerProvider = StateNotifierProvider<ToggleController, bool>(
+  (_) => ToggleController(),
 );
 
-class CrewController extends StateNotifier<bool> {
-  CrewController() : super(false);
-
-  void toggleShowAll() {
-    state = !state;
-  }
-}
-
-final crewControllerProvider = StateNotifierProvider<CrewController, bool>(
-  (_) => CrewController(),
+final crewControllerProvider = StateNotifierProvider<ToggleController, bool>(
+  (_) => ToggleController(),
 );
