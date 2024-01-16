@@ -1,11 +1,9 @@
+import 'package:cine_app/config/constants/typedefs.dart';
 import 'package:cine_app/config/helpers/api_provider.dart';
 import 'package:cine_app/domain/datasources/movies_datasource.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/infrastructure/mappers/index.dart';
 import 'package:cine_app/infrastructure/models/index.dart';
-
-typedef FutureListItemEntity = Future<List<ItemEntity>>;
-typedef FutureItemEntity = Future<ItemEntity>;
 
 class TheMovieDbDataSource extends MoviesDataSource {
   
@@ -70,7 +68,7 @@ class TheMovieDbDataSource extends MoviesDataSource {
     return _jsonToMovies(response.data);
   }
 
-  //GetMovieById
+//GetMovieById
   @override
   FutureItemEntity getMovieById(String id) async {
     final response = await dio.get(

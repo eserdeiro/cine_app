@@ -1,6 +1,4 @@
-import 'package:cine_app/domain/entities/item_entity.dart';
-
-typedef FutureListItemEntity = Future<List<ItemEntity>>;
+import 'package:cine_app/config/constants/typedefs.dart';
 
 abstract class MoviesRepository {
 
@@ -12,7 +10,7 @@ abstract class MoviesRepository {
 
   FutureListItemEntity getTopRated({int page = 1});
 
-  Future<ItemEntity> getMovieById(String id);
+  FutureItemEntity getMovieById(String id);
 
   FutureListItemEntity searchMoviesByQuery(String query);
   

@@ -1,15 +1,21 @@
 import 'package:cine_app/presentation/providers/index.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-//when all providers load, return '', & the fullscreen loader closes
-final firstLoadingProvider = Provider<bool>((ref){
+//When all providers load, return true, & the fullscreen loader closes
+final firstLoadingProvider = Provider<bool>((ref) {
+  final providers = <dynamic>[
+    popularMoviesProvider,
+    upcomingMoviesProvider,
+    topRatedMoviesProvider,
+    moviesSlideshowProvider,
+    genresDataNotifierProvider,
+  ];
 
-    final popularMovies     = ref.watch(popularMoviesProvider).isEmpty;
-    final upcomingMovies    = ref.watch(upcomingMoviesProvider).isEmpty;
-    final topRatedMovies    = ref.watch(topRatedMoviesProvider).isEmpty;
-    final slideshowProvider = ref.watch(moviesSlideshowProvider).isEmpty;
-    final genresData        = ref.watch(genresDataNotifierProvider).isEmpty;
+  for (final provider in providers) {
+    if (ref.watch(provider).isEmpty) {
+      return true;
+    }
+  }
 
-if(popularMovies || upcomingMovies || topRatedMovies || slideshowProvider || genresData) return true;
-return false;
+  return false;
 });

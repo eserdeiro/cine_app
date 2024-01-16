@@ -1,3 +1,4 @@
+import 'package:cine_app/config/constants/typedefs.dart';
 import 'package:cine_app/domain/datasources/local_database_datasource.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -11,10 +12,8 @@ class LocalDatabaseDataSourceImpl extends LocalDatabaseDatasource {
   late Future<Box<ItemEntity>> database;
 
   Future<Box<ItemEntity>> openDB() async {
-    
     final box = await Hive.openBox<ItemEntity>('item_entity_box');
     return box;
-
   }
 
   //Check each item if it is favorite or not, by id
@@ -30,7 +29,7 @@ class LocalDatabaseDataSourceImpl extends LocalDatabaseDatasource {
   //Offset brings the items after x, example
   //If offset is 10, bring the items after the next 10
   @override
-  Future<List<ItemEntity>> loadFavoriteItems({
+  FutureListItemEntity loadFavoriteItems({
     int limit = 9,
     int offset = 0,
   }) async {

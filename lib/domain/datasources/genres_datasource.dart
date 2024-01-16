@@ -1,7 +1,5 @@
 
-import 'package:cine_app/domain/entities/genre_entity.dart';
-
-typedef FutureListGenreEntity = Future<List<GenreEntity>>;
+import 'package:cine_app/config/constants/typedefs.dart';
 
 abstract class GenresDatasource {
 

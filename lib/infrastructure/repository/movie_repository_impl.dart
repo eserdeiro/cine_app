@@ -1,9 +1,6 @@
+import 'package:cine_app/config/constants/typedefs.dart';
 import 'package:cine_app/domain/datasources/movies_datasource.dart';
-import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/domain/repository/movies_repository.dart';
-
-typedef FutureListItemEntity = Future<List<ItemEntity>>;
-typedef FutureItemEntity = Future<ItemEntity>;
 
 class MovieRepositoryImpl extends MoviesRepository {
   final MoviesDataSource datasource;

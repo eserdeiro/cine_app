@@ -1,6 +1,5 @@
+import 'package:cine_app/config/constants/typedefs.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
-
-typedef FutureListItemEntity = Future<List<ItemEntity>>;
 
 abstract class LocalDatabaseRepository {
   Future<void> toggleFavorite(ItemEntity item);

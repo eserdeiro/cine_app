@@ -1,3 +1,4 @@
+import 'package:cine_app/config/constants/typedefs.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/domain/repository/local_database_repository.dart';
 import 'package:cine_app/presentation/providers/index.dart';
@@ -17,7 +18,7 @@ class DatabaseItemsNotifier extends StateNotifier<Map<int, ItemEntity>>{
 
   DatabaseItemsNotifier({required this.localDatabaseRepository}) : super({});
 
-  Future<List<ItemEntity>> loadNextPage() async {
+  FutureListItemEntity loadNextPage() async {
 
     final items = await localDatabaseRepository.loadFavoriteItems(offset: page * 10, limit: 12); // 
     page++;

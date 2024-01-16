@@ -1,8 +1,6 @@
+import 'package:cine_app/config/constants/typedefs.dart';
 import 'package:cine_app/domain/datasources/actors_datasource.dart';
-import 'package:cine_app/domain/entities/actor_entity.dart';
 import 'package:cine_app/domain/repository/actors_repository.dart';
-
-typedef FutureListActorEntity = Future<List<ActorEntity>>;
 
 class ActorsRepositoryImpl extends ActorsRepository{
 

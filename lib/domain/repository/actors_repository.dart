@@ -1,6 +1,4 @@
-import 'package:cine_app/domain/entities/actor_entity.dart';
-
-typedef FutureListActorEntity = Future<List<ActorEntity>>;
+import 'package:cine_app/config/constants/typedefs.dart';
 
 abstract class ActorsRepository {
   FutureListActorEntity getCastByItem(String itemId);

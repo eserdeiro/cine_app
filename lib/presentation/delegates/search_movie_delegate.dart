@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:animate_do/animate_do.dart';
+import 'package:cine_app/config/constants/typedefs.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/presentation/widgets/index.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-typedef SearchMovieCallback = Future<List<ItemEntity>> Function(String query);
+typedef SearchMovieCallback = FutureListItemEntity Function(String query);
 
 class SearchMovieDelegate extends SearchDelegate<ItemEntity?> {
   final SearchMovieCallback searchMovies;
