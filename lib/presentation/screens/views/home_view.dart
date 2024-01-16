@@ -41,10 +41,10 @@ class HomeViewState extends ConsumerState<HomeView>
       FlutterNativeSplash.remove();
     }
     //If changed to nowPlayingMovies, a list of 20 movies will be displayed
-    final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
-    final popularMovies = ref.watch(popularMoviesProvider);
-    final upcomingMovies = ref.watch(upcomingMoviesProvider);
-    final topRatedMovies = ref.watch(topRatedMoviesProvider);
+    final nowPlayingMovies  = ref.watch(nowPlayingMoviesProvider);
+    final popularMovies     = ref.watch(popularMoviesProvider);
+    final upcomingMovies    = ref.watch(upcomingMoviesProvider);
+    final topRatedMovies    = ref.watch(topRatedMoviesProvider);
     final slideshowProvider = ref.watch(moviesSlideshowProvider);
 
     //CustomScrollView + Slivers

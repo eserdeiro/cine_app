@@ -1,5 +1,6 @@
 import 'package:cine_app/presentation/providers/index.dart';
 import 'package:cine_app/presentation/widgets/index.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -36,11 +37,13 @@ class FavoriteViewState extends ConsumerState<FavoriteView>
 
   @override
   Widget build(BuildContext context) {
+    
     super.build(context);
 
     final favoriteMovies = ref.watch(favoriteItemsProvider).values.toList();
 
     return Scaffold(
+      drawer: kIsWeb? const SideMenu() : null,
       appBar: AppBar(
         title: const Text('Favorites'),
       ),

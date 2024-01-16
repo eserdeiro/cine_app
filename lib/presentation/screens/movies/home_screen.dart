@@ -37,6 +37,8 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
+
+   final scaffoldKey = GlobalKey<ScaffoldState>();
     super.build(context);
 
     if (pageController.hasClients) {
@@ -53,8 +55,9 @@ class _HomeScreenState extends State<HomeScreen>
           index: widget.page,
           children: viewRoutes,
         ),
-        bottomNavigationBar:
-            CustomBottomNavigationBar(currentIndex: widget.page),
+      key: scaffoldKey,
+      drawer: SideMenu(scaffoldKey: scaffoldKey),
+
       );
     }
     //If is mobile

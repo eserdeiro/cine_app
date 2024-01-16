@@ -14,3 +14,4 @@ export 'package:cine_app/presentation/widgets/shared/item/title_subtitle.dart';
 export 'package:cine_app/presentation/widgets/shared/item/vote_average.dart';
 export 'package:cine_app/presentation/widgets/shared/movie_poster.dart';
 export 'package:cine_app/presentation/widgets/shared/poster_loading_progress.dart';
+export 'package:cine_app/presentation/widgets/shared/side_menu.dart';

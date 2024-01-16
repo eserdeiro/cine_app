@@ -11,8 +11,6 @@ class CustomBottomNavigationBar extends StatelessWidget {
         context.go('/home/0');
       case 1:
         context.go('/home/1');
-      // case 2: context.go('/home/2');
-      // break;
     }
   }
 
@@ -34,10 +32,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
           icon: Icon(Icons.favorite_border_outlined),
           label: 'Favorites',
         ),
-
-        //  BottomNavigationBarItem(
-        // icon: Icon(Icons.favorite_border_outlined),
-        // label: 'other'),
+        
       ],
     );
   }
