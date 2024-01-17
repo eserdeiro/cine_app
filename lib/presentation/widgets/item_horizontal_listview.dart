@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ItemHorizontalListview extends ConsumerStatefulWidget {
-  final List<ItemEntity> movies;
+  final List<ItemEntity> items;
   final VoidCallback? loadNextPage;
 
   const ItemHorizontalListview({
-    required this.movies,
+    required this.items,
     super.key,
     this.loadNextPage,
   });
@@ -53,9 +53,9 @@ class ItemHorizontalListviewState
         controller: scrollController,
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
-        itemCount: widget.movies.length,
+        itemCount: widget.items.length,
         itemBuilder: (context, index) {
-          return _Slide(movie: widget.movies[index]);
+          return _Slide(item: widget.items[index]);
         },
       ),
     );
@@ -63,8 +63,8 @@ class ItemHorizontalListviewState
 }
 
 class _Slide extends ConsumerStatefulWidget {
-  final ItemEntity movie;
-  const _Slide({required this.movie});
+  final ItemEntity item;
+  const _Slide({required this.item});
 
   @override
   _SlideState createState() => _SlideState();
@@ -75,7 +75,9 @@ class _SlideState extends ConsumerState<_Slide> {
   Widget build(BuildContext context) {
     final genresData = ref.watch(genresDataNotifierProvider);
     final textStyle = Theme.of(context).textTheme;
-
+    final item = widget.item;
+    final itemVoteAverage = item.voteAverage;
+    final itemGenreIds = item.genreIds;
     return Padding(
       padding: const EdgeInsets.all(8),
       child: ClipRRect(
@@ -91,7 +93,7 @@ class _SlideState extends ConsumerState<_Slide> {
                   SizedBox(
                     width: 150,
                     height: 222,
-                    child: MoviePoster(movie: widget.movie),
+                    child: ItemPoster(item: item),
                   ),
                   //Vote average
                   Positioned(
@@ -113,7 +115,7 @@ class _SlideState extends ConsumerState<_Slide> {
                               ),
                               const SizedBox(width: 2),
                               Text(
-                                FormatsHelper.number(widget.movie.voteAverage, 1),
+                                FormatsHelper.number(itemVoteAverage, 1),
                                 style: textStyle.bodyMedium
                                     ?.copyWith(color: const Color(0xfffd8701)),
                               ),
@@ -134,7 +136,7 @@ class _SlideState extends ConsumerState<_Slide> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5),
                   child: Text(
-                    widget.movie.title,
+                    item.title,
                     maxLines: 1,
                     style: const TextStyle(fontWeight: FontWeight.w600),
                     overflow: TextOverflow.ellipsis,
@@ -154,7 +156,7 @@ class _SlideState extends ConsumerState<_Slide> {
                   ),
                   child: Text(
                     GenreHelper.genreIdsToNames(
-                      widget.movie.genreIds,
+                      itemGenreIds,
                       genresData,
                     ),
                     overflow: TextOverflow.ellipsis,

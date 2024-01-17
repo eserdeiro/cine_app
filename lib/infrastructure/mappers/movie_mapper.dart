@@ -6,7 +6,7 @@ class MovieMapper {
 
       adult       : movieDb.adult,
       backdropPath: (movieDb.backdropPath != '') 
-          ? 'https://image.tmdb.org/t/p/w1280/${movieDb.backdropPath}' 
+          ? 'https://image.tmdb.org/t/p/w780/${movieDb.backdropPath}' 
           : 'no-poster',
       genreIds    : movieDb.genreIds.map((e) => e.toString()).toList(),
       id          : movieDb.id,
@@ -15,7 +15,7 @@ class MovieMapper {
       overview    : movieDb.overview,
       popularity  : movieDb.popularity,
       posterPath  : (movieDb.posterPath != '')
-          ? 'https://image.tmdb.org/t/p/w500/${movieDb.posterPath}' 
+          ? 'https://image.tmdb.org/t/p/w342/${movieDb.posterPath}' 
           : 'no-poster',
       releaseDate : movieDb.releaseDate ,
       title       : movieDb.title,

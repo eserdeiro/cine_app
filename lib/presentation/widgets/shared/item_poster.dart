@@ -5,15 +5,17 @@ import 'package:cine_app/presentation/widgets/index.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class MoviePoster extends StatelessWidget {
-  final ItemEntity movie;
-  const MoviePoster({required this.movie, super.key});
+class ItemPoster extends StatelessWidget {
+  final ItemEntity item;
+  const ItemPoster({required this.item, super.key});
 
   @override
   Widget build(BuildContext context) {
+    final itemPosterPath = item.posterPath;
+    final itemId = item.id;
     return SizedBox(
       child: Image.network(
-        movie.posterPath,
+        itemPosterPath,
         fit: BoxFit.cover,
         loadingBuilder: (context, child, loadingProgress) {
           if (loadingProgress != null) {
@@ -21,10 +23,9 @@ class MoviePoster extends StatelessWidget {
           } else {
             //redirect from '/movie' to '/home/0/move/id' because movie is not recognized
             return GestureDetector(
-              onTap: () => context.push('${Strings.movieRoute}${movie.id}'),
+              onTap: () => context.push('${Strings.movieRoute}$itemId'),
               child: FadeIn(
-                delay: const Duration(milliseconds: 500),
-                duration: const Duration(milliseconds: 1100),
+                delay: const Duration(milliseconds: 200),
                 child: child,
               ),
             );

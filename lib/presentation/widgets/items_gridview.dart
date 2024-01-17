@@ -1,6 +1,6 @@
 import 'package:cine_app/config/helpers/orientation_helper.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
-import 'package:cine_app/presentation/widgets/shared/movie_poster.dart';
+import 'package:cine_app/presentation/widgets/shared/item_poster.dart';
 import 'package:flutter/material.dart';
 
 class ItemsGridView extends StatefulWidget {
@@ -46,7 +46,8 @@ class _ItemsGridViewState extends State<ItemsGridView> {
     final orientationHelper = OrientationHelper(context);
     final landscape = orientationHelper.isLandscape;
     final titleStyle = Theme.of(context).textTheme;
-    if (widget.items.isNotEmpty) {
+    final items = widget.items;
+    if (items.isNotEmpty) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -58,7 +59,7 @@ class _ItemsGridViewState extends State<ItemsGridView> {
               crossAxisCount: landscape ? 6 : 3,
               childAspectRatio: 0.7,
               children: [
-                ...widget.items.map((movie) => MoviePoster(movie: movie)),
+                ...items.map((item) => ItemPoster(item: item)),
               ],
             ),
           ),

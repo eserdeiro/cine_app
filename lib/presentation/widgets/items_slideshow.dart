@@ -1,4 +1,3 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:cine_app/config/constants/strings.dart';
 import 'package:cine_app/config/helpers/orientation_helper.dart';
@@ -7,10 +6,10 @@ import 'package:cine_app/presentation/widgets/index.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class MoviesSlideshow extends StatelessWidget {
-  final List<ItemEntity> movies;
-  const MoviesSlideshow({
-    required this.movies,
+class ItemsSlideshow extends StatelessWidget {
+  final List<ItemEntity> items;
+  const ItemsSlideshow({
+    required this.items,
     super.key,
   });
 
@@ -40,10 +39,10 @@ class MoviesSlideshow extends StatelessWidget {
                 color: colors.secondary,
               ),
             ),
-            itemCount: movies.length,
+            itemCount: items.length,
             itemBuilder: (context, index) {
-              final movie = movies[index];
-              return _Slide(movie: movie);
+              final item = items[index];
+              return _Slide(item: item);
             },
           ),
         ),
@@ -53,41 +52,41 @@ class MoviesSlideshow extends StatelessWidget {
 }
 
 class _Slide extends StatelessWidget {
-  final ItemEntity movie;
-  const _Slide({required this.movie});
+  final ItemEntity item;
+  const _Slide({required this.item});
 
   @override
   Widget build(BuildContext context) {
-    final decorationBackground = BoxDecoration(
-      borderRadius: BorderRadius.circular(20),
-      boxShadow: const [
-        BoxShadow(
-          color: Colors.black26,
-          blurRadius: 10,
-          offset: Offset(0, 15),
-        ),
-      ],
-    );
+    final itemBackdropPath = item.backdropPath;
+    final itemId = item.id;
+
+    // final decorationBackground = BoxDecoration(
+    //   borderRadius: BorderRadius.circular(20),
+    //   boxShadow: const [
+    //     BoxShadow(
+    //       color: Colors.black26,
+    //       blurRadius: 10,
+    //       offset: Offset(0, 15),
+    //     ),
+    //   ],
+    // );
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 30),
-      child: DecoratedBox(
-        decoration: decorationBackground,
-        child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-          child: GestureDetector(
-            onTap: () => context.push('${Strings.movieRoute}${movie.id}'),
-            child: Image.network(
-              movie.backdropPath,
-              fit: BoxFit.cover,
-              loadingBuilder: (context, child, loadingProgress) {
-                if (loadingProgress != null) {
-                  return const PosterLoadingProgress();
-                } else {
-                  return FadeIn(child: child);
-                }
-              },
-            ),
+      child: ClipRRect(
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        child: GestureDetector(
+          onTap: () => context.push('${Strings.movieRoute}$itemId'),
+          child: Image.network(
+            itemBackdropPath,
+            fit: BoxFit.cover,
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress != null) {
+                return const PosterLoadingProgress();
+              } else {
+                return child;
+              }
+            },
           ),
         ),
       ),

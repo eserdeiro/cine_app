@@ -64,7 +64,7 @@ class HomeViewState extends ConsumerState<HomeView>
             (context, index) {
               return Column(
                 children: [
-                  MoviesSlideshow(movies: slideshowProvider),
+                  ItemsSlideshow(items: slideshowProvider),
 
                   //NowPlaying
                   TitleSubtitle(
@@ -79,7 +79,7 @@ class HomeViewState extends ConsumerState<HomeView>
                   ),
                   const SizedBox(height: 10),
                   ItemHorizontalListview(
-                    movies: nowPlayingMovies,
+                    items: nowPlayingMovies,
                     loadNextPage: () {
                       ref
                           .read(nowPlayingMoviesProvider.notifier)
@@ -100,7 +100,7 @@ class HomeViewState extends ConsumerState<HomeView>
                   ),
 
                   ItemHorizontalListview(
-                    movies: popularMovies,
+                    items: popularMovies,
                     loadNextPage: () {
                       ref.read(popularMoviesProvider.notifier).loadNextPage();
                     },
@@ -119,7 +119,7 @@ class HomeViewState extends ConsumerState<HomeView>
                   ),
 
                   ItemHorizontalListview(
-                    movies: upcomingMovies,
+                    items: upcomingMovies,
                     loadNextPage: () {
                       ref.read(upcomingMoviesProvider.notifier).loadNextPage();
                     },
@@ -138,7 +138,7 @@ class HomeViewState extends ConsumerState<HomeView>
                   ),
 
                   ItemHorizontalListview(
-                    movies: topRatedMovies,
+                    items: topRatedMovies,
                     loadNextPage: () {
                       ref.read(topRatedMoviesProvider.notifier).loadNextPage();
                     },
