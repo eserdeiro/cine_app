@@ -8,7 +8,7 @@ import 'package:cine_app/infrastructure/models/index.dart';
 class MovieDbResponse {
 
     final int page;
-    final List<MovieFromMovieDbResponse> results;
+    final List<ItemFromMovieDbResponse> results;
     final int totalPages;
     final int totalResults;
 
@@ -21,7 +21,7 @@ class MovieDbResponse {
 
     factory MovieDbResponse.fromJson(Map<String, dynamic> json) => MovieDbResponse(
         page: json['page'],
-        results: List<MovieFromMovieDbResponse>.from(json['results'].map((x) => MovieFromMovieDbResponse.fromJson(x))),
+        results: List<ItemFromMovieDbResponse>.from(json['results'].map((x) => ItemFromMovieDbResponse.fromJson(x))),
         totalPages: json['total_pages'],
         totalResults: json['total_results'],
     );

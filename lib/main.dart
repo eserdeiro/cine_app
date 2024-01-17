@@ -7,13 +7,13 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-Future<void> main() async{
+Future<void> main() async {
   //It matches the default value fileName: '.env'
   await dotenv.load();
-   await Hive.initFlutter();
-  if(!kIsWeb){
-     final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  await Hive.initFlutter();
+  if (!kIsWeb) {
+    final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   }
   runApp(const ProviderScope(child: MainApp()));
 }

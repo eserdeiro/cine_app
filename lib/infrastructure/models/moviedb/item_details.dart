@@ -1,6 +1,6 @@
 import 'package:cine_app/infrastructure/models/index.dart';
 
-class MovieDetails {
+class ItemDetails {
     final bool adult;
     final String backdropPath;
     final BelongsToCollection? belongsToCollection;
@@ -17,7 +17,7 @@ class MovieDetails {
     final double voteAverage;
     final int voteCount;
 
-    MovieDetails({
+    ItemDetails({
         required this.adult,
         required this.backdropPath,
         required this.belongsToCollection,
@@ -35,7 +35,7 @@ class MovieDetails {
         required this.voteCount,
     });
 
-    factory MovieDetails.fromJson(Map<String, dynamic> json) => MovieDetails(
+    factory ItemDetails.fromJson(Map<String, dynamic> json) => ItemDetails(
         adult: json['adult'] ?? false,
         backdropPath: json['backdrop_path'] ?? '',
         belongsToCollection:json['belongs_to_collection'] == null 

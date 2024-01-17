@@ -2,7 +2,7 @@ import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/infrastructure/models/index.dart'; 
 class MovieMapper {
   //This is used to get the list of movies, for nowplaying, popular, etc.
-  static ItemEntity movieDbToEntity(MovieFromMovieDbResponse movieDb) => ItemEntity(
+  static ItemEntity movieDbToEntity(ItemFromMovieDbResponse movieDb) => ItemEntity(
 
       adult       : movieDb.adult,
       backdropPath: (movieDb.backdropPath != '') 
@@ -25,7 +25,7 @@ class MovieMapper {
       );
 
       //This is used to get movies by id
-      static ItemEntity movieDetailstoEntity(MovieDetails movieDetails) => ItemEntity(
+      static ItemEntity movieDetailstoEntity(ItemDetails movieDetails) => ItemEntity(
         adult: movieDetails.adult, 
         backdropPath: (movieDetails.backdropPath != '') 
           ? 'https://image.tmdb.org/t/p/w1280/${movieDetails.backdropPath}' 
