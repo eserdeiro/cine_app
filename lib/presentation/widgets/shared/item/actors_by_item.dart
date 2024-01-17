@@ -1,4 +1,4 @@
-import 'package:cine_app/config/helpers/orientation.dart';
+import 'package:cine_app/config/helpers/orientation_helper.dart';
 import 'package:cine_app/domain/entities/actor_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

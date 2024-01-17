@@ -1,5 +1,5 @@
-import 'package:cine_app/config/helpers/formats.dart';
-import 'package:cine_app/config/helpers/genre_utils.dart';
+import 'package:cine_app/config/helpers/formats_helper.dart';
+import 'package:cine_app/config/helpers/genre_helper.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/presentation/providers/genres/genres_providers.dart';
 import 'package:cine_app/presentation/widgets/index.dart';
@@ -113,7 +113,7 @@ class _SlideState extends ConsumerState<_Slide> {
                               ),
                               const SizedBox(width: 2),
                               Text(
-                                Formats.number(widget.movie.voteAverage, 1),
+                                FormatsHelper.number(widget.movie.voteAverage, 1),
                                 style: textStyle.bodyMedium
                                     ?.copyWith(color: const Color(0xfffd8701)),
                               ),
@@ -153,7 +153,7 @@ class _SlideState extends ConsumerState<_Slide> {
                     top: 5,
                   ),
                   child: Text(
-                    GenreUtils.genreIdsToNames(
+                    GenreHelper.genreIdsToNames(
                       widget.movie.genreIds,
                       genresData,
                     ),

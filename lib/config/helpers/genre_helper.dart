@@ -1,6 +1,6 @@
 import 'package:cine_app/domain/entities/genre_entity.dart';
 
-class GenreUtils {
+class GenreHelper {
   static String genreIdsToNames(
     List<String> itemGenreIds,
     List<GenreEntity> genresProvider,

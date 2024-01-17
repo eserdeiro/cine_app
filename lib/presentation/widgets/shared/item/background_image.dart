@@ -1,5 +1,5 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:cine_app/config/helpers/orientation.dart';
+import 'package:cine_app/config/helpers/orientation_helper.dart';
 import 'package:cine_app/presentation/widgets/index.dart';
 import 'package:flutter/material.dart';
 

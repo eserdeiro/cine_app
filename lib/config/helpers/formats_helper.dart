@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-class Formats {
+class FormatsHelper {
 
   static String number(double number, int decimalDigits) {
     final formattedNumber = NumberFormat.compactCurrency(

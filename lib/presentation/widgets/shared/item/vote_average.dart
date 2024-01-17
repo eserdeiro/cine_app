@@ -1,4 +1,4 @@
-import 'package:cine_app/config/helpers/formats.dart';
+import 'package:cine_app/config/helpers/formats_helper.dart';
 import 'package:flutter/material.dart';
 
 class VoteAvergateItem extends StatelessWidget {
@@ -17,7 +17,7 @@ class VoteAvergateItem extends StatelessWidget {
             const Icon(Icons.star, color: Color(0xfffd8701), size: 15),
             const SizedBox(width: 2),
             Text(
-              Formats.number(voteAverage, 1),
+              FormatsHelper.number(voteAverage, 1),
               style: titleStyle.bodyMedium
                   ?.copyWith(color: const Color(0xfffd8701)),
             ),
