@@ -2,6 +2,7 @@ import 'package:cine_app/config/constants/strings.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/presentation/delegates/search_movie_delegate.dart';
 import 'package:cine_app/presentation/providers/index.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -26,6 +27,8 @@ class CustomAppbar extends ConsumerWidget {
             height: 60,
             child: Row(
               children: [
+                if(kIsWeb)
+                const Padding(padding: EdgeInsets.only(left: 45)),
                 Icon(Icons.movie_outlined, color: colors.primary),
                 const SizedBox(width: 5),
                 Text(Strings.appName, style: titleStyle),

@@ -37,7 +37,6 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
-
    final scaffoldKey = GlobalKey<ScaffoldState>();
     super.build(context);
 

@@ -4,7 +4,10 @@ import 'package:go_router/go_router.dart';
 
 class SideMenu extends StatefulWidget {
   final GlobalKey<ScaffoldState>? scaffoldKey;
-  const SideMenu({super.key, this.scaffoldKey});
+  const SideMenu({
+    super.key,
+    this.scaffoldKey,
+  });
 
   @override
   State<SideMenu> createState() => _SideMenuState();
@@ -16,7 +19,7 @@ class _SideMenuState extends State<SideMenu> {
   @override
   void initState() {
     super.initState();
-    // Obtener la URL actual del router
+
     final currentUrl =
         GoRouter.of(context).routeInformationProvider.value.uri.toString();
 

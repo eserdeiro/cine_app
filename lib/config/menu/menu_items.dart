@@ -16,7 +16,7 @@ const appMenuItems = <MenuItem>[
   MenuItem(
     title: 'Home',
     url: '/home/0',
-    icon: Icons.home,
+    icon: Icons.home_max,
   ),
   MenuItem(
     title: 'Favorites',
