@@ -1,15 +1,15 @@
-class CreditsResponse {
+class ActorsResponse {
     final int id;
     final List<Actor> cast;
     final List<Actor> crew;
 
-    CreditsResponse({
+    ActorsResponse({
         required this.id,
         required this.cast,
         required this.crew,
     });
 
-    factory CreditsResponse.fromJson(Map<String, dynamic> json) => CreditsResponse(
+    factory ActorsResponse.fromJson(Map<String, dynamic> json) => ActorsResponse(
         id: json['id'],
         cast: List<Actor>.from(json['cast'].map((x) => Actor.fromJson(x))),
         crew: List<Actor>.from(json['crew'].map((x) => Actor.fromJson(x))),
