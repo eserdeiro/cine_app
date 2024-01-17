@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:cine_app/config/constants/strings.dart';
+import 'package:cine_app/config/helpers/orientation.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/presentation/widgets/index.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +17,8 @@ class MoviesSlideshow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-    final size = MediaQuery.of(context).size;
-    final landscape = size.width > 600;
+    final orientationHelper = OrientationHelper(context);
+    final landscape = orientationHelper.isLandscape;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

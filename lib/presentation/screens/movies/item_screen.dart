@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:animate_do/animate_do.dart';
 import 'package:cine_app/config/constants/strings.dart';
+import 'package:cine_app/config/helpers/orientation.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/presentation/providers/index.dart';
 import 'package:cine_app/presentation/widgets/index.dart';
@@ -75,7 +76,8 @@ class CustomSliverAppBarState extends ConsumerState<CustomSliverAppBar> {
     final isFavoriteFutureProvider =
         ref.watch(isFavoriteProvider(widget.item.id));
     final size = MediaQuery.of(context).size;
-    final landscape = size.width > 600;
+    final orientationHelper = OrientationHelper(context);
+    final landscape = orientationHelper.isLandscape;
 
     return SliverAppBar(
       leading: IconButton(

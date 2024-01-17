@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:cine_app/config/helpers/orientation.dart';
 import 'package:cine_app/presentation/widgets/index.dart';
 import 'package:flutter/material.dart';
 
@@ -12,8 +13,8 @@ class BackgroundImageItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final landscape = size.width > 600;
+    final orientationHelper = OrientationHelper(context);
+    final landscape = orientationHelper.isLandscape;
     final colors = Theme.of(context).colorScheme;
     return Stack(
       children: [

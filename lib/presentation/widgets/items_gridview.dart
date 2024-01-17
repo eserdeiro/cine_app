@@ -1,3 +1,4 @@
+import 'package:cine_app/config/helpers/orientation.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/presentation/widgets/shared/movie_poster.dart';
 import 'package:flutter/material.dart';
@@ -42,8 +43,8 @@ class _ItemsGridViewState extends State<ItemsGridView> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final landscape = size.width > 600;
+    final orientationHelper = OrientationHelper(context);
+    final landscape = orientationHelper.isLandscape;
     final titleStyle = Theme.of(context).textTheme;
     if (widget.items.isNotEmpty) {
       return Column(
