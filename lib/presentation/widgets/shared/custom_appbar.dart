@@ -11,11 +11,10 @@ class CustomAppbar extends ConsumerWidget {
   const CustomAppbar({super.key});
 
   @override
-  Widget build(BuildContext context,WidgetRef ref ) {
-
+  Widget build(BuildContext context, WidgetRef ref) {
     final colors = Theme.of(context).colorScheme;
     final titleStyle = Theme.of(context).textTheme.titleMedium;
-    
+
     return SafeArea(
       bottom: false,
       child: ColoredBox(
@@ -27,30 +26,33 @@ class CustomAppbar extends ConsumerWidget {
             height: 60,
             child: Row(
               children: [
-                if(kIsWeb)
-                const Padding(padding: EdgeInsets.only(left: 45)),
+                if (kIsWeb) const Padding(padding: EdgeInsets.only(left: 45)),
                 Icon(Icons.movie_outlined, color: colors.primary),
                 const SizedBox(width: 5),
                 Text(Strings.appName, style: titleStyle),
                 const Spacer(),
-                IconButton(onPressed: (){
-              
-                  final searchedMovies= ref.read(searchedMoviesProvider);
-                  final searchQuery = ref.read(searchMoviesQueryProvider);
-                   showSearch<ItemEntity?>(
-                            query: searchQuery,
-                            context: context,
-                            delegate: SearchMovieDelegate(
-                            initialMovies: searchedMovies,
-                            searchMovies:  ref.read(searchedMoviesProvider.notifier).searchMoviesByQuery,),)
-                            .then((movie){
-                              if(movie != null){
-                                //redirect from '/movie' to '/home/0/move/id' because movie is not recognized
-                                context.push('${Strings.movieRoute}${movie.id}');
-                              }
-                            });
-                }, icon: const Icon(Icons.search),),
-              
+                IconButton(
+                  onPressed: () {
+                    final searchedMovies = ref.read(searchedMoviesProvider);
+                    final searchQuery = ref.read(searchMoviesQueryProvider);
+                    showSearch<ItemEntity?>(
+                      query: searchQuery,
+                      context: context,
+                      delegate: SearchMovieDelegate(
+                        initialMovies: searchedMovies,
+                        searchMovies: ref
+                            .read(searchedMoviesProvider.notifier)
+                            .searchMoviesByQuery,
+                      ),
+                    ).then((item) {
+                      if (item != null) {
+                        //redirect from '/movie' to '/home/0/movie/id' because movie is not recognized
+                        context.push('${Strings.movieRoute}${item.id}');
+                      }
+                    });
+                  },
+                  icon: const Icon(Icons.search),
+                ),
               ],
             ),
           ),

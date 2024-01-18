@@ -1,10 +1,11 @@
-import 'package:cine_app/config/constants/strings.dart';
+import 'package:cine_app/config/categorie/categorie_items.dart';
 import 'package:cine_app/presentation/providers/index.dart';
 import 'package:cine_app/presentation/widgets/index.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeView extends ConsumerStatefulWidget {
   const HomeView({super.key});
@@ -19,15 +20,8 @@ class HomeViewState extends ConsumerState<HomeView>
   void initState() {
     super.initState();
 
-    final providers = [
-      nowPlayingMoviesProvider,
-      popularMoviesProvider,
-      upcomingMoviesProvider,
-      topRatedMoviesProvider,
-    ];
-
-    for (final provider in providers) {
-      ref.read(provider.notifier).loadNextPage();
+    for (final categorieItem in categorieItems) {
+      ref.read(categorieItem.provider.notifier).loadNextPage();
     }
   }
 
@@ -40,11 +34,6 @@ class HomeViewState extends ConsumerState<HomeView>
     if (!kIsWeb) {
       FlutterNativeSplash.remove();
     }
-    //If changed to nowPlayingMovies, a list of 20 movies will be displayed
-    final nowPlayingMovies  = ref.watch(nowPlayingMoviesProvider);
-    final popularMovies     = ref.watch(popularMoviesProvider);
-    final upcomingMovies    = ref.watch(upcomingMoviesProvider);
-    final topRatedMovies    = ref.watch(topRatedMoviesProvider);
     final slideshowProvider = ref.watch(moviesSlideshowProvider);
 
     //CustomScrollView + Slivers
@@ -65,84 +54,33 @@ class HomeViewState extends ConsumerState<HomeView>
               return Column(
                 children: [
                   ItemsSlideshow(items: slideshowProvider),
-
-                  //NowPlaying
-                  TitleSubtitle(
-                    title: Strings.nowPlaying,
-                    subtitle: 'Today',
-                    subtitleFontColor: Colors.cyan,
-                  ),
-                  const TitleSubtitle(
-                    title: 'Movies',
-                    titleFontSize: 14,
-                    titleFontWeight: FontWeight.w400,
-                  ),
-                  const SizedBox(height: 10),
-                  ItemHorizontalListview(
-                    items: nowPlayingMovies,
-                    loadNextPage: () {
-                      ref
-                          .read(nowPlayingMoviesProvider.notifier)
-                          .loadNextPage();
-                    },
-                  ),
-
-                  //Popular
-                  TitleSubtitle(
-                    title: Strings.popular,
-                    subtitle: 'Today',
-                    subtitleFontColor: Colors.cyan,
-                  ),
-                  const TitleSubtitle(
-                    title: 'Movies',
-                    titleFontSize: 14,
-                    titleFontWeight: FontWeight.w400,
-                  ),
-
-                  ItemHorizontalListview(
-                    items: popularMovies,
-                    loadNextPage: () {
-                      ref.read(popularMoviesProvider.notifier).loadNextPage();
-                    },
-                  ),
-
-                  //Upcoming
-                  TitleSubtitle(
-                    title: Strings.upcoming,
-                    subtitle: 'Today',
-                    subtitleFontColor: Colors.cyan,
-                  ),
-                  const TitleSubtitle(
-                    title: 'Movies',
-                    titleFontSize: 14,
-                    titleFontWeight: FontWeight.w400,
-                  ),
-
-                  ItemHorizontalListview(
-                    items: upcomingMovies,
-                    loadNextPage: () {
-                      ref.read(upcomingMoviesProvider.notifier).loadNextPage();
-                    },
-                  ),
-
-                  //Toprated
-                  TitleSubtitle(
-                    title: Strings.topRated,
-                    subtitle: 'Today',
-                    subtitleFontColor: Colors.cyan,
-                  ),
-                  const TitleSubtitle(
-                    title: 'Movies',
-                    titleFontSize: 14,
-                    titleFontWeight: FontWeight.w400,
-                  ),
-
-                  ItemHorizontalListview(
-                    items: topRatedMovies,
-                    loadNextPage: () {
-                      ref.read(topRatedMoviesProvider.notifier).loadNextPage();
-                    },
-                  ),
+                  ...categorieItems.map((categorieItem) {
+                    return Column(
+                      children: [
+                        TitleSubtitle(
+                          title: categorieItem.title,
+                        ),
+                        TitleSubtitle(
+                          title: 'Movies',
+                          titleFontSize: 14,
+                          titleFontWeight: FontWeight.w400,
+                          subtitle: 'Show all',
+                          subtitleFontColor: Colors.cyan,
+                          onTapSubtitle: () {
+                            context.push(categorieItem.url);
+                          },
+                        ),
+                        ItemHorizontalListview(
+                          items: ref.watch(categorieItem.provider),
+                          loadNextPage: () {
+                            ref
+                                .read(categorieItem.provider.notifier)
+                                .loadNextPage();
+                          },
+                        ),
+                      ],
+                    );
+                  }),
                 ],
               );
             },

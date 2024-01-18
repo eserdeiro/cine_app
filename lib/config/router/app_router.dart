@@ -5,17 +5,17 @@ import 'package:cine_app/presentation/screens/movies/index.dart';
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(
+  //GoException: no routes for location
   errorBuilder: (context, state) {
     return const ErrorScreen();
   },
-  // /home/0
+ 
   initialLocation: Strings.initialLocation,
   routes: [
-    //redirect from '/' to '/home/0' because home is not recognized
+     // /home/0
     GoRoute(
       path: '/',
       redirect: (_, __) {
-        // /home/0
         return Strings.initialLocation;
       },
     ),
@@ -26,7 +26,6 @@ final appRouter = GoRouter(
         //The url is not a correct index? we redirect to ErrorScreen
         final page = state.pathParameters['page'] ?? '0';
         try {
-          //Url 
           final pageIndex = int.parse(page);
           return (pageIndex < appMenuItems.length)
               ? HomeScreen(page: pageIndex)
@@ -36,13 +35,23 @@ final appRouter = GoRouter(
         }
       },
       routes: [
-        //the initial slash /movie/:id is'nt needed by the parent
         GoRoute(
+          // Example /home/0/movie/46648
           path: 'movie/:id',
           name: ItemScreen.name,
           builder: (context, state) {
             final itemId = state.pathParameters['id'] ?? 'no-id';
             return ItemScreen(itemId: itemId);
+          },
+        ),
+        GoRoute(
+          // Example /home/0/categories/nowplaying
+          path: 'categories/:categorie',
+          name: CategorieScreen.name,
+          builder: (context, state) {
+            final categorieId =
+                state.pathParameters['categorie'] ?? 'no-categorie';
+            return CategorieScreen(categorieId: categorieId);
           },
         ),
       ],

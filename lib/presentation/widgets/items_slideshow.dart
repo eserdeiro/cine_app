@@ -23,7 +23,7 @@ class ItemsSlideshow extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 10),
-          child: TitleSubtitle(title: Strings.upComingMovies),
+          child: TitleSubtitle(title: Strings.nowPlaying),
         ),
         SizedBox(
           height: 220,
@@ -59,18 +59,6 @@ class _Slide extends StatelessWidget {
   Widget build(BuildContext context) {
     final itemBackdropPath = item.backdropPath;
     final itemId = item.id;
-
-    // final decorationBackground = BoxDecoration(
-    //   borderRadius: BorderRadius.circular(20),
-    //   boxShadow: const [
-    //     BoxShadow(
-    //       color: Colors.black26,
-    //       blurRadius: 10,
-    //       offset: Offset(0, 15),
-    //     ),
-    //   ],
-    // );
-
     return Padding(
       padding: const EdgeInsets.only(bottom: 30),
       child: ClipRRect(
