@@ -1,6 +1,4 @@
-import 'package:cine_app/config/helpers/orientation_helper.dart';
 import 'package:cine_app/domain/entities/actor_entity.dart';
-import 'package:cine_app/presentation/widgets/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -28,13 +26,17 @@ class ActorsByItem extends ConsumerWidget {
 
     final actors = actorsByItem[itemId]!;
     final actorsLength = actors.length;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final crossAxisCount = (screenWidth / 175).floor();
+    final itemCount = showAll ? actors.length : crossAxisCount ;
+
     return GridView.builder(
       padding: EdgeInsets.zero,
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 200,
         childAspectRatio: 3,
       ),
-      itemCount: showAll ? actorsLength : (actorsLength < 4 ? actorsLength : 4),
+      itemCount:itemCount,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (_, index) {
@@ -53,7 +55,7 @@ class ActorsByItem extends ConsumerWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-
+          
               //Name
               const SizedBox(height: 5),
               Expanded(
@@ -70,7 +72,7 @@ class ActorsByItem extends ConsumerWidget {
                         ),
                       ),
                       const SizedBox(height: 8),
-
+          
                       //Actor character, if null, show job.
                       Text(
                         actor.character ?? actor.job!,
