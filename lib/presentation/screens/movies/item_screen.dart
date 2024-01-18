@@ -77,7 +77,6 @@ class _ItemDetails extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 8),
-          //portrait posterpath + overview
           if (!landscape)
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

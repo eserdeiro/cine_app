@@ -19,13 +19,11 @@ class BackgroundImageItem extends StatelessWidget {
     return Stack(
       children: [
         SizedBox.expand(
-          child: Image.network(
-            imagePath,
-            fit: BoxFit.cover,
-            loadingBuilder: (context, child, loadingProgress) {
-              if (loadingProgress != null) return const SizedBox();
-              return FadeIn(child: child);
-            },
+          child: FadeIn(
+            child: Image.network(
+              imagePath,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
         LayoutBuilder(

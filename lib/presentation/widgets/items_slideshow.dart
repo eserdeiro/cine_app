@@ -60,7 +60,7 @@ class _Slide extends StatelessWidget {
     final itemBackdropPath = item.backdropPath;
     final itemId = item.id;
     return Padding(
-      padding: const EdgeInsets.only(bottom: 30),
+      padding: const EdgeInsets.only(bottom: 24),
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(10)),
         child: GestureDetector(
@@ -68,13 +68,6 @@ class _Slide extends StatelessWidget {
           child: Image.network(
             itemBackdropPath,
             fit: BoxFit.cover,
-            loadingBuilder: (context, child, loadingProgress) {
-              if (loadingProgress != null) {
-                return const PosterLoadingProgress();
-              } else {
-                return child;
-              }
-            },
           ),
         ),
       ),

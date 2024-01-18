@@ -15,4 +15,3 @@ export 'package:cine_app/presentation/widgets/shared/item/release_date.dart';
 export 'package:cine_app/presentation/widgets/shared/item/title_subtitle.dart';
 export 'package:cine_app/presentation/widgets/shared/item/vote_average.dart';
 export 'package:cine_app/presentation/widgets/shared/item_poster.dart';
-export 'package:cine_app/presentation/widgets/shared/poster_loading_progress.dart';
