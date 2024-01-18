@@ -15,10 +15,10 @@ class VoteAvergateItem extends StatelessWidget {
         const SizedBox(width: 4),
         Text(
           FormatsHelper.number(voteAverage, 1),
-          style: titleStyle.bodyMedium
-              ?.copyWith(color: const Color(0xfffd8701),),
+          style: titleStyle.bodyMedium?.copyWith(
+            color: const Color(0xfffd8701),
+          ),
         ),
-       
       ],
     );
   }

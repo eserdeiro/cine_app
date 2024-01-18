@@ -11,7 +11,7 @@ class ReleaseDate extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Icon(Icons.calendar_month),
+        const Icon(Icons.calendar_month,),
         Text('${releaseDate!.year}'),
       ],
     );

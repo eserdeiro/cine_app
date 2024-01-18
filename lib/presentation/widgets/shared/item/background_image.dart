@@ -27,7 +27,7 @@ class BackgroundImageItem extends StatelessWidget {
           ),
         ),
         LayoutBuilder(
-          builder: (context, constraints) {
+          builder: (_, __) {
             if (landscape) {
               return Stack(
                 children: [

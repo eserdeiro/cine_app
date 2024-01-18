@@ -18,7 +18,7 @@ class TitleSubtitle extends StatelessWidget {
     this.subtitleFontSize,
     this.subtitleFontColor,
     this.titleFontWeight,
-    this.horizontalPadding, 
+    this.horizontalPadding,
     this.onTapSubtitle,
   });
 
@@ -26,23 +26,19 @@ class TitleSubtitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(
-        horizontal: (horizontalPadding != null) ? horizontalPadding! : 10,
+        horizontal: horizontalPadding ?? 8,
       ),
-      padding: const EdgeInsets.only(top: 10),
+      padding: const EdgeInsets.only(top: 8),
       child: Row(
         children: [
           if (title != null)
-            Expanded(
-              child: Text(
-                title!,
-                maxLines: 1,
-                style: TextStyle(
-                  fontSize: (titleFontSize != null) ? titleFontSize : 18,
-                  fontWeight: (titleFontWeight != null)
-                      ? titleFontWeight
-                      : FontWeight.w600,
-                  overflow: TextOverflow.ellipsis,
-                ),
+            Text(
+              title!,
+              maxLines: 1,
+              style: TextStyle(
+                fontSize: titleFontSize ?? 18,
+                fontWeight: titleFontWeight ?? FontWeight.w600,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           const Spacer(),
@@ -51,13 +47,11 @@ class TitleSubtitle extends StatelessWidget {
               onTap: onTapSubtitle,
               child: Text(
                 subtitle!,
-                textAlign: TextAlign.end,
                 style: TextStyle(
-                  fontSize: (subtitleFontSize != null) ? subtitleFontSize : 14,
+                fontSize: subtitleFontSize,
                   fontWeight: FontWeight.w400,
-                  color: (subtitleFontColor != null)
-                      ? subtitleFontColor
-                      : Colors.white,
+                  color: subtitleFontColor,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ),

@@ -12,15 +12,13 @@ class ItemPoster extends StatelessWidget {
   Widget build(BuildContext context) {
     final itemPosterPath = item.posterPath;
     final itemId = item.id;
-    return SizedBox(
-      child: GestureDetector(
-        onTap: () => context.push('${Strings.movieRoute}$itemId'),
-        child: FadeIn(
-          delay: const Duration(milliseconds: 200),
-          child: Image.network(
-            itemPosterPath,
-            fit: BoxFit.cover,
-          ),
+    return GestureDetector(
+      onTap: () => context.push('${Strings.movieRoute}$itemId'),
+      child: FadeIn(
+        delay: const Duration(milliseconds: 200),
+        child: Image.network(
+          itemPosterPath,
+          fit: BoxFit.cover,
         ),
       ),
     );

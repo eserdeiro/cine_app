@@ -34,7 +34,7 @@ class FullScreenLoader extends StatelessWidget {
               return Text(snapshot.data!, style: titleStyle.titleMedium);
             },
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 8),
           const CircularProgressIndicator(strokeWidth: 3),
         ],
       ),

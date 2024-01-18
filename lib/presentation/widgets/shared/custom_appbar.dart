@@ -5,7 +5,6 @@ import 'package:cine_app/presentation/providers/index.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 class CustomAppbar extends ConsumerWidget {
   const CustomAppbar({super.key});
@@ -20,15 +19,14 @@ class CustomAppbar extends ConsumerWidget {
       child: ColoredBox(
         color: colors.background,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
           child: SizedBox(
             width: double.infinity,
-            height: 60,
             child: Row(
               children: [
-                if (kIsWeb) const Padding(padding: EdgeInsets.only(left: 45)),
+                if (kIsWeb) const Padding(padding: EdgeInsets.only(left: 48)),
                 Icon(Icons.movie_outlined, color: colors.primary),
-                const SizedBox(width: 5),
+                const SizedBox(width: 4),
                 Text(Strings.appName, style: titleStyle),
                 const Spacer(),
                 IconButton(
@@ -44,11 +42,7 @@ class CustomAppbar extends ConsumerWidget {
                             .read(searchedMoviesProvider.notifier)
                             .searchMoviesByQuery,
                       ),
-                    ).then((item) {
-                      if (item != null) {
-                        context.push('${Strings.movieRoute}${item.id}');
-                      }
-                    });
+                    );
                   },
                   icon: const Icon(Icons.search),
                 ),

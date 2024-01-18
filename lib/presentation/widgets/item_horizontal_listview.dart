@@ -1,4 +1,3 @@
-import 'package:cine_app/config/helpers/formats_helper.dart';
 import 'package:cine_app/config/helpers/genre_helper.dart';
 import 'package:cine_app/domain/entities/item_entity.dart';
 import 'package:cine_app/presentation/providers/genres/genres_providers.dart';
@@ -74,15 +73,16 @@ class _SlideState extends ConsumerState<_Slide> {
   @override
   Widget build(BuildContext context) {
     final genresData = ref.watch(genresDataNotifierProvider);
-    final textStyle = Theme.of(context).textTheme;
     final item = widget.item;
     final itemVoteAverage = item.voteAverage;
     final itemGenreIds = item.genreIds;
     return Padding(
       padding: const EdgeInsets.all(8),
       child: ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-        child: ColoredBox(
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
+        child: Container(
+          width: 150,
+          height: 222,
           color: const Color(0xff252836),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,7 +91,6 @@ class _SlideState extends ConsumerState<_Slide> {
               Stack(
                 children: [
                   SizedBox(
-                    width: 150,
                     height: 222,
                     child: ItemPoster(item: item),
                   ),
@@ -100,27 +99,14 @@ class _SlideState extends ConsumerState<_Slide> {
                     right: 10,
                     top: 10,
                     child: ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(5)),
+                      borderRadius: const BorderRadius.all(Radius.circular(4)),
                       child: Container(
-                        color: const Color.fromRGBO(31, 29, 43, 50),
-                        width: 55,
+                        color: const Color.fromRGBO(32, 28, 44, 50),
+                        width: 60,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.star,
-                                color: Color(0xfffd8701),
-                                size: 15,
-                              ),
-                              const SizedBox(width: 2),
-                              Text(
-                                FormatsHelper.number(itemVoteAverage, 1),
-                                style: textStyle.bodyMedium
-                                    ?.copyWith(color: const Color(0xfffd8701)),
-                              ),
-                              const Spacer(),
-                            ],
+                          child: VoteAvergateItem(
+                            voteAverage: itemVoteAverage,
                           ),
                         ),
                       ),
@@ -128,40 +114,27 @@ class _SlideState extends ConsumerState<_Slide> {
                   ),
                 ],
               ),
-              const SizedBox(height: 5),
 
-              //Item title
-              SizedBox(
-                width: 150,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
-                  child: Text(
-                    item.title,
-                    maxLines: 1,
-                    style: const TextStyle(fontWeight: FontWeight.w600),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-              ),
-
-              //GenreID
-              SizedBox(
-                width: 150,
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    bottom: 10,
-                    left: 5,
-                    right: 5,
-                    top: 5,
-                  ),
-                  child: Text(
-                    GenreHelper.genreIdsToNames(
-                      itemGenreIds,
-                      genresData,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item.title,
+                      maxLines: 1,
+                      style: const TextStyle(fontWeight: FontWeight.w600),
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: 12),
-                  ),
+                    Text(
+                      GenreHelper.genreIdsToNames(
+                        itemGenreIds,
+                        genresData,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                  ],
                 ),
               ),
             ],

@@ -22,7 +22,7 @@ class ItemsSlideshow extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(bottom: 10),
+          padding: const EdgeInsets.only(bottom: 8),
           child: TitleSubtitle(title: Strings.nowPlaying),
         ),
         SizedBox(

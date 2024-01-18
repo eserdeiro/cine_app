@@ -4,7 +4,7 @@ import 'package:cine_app/presentation/widgets/shared/item_poster.dart';
 import 'package:flutter/material.dart';
 
 class ItemsGridView extends StatefulWidget {
-  final String? text;
+  final String text;
   final List<ItemEntity> items;
   final VoidCallback? loadNextPage;
 
@@ -48,24 +48,17 @@ class _ItemsGridViewState extends State<ItemsGridView> {
     final titleStyle = Theme.of(context).textTheme;
     final items = widget.items;
     if (items.isNotEmpty) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      return GridView.count(
+        controller: scrollController,
+        mainAxisSpacing: 3,
+        crossAxisSpacing: 3,
+        crossAxisCount: landscape ? 6 : 3,
+        childAspectRatio: 0.7,
         children: [
-          Expanded(
-            child: GridView.count(
-              controller: scrollController,
-              mainAxisSpacing: 3,
-              crossAxisSpacing: 3,
-              crossAxisCount: landscape ? 6 : 3,
-              childAspectRatio: 0.7,
-              children: [
-                ...items.map((item) => ItemPoster(item: item)),
-              ],
-            ),
-          ),
+          ...items.map((item) => ItemPoster(item: item)),
         ],
       );
     }
-    return Center(child: Text('${widget.text}', style: titleStyle.titleLarge));
+    return Center(child: Text(widget.text, style: titleStyle.titleLarge));
   }
 }

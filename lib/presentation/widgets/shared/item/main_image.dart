@@ -12,14 +12,12 @@ class MainImageItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: const BorderRadius.all(Radius.circular(10)),
-      child: SizedBox(
-        child: FadeIn(
-          child: Image.network(
-            imagePath,
-            height: height,
-          ),
+    return FadeIn(
+      child: ClipRRect(
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
+        child: Image.network(
+          imagePath,
+          height: height,
         ),
       ),
     );
