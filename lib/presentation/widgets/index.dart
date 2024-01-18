@@ -5,6 +5,7 @@ export 'package:cine_app/presentation/widgets/menu/custom_bottom_navigationbar.d
 export 'package:cine_app/presentation/widgets/menu/side_menu.dart';
 export 'package:cine_app/presentation/widgets/shared/custom_appbar.dart';
 export 'package:cine_app/presentation/widgets/shared/custom_gradient.dart';
+export 'package:cine_app/presentation/widgets/shared/custom_sliver_appbar.dart';
 export 'package:cine_app/presentation/widgets/shared/fullscreen_loader.dart';
 export 'package:cine_app/presentation/widgets/shared/item/actors_by_item.dart';
 export 'package:cine_app/presentation/widgets/shared/item/background_image.dart';
