@@ -25,20 +25,21 @@ class ActorsByItem extends ConsumerWidget {
         child: Center(child: CircularProgressIndicator(strokeWidth: 3)),
       );
     }
-
+   
     final actors = actorsByItem[itemId]!;
     return GridView.builder(
       padding: EdgeInsets.zero,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: landscape ? 4 : 2,
-        childAspectRatio: landscape ? 3.5 : 2.5,
+        crossAxisCount: ((actors.length < 4) ? actors.length : (landscape ? 4 : 2)).clamp(1, double.infinity).toInt(),
+        childAspectRatio: (actors.length < 4) ? 8 : (landscape ? 3.5 : 2.5),
       ),
-      itemCount: showAll ? actors.length : 4,
+      itemCount: showAll ? actors.length : (actors.length < 4 ? actors.length : 4),
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
+        if(index < actors.length){
         final actor = actors[index];
-        return Row(
+         return Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             //Actor photo
@@ -86,6 +87,9 @@ class ActorsByItem extends ConsumerWidget {
             ),
           ],
         );
+        }else {
+        return const SizedBox();
+        }
       },
     );
   }

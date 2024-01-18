@@ -8,23 +8,18 @@ class VoteAvergateItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final titleStyle = Theme.of(context).textTheme;
-    return SizedBox(
-      width: 55,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5),
-        child: Row(
-          children: [
-            const Icon(Icons.star, color: Color(0xfffd8701), size: 15),
-            const SizedBox(width: 2),
-            Text(
-              FormatsHelper.number(voteAverage, 1),
-              style: titleStyle.bodyMedium
-                  ?.copyWith(color: const Color(0xfffd8701)),
-            ),
-            const Spacer(),
-          ],
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Icon(Icons.star, color: Color(0xfffd8701), size: 16),
+        const SizedBox(width: 4),
+        Text(
+          FormatsHelper.number(voteAverage, 1),
+          style: titleStyle.bodyMedium
+              ?.copyWith(color: const Color(0xfffd8701),),
         ),
-      ),
+       
+      ],
     );
   }
 }

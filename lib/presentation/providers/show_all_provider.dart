@@ -6,6 +6,10 @@ class ToggleController extends StateNotifier<bool> {
   void toggleShowAll() {
     state = !state;
   }
+
+    void setToFalse() {
+    state = false;
+  }
 }
 
 final castControllerProvider = StateNotifierProvider<ToggleController, bool>(

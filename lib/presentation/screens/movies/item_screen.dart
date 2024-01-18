@@ -71,6 +71,7 @@ class CustomSliverAppBar extends ConsumerStatefulWidget {
 }
 
 class CustomSliverAppBarState extends ConsumerState<CustomSliverAppBar> {
+  GlobalKey appBarKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     final isFavoriteFutureProvider =
@@ -80,6 +81,7 @@ class CustomSliverAppBarState extends ConsumerState<CustomSliverAppBar> {
     final landscape = orientationHelper.isLandscape;
 
     return SliverAppBar(
+      key: appBarKey,
       leading: IconButton(
         onPressed: () {
           context.pop();
@@ -94,7 +96,7 @@ class CustomSliverAppBarState extends ConsumerState<CustomSliverAppBar> {
       ),
       centerTitle: true,
       title: Text(widget.item.title),
-      expandedHeight: size.height * 0.60,
+      expandedHeight: size.height * 0.7,
       backgroundColor: Colors.black,
       foregroundColor: Colors.white,
       actions: [
@@ -123,45 +125,101 @@ class CustomSliverAppBarState extends ConsumerState<CustomSliverAppBar> {
       ],
       flexibleSpace: FlexibleSpaceBar(
         background: LayoutBuilder(
-          builder: (context, constraints) {
+          builder: (_, constraints) {
             final availableHeight = constraints.biggest.height;
-
-            return Stack(
-              children: [
-                BackgroundImageItem(
-                  imagePath: landscape
-                      ? widget.item.backdropPath
-                      : widget.item.posterPath,
-                ),
-
-                //Center image
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    //If the screen is very small, we eliminate the sizesbox and posterpath
-                    if (availableHeight >= 270) const SizedBox(height: 60),
-                    //Center posterpath
-                    if (!landscape && availableHeight >= 270)
+            if (!landscape && availableHeight >= 270) {
+              //portrait
+              return Stack(
+                children: [
+                  BackgroundImageItem(
+                    imagePath: widget.item.posterPath,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 60),
                       MainImageItem(
                         imagePath: widget.item.posterPath,
                         height: availableHeight * 0.45,
                       ),
-
-                    const SizedBox(height: 20),
-
-                    //ReleaseDate
-                    if (widget.item.releaseDate?.year != null)
-                      ReleaseDate(releaseDate: widget.item.releaseDate),
-
-                    //Genres
-                    GenresItem(genreIds: widget.item.genreIds),
-
-                    //Vote average
-                    VoteAvergateItem(voteAverage: widget.item.voteAverage),
-                  ],
-                ),
-              ],
-            );
+                      const SizedBox(height: 16),
+                      if (widget.item.releaseDate?.year != null)
+                        ReleaseDate(releaseDate: widget.item.releaseDate),
+                      GenresItem(genreIds: widget.item.genreIds),
+                      VoteAvergateItem(voteAverage: widget.item.voteAverage),
+                    ],
+                  ),
+                ],
+              );
+            } else {
+              //Landscape
+              return Stack(
+                children: [
+                  BackgroundImageItem(
+                    imagePath: widget.item.backdropPath,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: size.height * 0.1,
+                      ),
+                      SafeArea(
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(24, 0, 0, 0),
+                              child: MainImageItem(
+                                imagePath: widget.item.posterPath,
+                                height: availableHeight * 0.6,
+                              ),
+                            ),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  TitleSubtitle(
+                                    title: Strings.overview,
+                                    horizontalPadding: 8,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                    ),
+                                    child: SizedBox(
+                                      width: size.width * 0.6,
+                                      child: Text(widget.item.overview),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ReleaseDate(releaseDate: widget.item.releaseDate),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          GenresItem(genreIds: widget.item.genreIds),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          VoteAvergateItem(
+                            voteAverage: widget.item.voteAverage,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              );
+            }
           },
         ),
       ),
@@ -185,57 +243,24 @@ class _ItemDetails extends ConsumerWidget {
     final castIsNotEmpty = cast.values.any((list) => list.isNotEmpty);
     final crewIsNotEmpty = crew.values.any((list) => list.isNotEmpty);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 10),
-          LayoutBuilder(
-            builder: (context, constraints) {
-              //Landscape posterpath + overview
-              if (landscape) {
-                return Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: MainImageItem(
-                        imagePath: item.posterPath,
-                        height: 200,
-                      ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Column(
-                          children: [
-                            TitleSubtitle(
-                              title: Strings.overview,
-                              horizontalPadding: 0,
-                            ),
-                            const SizedBox(width: 10),
-                            Text(item.overview),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              } else {
-                //Portrait overview without posterpath
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TitleSubtitle(
-                      title: Strings.overview,
-                      horizontalPadding: 0,
-                    ),
-                    const SizedBox(height: 10),
-                    Text(item.overview),
-                  ],
-                );
-              }
-            },
-          ),
+          const SizedBox(height: 8),
+          //portrait posterpath + overview
+          if (!landscape)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TitleSubtitle(
+                  title: Strings.overview,
+                  horizontalPadding: 0,
+                ),
+                const SizedBox(height: 8),
+                Text(item.overview),
+              ],
+            ),
 
           //Actors
           //Cast view
@@ -249,6 +274,7 @@ class _ItemDetails extends ConsumerWidget {
                 ref.read(castControllerProvider.notifier).toggleShowAll();
               },
             ),
+          const SizedBox(height: 16),
           ActorsByItem(
             itemId: item.id.toString(),
             actorsByItem: cast,
@@ -266,6 +292,7 @@ class _ItemDetails extends ConsumerWidget {
                 ref.read(crewControllerProvider.notifier).toggleShowAll();
               },
             ),
+          const SizedBox(height: 16),
           ActorsByItem(
             itemId: item.id.toString(),
             actorsByItem: crew,

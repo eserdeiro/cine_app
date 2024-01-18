@@ -28,7 +28,7 @@ class MovieMapper {
       static ItemEntity movieDetailstoEntity(ItemDetails movieDetails) => ItemEntity(
         adult: movieDetails.adult, 
         backdropPath: (movieDetails.backdropPath != '') 
-          ? 'https://image.tmdb.org/t/p/w1280/${movieDetails.backdropPath}' 
+          ? 'https://image.tmdb.org/t/p/w780/${movieDetails.backdropPath}' 
           : 'https://raw.githubusercontent.com/eserdeiro/cine_app/main/lib/assets/images/not-found.jpeg',
         genreIds: movieDetails.genres.map((e) => e.name).toList(), 
         id: movieDetails.id, 

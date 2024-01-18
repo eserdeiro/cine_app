@@ -46,7 +46,6 @@ class CustomAppbar extends ConsumerWidget {
                       ),
                     ).then((item) {
                       if (item != null) {
-                        //redirect from '/movie' to '/home/0/movie/id' because movie is not recognized
                         context.push('${Strings.movieRoute}${item.id}');
                       }
                     });
