@@ -77,6 +77,7 @@ class _ItemDetails extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 8),
+
           if (!landscape)
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -139,23 +140,30 @@ class CastCrewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        if (isNotEmpty)
-          TitleSubtitle(
-            title: title,
-            horizontalPadding: 0,
-            subtitle: showAll ? Strings.hideAll : Strings.showAll,
-            subtitleFontColor: Colors.cyan,
-            onTapSubtitle: onTapSubtitle,
-          ),
-        const SizedBox(height: 16),
-        ActorsByItem(
-          itemId: itemId,
-          actorsByItem: actorsByItem,
-          showAll: showAll,
-        ),
-      ],
+    return LayoutBuilder(
+      builder: (_, __) {
+        if (isNotEmpty) {
+          return Column(
+            children: [
+              TitleSubtitle(
+                title: title,
+                horizontalPadding: 0,
+                subtitle: showAll ? Strings.hideAll : Strings.showAll,
+                subtitleFontColor: Colors.cyan,
+                onTapSubtitle: onTapSubtitle,
+              ),
+              const SizedBox(height: 16),
+              ActorsByItem(
+                itemId: itemId,
+                actorsByItem: actorsByItem,
+                showAll: showAll,
+              ),
+            ],
+          );
+        } else {
+          return const SizedBox();
+        }
+      },
     );
   }
 }

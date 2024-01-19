@@ -12,7 +12,7 @@ class ErrorScreen extends StatelessWidget {
       ),
       body: Center(
         child: ElevatedButton(
-          onPressed: () => context.go(Strings.initialLocation),
+          onPressed: () => context.go(Strings.homeUrl),
           child: const Text('Go to home page'),
         ),
       ),

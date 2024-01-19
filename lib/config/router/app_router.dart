@@ -6,23 +6,23 @@ import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(
   //GoException: no routes for location
-  errorBuilder: (context, state) {
+  errorBuilder: (_, __) {
     return const ErrorScreen();
   },
  
-  initialLocation: Strings.initialLocation,
+  initialLocation: Strings.homeUrl,
   routes: [
      // /home/0
     GoRoute(
       path: '/',
       redirect: (_, __) {
-        return Strings.initialLocation;
+        return Strings.homeUrl;
       },
     ),
     GoRoute(
       path: '/home/:page',
       name: HomeScreen.name,
-      builder: (context, state) {
+      builder: (_, state) {
         //The url is not a correct index? we redirect to ErrorScreen
         final page = state.pathParameters['page'] ?? '0';
         try {

@@ -14,7 +14,7 @@ class TheMovieDbDataSource extends MoviesDataSource {
     final movieDbResponse = MovieDbResponse.fromJson(json);
     final movies = movieDbResponse.results
         .map(
-          MovieMapper.movieDbToEntity,
+          ItemMapper.movieDbToEntity,
         )
         .where((moviedb) => moviedb.posterPath != 'no-poster')
         .toList();
@@ -78,7 +78,7 @@ class TheMovieDbDataSource extends MoviesDataSource {
       throw Exception('Movie with id $id not found');
     }
     final movieDetails = ItemDetails.fromJson(response.data);
-    final movie = MovieMapper.movieDetailstoEntity(movieDetails);
+    final movie = ItemMapper.itemDetailstoEntity(movieDetails);
     return movie;
   }
 }

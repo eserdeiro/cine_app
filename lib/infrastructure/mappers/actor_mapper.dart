@@ -4,7 +4,7 @@ import 'package:cine_app/infrastructure/models/index.dart';
 class ActorMapper {
 
   static ActorEntity actorToEntity(Actor cast)=> ActorEntity(
-    id: cast.id, 
+    id  : cast.id, 
     name: cast.name, 
     profilePath: (cast.profilePath != null)
      ? 'https://image.tmdb.org/t/p/w500/${cast.profilePath}' 

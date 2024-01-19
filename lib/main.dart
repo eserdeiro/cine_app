@@ -27,7 +27,6 @@ class MainApp extends StatelessWidget {
       routerConfig: appRouter,
       debugShowCheckedModeBanner: false,
       theme: AppTheme().getTheme(),
-      //Body is not needed, because go router(is a initialLocation '/' on app router)
     );
   }
 }

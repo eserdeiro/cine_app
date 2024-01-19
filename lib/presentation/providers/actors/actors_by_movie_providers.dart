@@ -1,22 +1,29 @@
+import 'package:cine_app/config/constants/typedefs.dart';
 import 'package:cine_app/domain/entities/actor_entity.dart';
 import 'package:cine_app/presentation/providers/index.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final castByItemProvider =
-    StateNotifierProvider<ActorsByItemNotifier, Map<String, List<ActorEntity>>>(
-        (ref) {
-  final castRepository = ref.watch(actorsRepositoryProvider).getCastByItem;
+enum ActorType { cast, crew }
 
-  return ActorsByItemNotifier(getActors: castRepository);
-});
+StateNotifierProviderActors newActorByItemProvider(ActorType type) {
+  return StateNotifierProviderActors(
+    (ref) {
+      final actorsRepository = ref.watch(actorsRepositoryProvider);
+      FutureListActorEntity getActors(String itemId) {
+        switch (type) {
+          case ActorType.cast:
+            return actorsRepository.getCastByItem(itemId);
+          case ActorType.crew:
+            return actorsRepository.getCrewByItem(itemId);
+        }
+      }
 
-final crewByItemProvider =
-    StateNotifierProvider<ActorsByItemNotifier, Map<String, List<ActorEntity>>>(
-        (ref) {
-  final crewsRepository = ref.watch(actorsRepositoryProvider).getCrewByItem;
+      return ActorsByItemNotifier(getActors: getActors);
+    },
+  );
+}
 
-  return ActorsByItemNotifier(getActors: crewsRepository);
-});
+final castByItemProvider = newActorByItemProvider(ActorType.cast);
+final crewByItemProvider = newActorByItemProvider(ActorType.crew);
 
 typedef GetActorsCallback = Future<List<ActorEntity>> Function(String itemId);
 

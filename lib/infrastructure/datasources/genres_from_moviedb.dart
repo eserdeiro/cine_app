@@ -14,10 +14,10 @@ class GenresFromMovieDb extends GenresDatasource {
 
     final response = await dio.get('/genre/movie/list');
 
-    final genresResponse = GenreResponse.fromJson(response.data);
+    final genreResponse = GenreResponse.fromJson(response.data);
 
     final genres =
-        genresResponse.genres.map(GenresMapper.genreToEntity).toList();
+        genreResponse.genres.map(GenresMapper.genreToEntity).toList();
     return genres;
   }
 }

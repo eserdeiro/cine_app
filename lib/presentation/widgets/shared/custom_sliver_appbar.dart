@@ -140,7 +140,7 @@ class CustomSliverAppBarState extends ConsumerState<CustomSliverAppBar> {
                                     ),
                                     child: SizedBox(
                                       width: size.width * 0.6,
-                                      child: Text(widget.item.overview),
+                                      child: Text(widget.item.overview, maxLines: 8,),
                                     ),
                                   ),
                                 ],

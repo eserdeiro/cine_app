@@ -1,3 +1,4 @@
+import 'package:cine_app/config/constants/strings.dart';
 import 'package:flutter/material.dart';
 
 class MenuItem {
@@ -12,15 +13,15 @@ class MenuItem {
   });
 }
 
-const appMenuItems = <MenuItem>[
+List<MenuItem> appMenuItems = <MenuItem>[
   MenuItem(
     title: 'Home',
-    url: '/home/0',
+    url: Strings.homeUrl,
     icon: Icons.home_max,
   ),
   MenuItem(
     title: 'Favorites',
-    url: '/home/1',
+    url: Strings.favoriteUrl,
     icon: Icons.favorite_border_outlined,
   ),
 ];

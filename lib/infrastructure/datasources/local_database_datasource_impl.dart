@@ -16,13 +16,12 @@ class LocalDatabaseDataSourceImpl extends LocalDatabaseDatasource {
     return box;
   }
 
-  //Check each item if it is favorite or not, by id
   @override
   Future<bool> isItemFavorite(int itemId) async {
     final box = await database;
     final isItemFavorite = box.values.where((item) {
       return item.id == itemId;
-    }).toList(); // convert a list to use the isNotEmpty method...
+    }).toList();
     return isItemFavorite.isNotEmpty;
   }
 
@@ -38,20 +37,18 @@ class LocalDatabaseDataSourceImpl extends LocalDatabaseDatasource {
     return items;
   }
 
-  //We save, update or delete when tap favorite icon
   @override
   Future<void> toggleFavorite(ItemEntity item) async {
     final box = await database;
 
-    // Check if the item is already a favorite
     final favoriteItemIndex =
         box.values.toList().indexWhere((itemDb) => itemDb.id == item.id);
 
     if (favoriteItemIndex != -1) {
       await box
-          .deleteAt(favoriteItemIndex); // Item is already a favorite, remove it
+          .deleteAt(favoriteItemIndex); 
     } else {
-      await box.add(item); // Item is not a favorite, add it
+      await box.add(item);
     }
   }
 }
