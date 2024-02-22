@@ -12,10 +12,10 @@ class ToggleController extends StateNotifier<bool> {
   }
 }
 
-final castControllerProvider = StateNotifierProvider<ToggleController, bool>(
+final castControllerProvider = StateNotifierProvider.autoDispose<ToggleController, bool>(
   (_) => ToggleController(),
 );
 
-final crewControllerProvider = StateNotifierProvider<ToggleController, bool>(
+final crewControllerProvider = StateNotifierProvider.autoDispose<ToggleController, bool>(
   (_) => ToggleController(),
 );
