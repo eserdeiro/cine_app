@@ -24,6 +24,10 @@ flutter pub run build_runner build
 ```
 THE_MOVIEDB_KEY=YOUR_API_KEY
 ```
+5. Run in your project
+```
+flutter pub get
+```
 
 # UI
 
@@ -35,3 +39,5 @@ The app has one dark theme that uses predefined colors.
 # Compatibility 
 
 Currently only available for Android and iOS, and Web 
+
+<a href='https://play.google.com/store/apps/details?id=com.eserdeiro.cineapp'><img width="200px" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
