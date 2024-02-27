@@ -2,7 +2,7 @@ name: cine_app
 description: This application shows information about movies, and actors from
   the API provided by https://www.themoviedb.org
 publish_to: 'eserdeiro'
-version: 0.1.7+7
+version: 0.1.8+8
 
 environment:
   sdk: '>=3.1.5 <4.0.0'
